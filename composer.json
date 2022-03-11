@@ -24,7 +24,8 @@
         "drupal/core-recommended": "^9.3",
         "drush/drush": "^10.6",
         "vlucas/phpdotenv": "^5.1",
-        "webflo/drupal-finder": "^1.2"
+        "webflo/drupal-finder": "^1.2",
+        "zircote/swagger-php": "^4.2"
     },
     "require-dev": {
         "drupal/core-dev": "^9.3"

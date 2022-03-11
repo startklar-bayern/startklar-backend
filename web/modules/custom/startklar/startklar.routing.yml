@@ -13,3 +13,13 @@ startklar.settings_form:
     _form: 'Drupal\startklar\Form\SettingsForm'
   requirements:
     _permission: 'administer startklar configuration'
+
+startklar.swagger.spec:
+  path: '/api/openapi.yaml'
+  defaults:
+    _title: 'OpenApi Documentation'
+    _controller: '\Drupal\startklar\Controller\SwaggerController::spec'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
