@@ -14,11 +14,21 @@ startklar.settings_form:
   requirements:
     _permission: 'administer startklar configuration'
 
-startklar.swagger.spec:
+startklar.openapi.spec:
   path: '/api/openapi.yaml'
   defaults:
     _title: 'OpenApi Documentation'
     _controller: '\Drupal\startklar\Controller\SwaggerController::spec'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.openapi.swagger:
+  path: '/api'
+  defaults:
+    _title: 'OpenApi Documentation'
+    _controller: '\Drupal\startklar\Controller\SwaggerController::swagger'
   options:
     no_cache: 'TRUE'
   requirements:

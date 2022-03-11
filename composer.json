@@ -16,13 +16,15 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
-        "composer/installers": "^1.9",
+        "php": ">=8.0",
+        "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.1",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
+        "drupal/openapi_ui_swagger": "^1.0@RC",
         "drush/drush": "^10.6",
+        "mnsami/composer-custom-directory-installer": "^2.0",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2",
         "zircote/swagger-php": "^4.2"
@@ -72,7 +74,7 @@
         },
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/libraries/{$name}": ["type:drupal-library", "swagger-api/swagger-ui"],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
