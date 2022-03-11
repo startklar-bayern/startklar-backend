@@ -1,0 +1,6 @@
+name: Startklar
+type: module
+description: API endpoints for the Startklar Website
+package: Custom
+core: 8.x
+core_version_requirement: ^8 || ^9

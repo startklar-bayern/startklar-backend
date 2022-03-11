@@ -1,0 +1,6 @@
+startklar.settings_form:
+  title: Startklar
+  description: Configure Startklar.
+  parent: system.admin_config_system
+  route_name: startklar.settings_form
+  weight: 10

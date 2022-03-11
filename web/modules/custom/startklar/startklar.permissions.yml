@@ -1,0 +1,4 @@
+administer startklar configuration:
+  title: 'Administer startklar configuration'
+  description: 'Optional description.'
+  restrict access: true
