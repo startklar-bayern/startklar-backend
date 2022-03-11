@@ -2,13 +2,13 @@ _core:
   default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
 langcode: de
 uuid: d791cae8-d537-4a4d-99c6-895009c5c3cc
-name: 'Drush Site-Install'
+name: 'Startklar Backend'
 mail: info@startklar.de
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node
+  front: /user/login
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: de
