@@ -1,0 +1,33 @@
+uuid: 03bce69b-3b6c-40a9-baec-9cc341110a3b
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.sharepic.body
+    - field.field.node.sharepic.field_image
+    - node.type.sharepic
+  module:
+    - text
+    - user
+id: node.sharepic.teaser
+targetEntityType: node
+bundle: sharepic
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_image: true
+  langcode: true

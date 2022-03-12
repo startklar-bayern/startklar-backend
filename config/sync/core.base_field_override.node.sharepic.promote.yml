@@ -1,0 +1,22 @@
+uuid: 1c26ea98-ef5c-4656-ac15-d531f25f78a5
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.sharepic
+id: node.sharepic.promote
+field_name: promote
+entity_type: node
+bundle: sharepic
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

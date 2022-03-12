@@ -1,0 +1,7 @@
+uuid: ea7672cb-ac36-4633-9ce8-ea176df46b85
+langcode: de
+status: true
+dependencies: {  }
+name: sharepic_share
+label: sharepic_share
+effects: {  }

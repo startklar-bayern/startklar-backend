@@ -1,0 +1,11 @@
+uuid: 6cd20dc4-3403-431f-a64f-e716e594daae
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.sharepic
+id: node.sharepic
+target_entity_type_id: node
+target_bundle: sharepic
+default_langcode: site_default
+language_alterable: false
