@@ -1,15 +1,15 @@
-uuid: a7186933-0f1a-47a8-aeac-ce90673e43da
+uuid: 22ad33a3-bf4b-4cd7-8033-975e458d9a21
 langcode: de
 status: true
 dependencies:
   theme:
-    - olivero
+    - claro
 _core:
-  default_config_hash: nGE3EoPQQaQCuqTUtZgw0-KIzmrqdKDzdNQf2JyPUt4
-id: olivero_primary_local_tasks
-theme: olivero
-region: highlighted
-weight: -4
+  default_config_hash: ACjBZI5shAMiiUpsz-inLYVXDqNNXRnSzAWV3kV_8Hw
+id: claro_primary_local_tasks
+theme: claro
+region: header
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:
