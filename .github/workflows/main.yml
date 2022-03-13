@@ -29,16 +29,16 @@ jobs:
         with:
           switches: --exclude '.env' --exclude '.git' --exclude '.github' --exclude 'web/sites/default/files' --exclude 'web/sites/default/settings.local.php' -avzr --delete
           path: ./
-          remote_path: /var/www/vhosts/startklar.bayern/httpdocs/
+          remote_path: /var/www/vhosts/startklar.bayern/httpdocs/backend/
           remote_host: bahuma.io
           remote_user: startklar-bayern
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-#      - name: executing post upload actions via ssh
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: server4.bahuma.io
-#          username: startklar-bayern
-#          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          port: 22
-#          script: cd /var/www/vhosts/startklar-bayern/httpdocs/web && /opt/plesk/php/8.1/bin/php ../vendor/bin/drush updb -y && /opt/plesk/php/8.1/bin/php ../vendor/bin/drush cim -y && /opt/plesk/php/8.1/bin/php ../vendor/bin/drush cr
+      - name: executing post upload actions via ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: server4.bahuma.io
+          username: startklar-bayern
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: cd /var/www/vhosts/startklar-bayern/httpdocs/backend/web && ../vendor/bin/drush updb -y && ../vendor/bin/drush cim -y && ../vendor/bin/drush cr
