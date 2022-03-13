@@ -1,11 +1,8 @@
-# Composer template for Drupal projects
+# startklar.bayern Backend
 
-[![CI](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml/badge.svg?branch=9.x)](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml)
+This is a Drupal 9 backend for the www.startklar.bayern website.
 
-This project template provides a starter kit for managing your site
-dependencies with [Composer](https://getcomposer.org/).
-
-## Usage
+## Initial setup
 
 First you need to [install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
 
@@ -13,39 +10,73 @@ First you need to [install Composer](https://getcomposer.org/doc/00-intro.md#ins
 You might need to replace `composer` with `php composer.phar` (or similar)
 for your setup.
 
-After that you can create the project:
+1. Clone this repository.
+
+2. Install the composer dependencies:
 
 ```
-composer create-project drupal-composer/drupal-project:9.x-dev some-dir --no-interaction
+composer install
 ```
 
-With `composer require ...` you can download new dependencies to your
-installation.
+3. Create a MySQL database.
 
+4. Copy the `.env.example` file to `.env` and adjust the properties in there.
+
+5. Import the database dump:
 ```
-cd some-dir
-composer require drupal/devel
+cd web && ../vendor/bin/dush sql-query --file=../sql-dumps/dump.sql
 ```
 
-The `composer create-project` command passes ownership of all files to the
-project that is created. You should create a new Git repository, and commit
-all files not excluded by the `.gitignore` file.
+6. Run database updates:
+```
+cd web && ../vendor/bin/dush updb
+```
 
-## What does the template do?
+7. Run config import:
+```
+cd web && ../vendor/bin/dush cim
+```
 
-When installing the given `composer.json` some tasks are taken care of:
+8. Clear cache:
+```
+cd web && ../vendor/bin/dush cr
+```
 
-* Drupal will be installed in the `web`-directory.
-* Autoloader is implemented to use the generated composer autoloader in `vendor/autoload.php`,
-  instead of the one provided by Drupal (`web/vendor/autoload.php`).
+9. Point your webservers root to the `web` directory.
+
+
+## Updating the latest changes
+
+1. Do a `git pull`
+2. Run the steps 2, 6, 7, 8 from Initial Setup
+
+## Making changes
+1. Make your changes to code and config
+2. Export config
+```
+cd web && ../vendor/bin/dush cex
+```
+3. Commit your changes
+
+## Installing Drupal modules / themes / libraries
+1. Require the package via composer
+```
+composer require drupal/module_name
+```
+2. Install the module
+```
+cd web && ../vendor/bin/drush en module_name
+```
+3. Export configuration
+```
+cd web && ../vendor/bin/drush cex
+```
+4. Commit changes
+
+
 * Modules (packages of type `drupal-module`) will be placed in `web/modules/contrib/`
 * Theme (packages of type `drupal-theme`) will be placed in `web/themes/contrib/`
 * Profiles (packages of type `drupal-profile`) will be placed in `web/profiles/contrib/`
-* Creates default writable versions of `settings.php` and `services.yml`.
-* Creates `web/sites/default/files`-directory.
-* Latest version of drush is installed locally for use at `vendor/bin/drush`.
-* Latest version of DrupalConsole is installed locally for use at `vendor/bin/drupal`.
-* Creates environment variables based on your .env file. See [.env.example](.env.example).
 
 ## Updating Drupal Core
 
@@ -123,7 +154,7 @@ section of composer.json:
 
 ### How do I specify a PHP version ?
 
-This project supports PHP 7.3 as minimum version (see [Environment requirements of Drupal 9](https://www.drupal.org/docs/understanding-drupal/how-drupal-9-was-made-and-what-is-included/environment-requirements-of)), however it's possible that a `composer update` will upgrade some package that will then require PHP 7.3+.
+This project supports PHP 8.1 as minimum version (see [Environment requirements of Drupal 9](https://www.drupal.org/docs/understanding-drupal/how-drupal-9-was-made-and-what-is-included/environment-requirements-of)), however it's possible that a `composer update` will upgrade some package that will then require PHP 8.1+.
 
 To prevent this you can add this code to specify the PHP version you want to use in the `config` section of `composer.json`:
 
@@ -131,7 +162,7 @@ To prevent this you can add this code to specify the PHP version you want to use
 "config": {
     "sort-packages": true,
     "platform": {
-        "php": "7.3.19"
+        "php": "8.1.0"
     }
 },
 ```
