@@ -22,7 +22,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
       - name: Install Dependencies
-        run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
+        run: >
+          composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true &&
+          composer config --no-plugins allow-plugins.mnsami/composer-custom-directory-installer true &&
+          composer install --no-ansi --no-interaction --no-progress --prefer-dist
 
       - name: upload
         uses: burnett01/rsync-deployments@5.2
@@ -41,4 +44,9 @@ jobs:
           username: startklar-bayern
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: export PATH="/opt/plesk/php/8.1/bin:$PATH" && cd /var/www/vhosts/startklar.bayern/httpdocs/backend/web && ../vendor/bin/drush updb -y && ../vendor/bin/drush cim -y && ../vendor/bin/drush cr
+          script: >
+            export PATH="/opt/plesk/php/8.1/bin:$PATH" &&
+            cd /var/www/vhosts/startklar.bayern/httpdocs/backend/web &&
+            ../vendor/bin/drush updb -y &&
+            ../vendor/bin/drush cim -y &&
+            ../vendor/bin/drush cr
