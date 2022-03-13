@@ -56,3 +56,12 @@ startklar.newsletter.subscribe:
     no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
+
+startklar.newsletter.info:
+  path: '/api/newsletter'
+  methods: 'GET'
+  defaults:
+    _title: 'Newsletter Info'
+    _controller: '\Drupal\startklar\Controller\NewsletterController::info'
+  requirements:
+    _access: 'TRUE'

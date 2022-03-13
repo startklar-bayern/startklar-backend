@@ -3,6 +3,10 @@
 namespace Drupal\startklar\Controller;
 
 use Drupal\Component\Utility\EmailValidatorInterface;
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\startklar\Model\NewsletterSubscribeBody;
@@ -36,6 +40,12 @@ class NewsletterController extends ControllerBase {
    */
   protected $entityTypeManager;
 
+  protected string $LIST_ID;
+
+  protected string $API_KEY;
+
+  const CACHE_TAG = 'startklar_newsletter_subscriber_count';
+
   /**
    * The controller constructor.
    *
@@ -47,6 +57,9 @@ class NewsletterController extends ControllerBase {
   public function __construct(EmailValidatorInterface $email_validator, EntityTypeManagerInterface $entity_type_manager) {
     $this->emailValidator = $email_validator;
     $this->entityTypeManager = $entity_type_manager;
+
+    $this->API_KEY = getenv('SEND_IN_BLUE_API_KEY');
+    $this->LIST_ID = getenv('SEND_IN_BLUE_LIST_ID');
   }
 
   /**
@@ -92,9 +105,6 @@ class NewsletterController extends ControllerBase {
   )]
   public function subscribe(Request $request) {
     try {
-      $apiKey = getenv('SEND_IN_BLUE_API_KEY');
-      $listId = getenv('SEND_IN_BLUE_LIST_ID');
-
       // Get body
       $body = NewsletterSubscribeBody::fromJson($request->getContent());
 
@@ -110,9 +120,7 @@ class NewsletterController extends ControllerBase {
 
 
       // Get SendInBlueClient
-      $config = Configuration::getDefaultConfiguration()
-        ->setApiKey('api-key', $apiKey);
-      $apiInstance = new ContactsApi(new Client(), $config);
+      $apiClient = $this->getApiClient();
 
       // Create contact
       $contact = new CreateContact();
@@ -120,7 +128,7 @@ class NewsletterController extends ControllerBase {
 
 
       try {
-        $result = $apiInstance->createContact($contact);
+        $result = $apiClient->createContact($contact);
 
         $contactId = $result->getId();
 
@@ -128,7 +136,9 @@ class NewsletterController extends ControllerBase {
         $addContactToList = new AddContactToList();
         $addContactToList->setIds([$contactId]);
 
-        $apiInstance->addContactToList($listId, $addContactToList);
+        $apiClient->addContactToList($this->LIST_ID, $addContactToList);
+
+        Cache::invalidateTags([self::CACHE_TAG]);
 
         return $this->successResponse();
       } catch (ApiException $e) {
@@ -162,6 +172,58 @@ class NewsletterController extends ControllerBase {
         'message' => 'Internal server error. Please contact support.',
       ], 500);
     }
+  }
+
+  #[OA\Get(
+    path: '/newsletter',
+    description: 'Get informations about the newsletter',
+    tags: ['Newsletter'],
+    responses: [
+      new OA\Response(
+        response: 200,
+        description: 'OK',
+        content: new OA\JsonContent(
+          required: ['subscriber_count'],
+          properties: [
+            new OA\Property('subscriber_count', description: 'The amount of users that are currently subscribed to the newsletter.', type: 'integer', format: 'int64'),
+          ], type: 'object'
+        )),
+    ]
+  )]
+  public function info() {
+    $apiClient = $this->getApiClient();
+
+    if ($cache = \Drupal::cache()->get(self::CACHE_TAG)) {
+      $subscriberCount = $cache->data;
+    }
+    else {
+      $list = $apiClient->getList($this->LIST_ID);
+      $subscriberCount = $list->getTotalSubscribers();
+      \Drupal::cache()
+        ->set(self::CACHE_TAG, $subscriberCount, CacheBackendInterface::CACHE_PERMANENT, [self::CACHE_TAG]);
+    }
+
+    // Set a minimum number of subscribers to display in the frontend.
+    $minimumValue = 11;
+
+    $data = [
+      'subscriber_count' => $subscriberCount > $minimumValue ? $subscriberCount : $subscriberCount + $minimumValue,
+    ];
+
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags([self::CACHE_TAG]);
+    $cache->addCacheContexts(['url']);
+
+    $response = new CacheableJsonResponse($data);
+    $response->addCacheableDependency($cache);
+
+    return $response;
+  }
+
+  protected function getApiClient() {
+    $config = Configuration::getDefaultConfiguration()
+      ->setApiKey('api-key', $this->API_KEY);
+    return new ContactsApi(new Client(), $config);
   }
 
   protected function successResponse(): Response {
