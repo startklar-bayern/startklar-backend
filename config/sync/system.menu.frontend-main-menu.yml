@@ -1,0 +1,8 @@
+uuid: d7a9f074-5ea2-4a1d-bf50-4eac9d799b4e
+langcode: de
+status: true
+dependencies: {  }
+id: frontend-main-menu
+label: 'Frontend Main Menu'
+description: ''
+locked: false

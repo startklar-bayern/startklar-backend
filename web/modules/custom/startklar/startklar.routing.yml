@@ -35,3 +35,13 @@ startklar.sharepic.list:
     no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
+
+startklar.page.list:
+  path: '/api/pages'
+  defaults:
+    _title: 'Pages'
+    _controller: '\Drupal\startklar\Controller\PageController::index'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'

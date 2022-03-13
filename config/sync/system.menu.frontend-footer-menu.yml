@@ -1,0 +1,8 @@
+uuid: c19f66f0-7445-4a51-9882-e2a47eedd1a3
+langcode: de
+status: true
+dependencies: {  }
+id: frontend-footer-menu
+label: 'Frontend Footer Menu'
+description: ''
+locked: false
