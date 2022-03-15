@@ -9,6 +9,7 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Url;
 use Drupal\startklar\Model\NewsletterSubscribeBody;
 use Drupal\startklar\ValidationException;
 use GuzzleHttp\Client;
@@ -16,8 +17,7 @@ use OpenApi\Attributes as OA;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\ApiException;
 use SendinBlue\Client\Configuration;
-use SendinBlue\Client\Model\AddContactToList;
-use SendinBlue\Client\Model\CreateContact;
+use SendinBlue\Client\Model\CreateDoiContact;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,9 +40,13 @@ class NewsletterController extends ControllerBase {
    */
   protected $entityTypeManager;
 
-  protected string $LIST_ID;
-
   protected string $API_KEY;
+
+  protected int $LIST_ID;
+
+  protected int $DOI_TEMPLATE_ID;
+
+  protected string $FRONTEND_URL;
 
   const CACHE_TAG = 'startklar_newsletter_subscriber_count';
 
@@ -59,7 +63,9 @@ class NewsletterController extends ControllerBase {
     $this->entityTypeManager = $entity_type_manager;
 
     $this->API_KEY = getenv('SEND_IN_BLUE_API_KEY');
-    $this->LIST_ID = getenv('SEND_IN_BLUE_LIST_ID');
+    $this->LIST_ID = intval(getenv('SEND_IN_BLUE_LIST_ID'));
+    $this->DOI_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_DOUBLE_OPT_IN_TEMPLATE_ID'));
+    $this->FRONTEND_URL = getenv('FRONTEND_URL');
   }
 
   /**
@@ -123,20 +129,14 @@ class NewsletterController extends ControllerBase {
       $apiClient = $this->getApiClient();
 
       // Create contact
-      $contact = new CreateContact();
-      $contact->setEmail($body->mail);
-
+      $createDoiContact = new CreateDoiContact();
+      $createDoiContact->setTemplateId($this->DOI_TEMPLATE_ID);
+      $createDoiContact->setEmail($body->mail);
+      $createDoiContact->setIncludeListIds([$this->LIST_ID]);
+      $createDoiContact->setRedirectionUrl(Url::fromUri($this->FRONTEND_URL, ['query' => ['emailConfirmed' => TRUE]])->setAbsolute(TRUE)->toString());
 
       try {
-        $result = $apiClient->createContact($contact);
-
-        $contactId = $result->getId();
-
-        // Add contact to mailing list
-        $addContactToList = new AddContactToList();
-        $addContactToList->setIds([$contactId]);
-
-        $apiClient->addContactToList($this->LIST_ID, $addContactToList);
+        $apiClient->createDoiContact($createDoiContact);
 
         Cache::invalidateTags([self::CACHE_TAG]);
 
