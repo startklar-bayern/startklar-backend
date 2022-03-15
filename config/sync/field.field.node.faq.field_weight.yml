@@ -1,0 +1,23 @@
+uuid: 2701b750-6f83-4c7c-ae9b-ebf6423a9c32
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weight
+    - node.type.faq
+id: node.faq.field_weight
+field_name: field_weight
+entity_type: node
+bundle: faq
+label: Sortierung
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

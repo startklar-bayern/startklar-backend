@@ -26,6 +26,16 @@ startklar.openapi.swagger:
   requirements:
     _access: 'TRUE'
 
+startklar.faq.list:
+  path: '/api/faqs'
+  defaults:
+    _title: 'FAQs'
+    _controller: '\Drupal\startklar\Controller\FaqController::index'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
 startklar.sharepic.list:
   path: '/api/sharepics'
   defaults:
