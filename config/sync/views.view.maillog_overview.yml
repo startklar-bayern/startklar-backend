@@ -1,39 +1,42 @@
-uuid: 52ef915d-b088-434e-9c0e-7d9af8201f43
+uuid: 590716bf-e21f-48b7-9c3a-79b014c90d33
 langcode: de
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
-    - block_content
+    - maillog
     - user
+  enforced:
+    module:
+      - maillog
 _core:
-  default_config_hash: jvd5Pu6jy-lra4oMr-mR7zuY6CVDv9CaNeoj0Y70gV4
-id: block_content
-label: 'Bibliothek benutzerdefinierter Blöcke'
+  default_config_hash: xQe_9UDnOYMgxHaQU_vAbBAt_2NfDnyCjJ_ue6vh_uA
+id: maillog_overview
+label: 'Maillog overview'
 module: views
-description: 'Benutzerdefinierte Blöcke finden und verwalten.'
-tag: default
-base_table: block_content_field_data
+description: ''
+tag: ''
+base_table: maillog
 base_field: id
 display:
   default:
     id: default
-    display_title: Standard
+    display_title: Master
     display_plugin: default
-    position: 0
+    position: 1
     display_options:
-      title: 'Bibliothek benutzerdefinierter Blöcke'
+      title: 'Maillog overview'
       fields:
-        info:
-          id: info
-          table: block_content_field_data
-          field: info
+        id:
+          id: id
+          table: maillog
+          field: id
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: null
-          entity_field: info
-          plugin_id: field
-          label: Blockbeschreibung
+          plugin_id: standard
+          label: '#'
           exclude: false
           alter:
             alter_text: false
@@ -52,7 +55,56 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: null
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: 'There are currently no mails to report.'
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+        sent_date:
+          id: sent_date
+          table: maillog
+          field: sent_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: date
+          label: Date
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: null
             word_boundary: true
             ellipsis: true
             more_link: false
@@ -74,37 +126,24 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        type:
-          id: type
-          table: block_content_field_data
-          field: type
+          date_format: short
+          custom_date_format: ''
+          timezone: ''
+        subject:
+          id: subject
+          table: maillog
+          field: subject
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: block_content
-          entity_field: type
-          plugin_id: field
-          label: Blocktyp
+          plugin_id: standard
+          label: Subject
           exclude: false
           alter:
             alter_text: false
             text: ''
-            make_link: false
-            path: ''
+            make_link: true
+            path: '/admin/reports/maillog/details/{{id}}'
             absolute: false
             external: false
             replace_spaces: false
@@ -117,7 +156,7 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: null
             word_boundary: true
             ellipsis: true
             more_link: false
@@ -139,31 +178,15 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        changed:
-          id: changed
-          table: block_content_field_data
-          field: changed
+        header_from:
+          id: header_from
+          table: maillog
+          field: header_from
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: block_content
-          entity_field: changed
-          plugin_id: field
-          label: Aktualisiert
+          plugin_id: standard
+          label: From
           exclude: false
           alter:
             alter_text: false
@@ -182,7 +205,7 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: null
             word_boundary: true
             ellipsis: true
             more_link: false
@@ -204,21 +227,15 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          type: timestamp
-          settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
-        operations:
-          id: operations
-          table: block_content
-          field: operations
+        header_to:
+          id: header_to
+          table: maillog
+          field: header_to
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: block_content
-          plugin_id: entity_operations
-          label: Aktionen
+          plugin_id: standard
+          label: To
           exclude: false
           alter:
             alter_text: false
@@ -237,7 +254,7 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 0
+            max_length: null
             word_boundary: true
             ellipsis: true
             more_link: false
@@ -259,30 +276,32 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          destination: true
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
-          items_per_page: 50
+          items_per_page: 10
           total_pages: null
           id: 0
           tags:
-            next: 'Nächste Seite ›'
-            previous: '‹ Vorherige Seite'
+            next: 'next ›'
+            previous: '‹ previous'
+            first: '« first'
+            last: 'last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options: '5, 10, 20, 40, 60'
             items_per_page_options_all: false
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          quantity: 9
       exposed_form:
         type: basic
         options:
           submit_button: Apply
-          reset_button: true
+          reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -291,9 +310,9 @@ display:
       access:
         type: perm
         options:
-          perm: 'administer blocks'
+          perm: 'view maillog'
       cache:
-        type: tag
+        type: none
         options: {  }
       empty:
         area_text_custom:
@@ -305,147 +324,25 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'Es sind keine benutzerdefinierten Blöcke verfügbar.'
+          content: 'There are no mail logs in the database.'
           tokenize: false
-        block_content_listing_empty:
-          id: block_content_listing_empty
-          table: block_content
-          field: block_content_listing_empty
+      sorts:
+        sent_date:
+          id: sent_date
+          table: maillog
+          field: sent_date
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: block_content
-          plugin_id: block_content_listing_empty
-          label: ''
-          empty: true
-      sorts: {  }
-      arguments: {  }
-      filters:
-        info:
-          id: info
-          table: block_content_field_data
-          field: info
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: block_content
-          entity_field: info
-          plugin_id: string
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
+          plugin_id: date
+          order: DESC
           expose:
-            operator_id: info_op
-            label: Blockbeschreibung
-            description: ''
-            use_operator: false
-            operator: info_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: info
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-          is_grouped: false
-          group_info:
             label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        type:
-          id: type
-          table: block_content_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: block_content
-          entity_field: type
-          plugin_id: bundle
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: type_op
-            label: Blocktyp
-            description: ''
-            use_operator: false
-            operator: type_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: type
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        reusable:
-          id: reusable
-          table: block_content_field_data
-          field: reusable
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: block_content
-          entity_field: reusable
-          plugin_id: boolean
-          operator: '='
-          value: '1'
-          group: 1
+            field_identifier: sent_date
           exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+          granularity: second
+      arguments: {  }
+      filters: {  }
       style:
         type: table
         options:
@@ -453,34 +350,42 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            info: info
-            type: type
-            changed: changed
-            operations: operations
-          default: changed
+            id: id
+            sent_date: sent_date
+            subject: subject
+            header_from: header_from
+            header_to: header_to
+          default: '-1'
           info:
-            info:
-              sortable: true
+            id:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            type:
-              sortable: true
+            sent_date:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            changed:
-              sortable: true
-              default_sort_order: desc
+            subject:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            operations:
+            header_from:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            header_to:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -501,21 +406,19 @@ display:
           query_comment: ''
           disable_sql_rewrite: false
           distinct: false
-          replica: false
           query_tags: {  }
       relationships: {  }
       header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - user.permissions
       tags: {  }
+      cacheable: false
   page_1:
     id: page_1
     display_title: Page
@@ -523,21 +426,20 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/structure/block/block-content
+      path: admin/reports/maillog
       menu:
-        type: tab
-        title: 'Bibliothek benutzerdefinierter Blöcke'
+        type: normal
+        title: Maillog
         description: ''
         weight: 0
         menu_name: admin
-        parent: block.admin_display
+        parent: system.admin_reports
         context: '0'
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
-        - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - user.permissions
       tags: {  }
+      cacheable: false
