@@ -31,8 +31,6 @@ startklar.faq.list:
   defaults:
     _title: 'FAQs'
     _controller: '\Drupal\startklar\Controller\FaqController::index'
-  options:
-    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
 

@@ -3,6 +3,8 @@
 namespace Drupal\startklar\Controller;
 
 use Drupal\Component\Utility\EmailValidatorInterface;
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
@@ -76,7 +78,7 @@ class FaqController extends ControllerBase {
     $nids = $nodeStorage->getQuery()
       ->condition('type', 'faq')
       ->condition('status', TRUE)
-      ->sort('field_weight', 'ASC')
+      ->sort('field_weight')
       ->execute();
 
     $faqNodes = $nodeStorage->loadMultiple($nids);
@@ -93,7 +95,21 @@ class FaqController extends ControllerBase {
       $faqs[] = $faq;
     }
 
-    return new JsonResponse($faqs);
+    $response = new CacheableJsonResponse($faqs);
+
+    foreach ($faqNodes as $node) {
+      $response->addCacheableDependency($node);
+    }
+
+    $response->addCacheableDependency(CacheableMetadata::createFromRenderArray([
+      '#cache' => [
+        'tags' => [
+          'node_list:faq',
+        ],
+      ],
+    ]));
+
+    return $response;
   }
 
   #[OA\Post(
