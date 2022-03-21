@@ -36,6 +36,17 @@ startklar.faq.list:
   requirements:
     _access: 'TRUE'
 
+startklar.faq.ask:
+  path: '/api/faqs/question'
+  methods: 'POST'
+  defaults:
+    _title: 'FAQs'
+    _controller: '\Drupal\startklar\Controller\FaqController::askQuestion'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
 startklar.sharepic.list:
   path: '/api/sharepics'
   defaults:
