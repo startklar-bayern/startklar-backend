@@ -50,8 +50,6 @@ startklar.sharepic.list:
   defaults:
     _title: 'Sharepics'
     _controller: '\Drupal\startklar\Controller\SharepicController::index'
-  options:
-    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
 

@@ -2,6 +2,8 @@
 
 namespace Drupal\startklar\Controller;
 
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\startklar\Model\SharePic;
@@ -70,10 +72,26 @@ class SharepicController extends ControllerBase {
     $nodes = $nodeStorage->loadMultiple($result);
 
     $sharePics = [];
+
+    $cacheableMetadata = CacheableMetadata::createFromRenderArray([
+      '#cache' => [
+        'tags' => [
+          'node_list:sharepic',
+        ],
+      ],
+    ]);
+
+    $cacheableMetadata->addCacheableDependency($previewImageStyle);
+    $cacheableMetadata->addCacheableDependency($shareImageStyle);
+
     foreach ($nodes as $node) {
+      $cacheableMetadata->addCacheableDependency($node);
+
       $image = $node->get('field_image')[0];
       /** @var \Drupal\file\Entity\File $file */
       $file = $image->entity;
+
+      $cacheableMetadata->addCacheableDependency($file);
 
       $pic = new SharePic();
       $pic->id = $node->id();
@@ -88,7 +106,9 @@ class SharepicController extends ControllerBase {
       $sharePics[] = $pic;
     }
 
-    return new JsonResponse($sharePics);
+    $response = new CacheableJsonResponse($sharePics);
+    $response->addCacheableDependency($cacheableMetadata);
+    return $response;
   }
 
 }
