@@ -2,11 +2,12 @@
 
 namespace Drupal\startklar\Controller;
 
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\startklar\Model\MenuLink;
 use Drupal\startklar\Model\Page;
-use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -68,13 +69,26 @@ class PageController extends ControllerBase {
 
     $pages = [];
 
+    $cacheMetadata = CacheableMetadata::createFromRenderArray([
+      '#cache' => [
+        'tags' => [
+          'node_list:page',
+        ],
+      ],
+    ]);
+
     foreach ($nodes as $node) {
       $page = new Page();
+
+      $cacheMetadata->addCacheableDependency($node);
 
       $page->id = $node->id();
       $page->title = $node->label();
       $page->body = $node->get('body')->value;
-      $page->path = $node->toUrl()->toString();
+
+      $url = $node->toUrl()->toString(TRUE);
+      $cacheMetadata->addCacheableDependency($url);
+      $page->path = $url->getGeneratedUrl();
 
       $menuLinks = $menuLinkManager->loadLinksByRoute('entity.node.canonical', ['node' => $node->id()]);
 
@@ -82,6 +96,8 @@ class PageController extends ControllerBase {
 
       foreach ($menuLinks as $menuLink) {
         $mLink = new MenuLink();
+
+        $cacheMetadata->addCacheableDependency($menuLink);
 
         $mLink->title = $menuLink->getTitle();
         $mLink->menu = str_replace("-menu", "", str_replace("frontend-", "", $menuLink->getMenuName()));
@@ -95,7 +111,15 @@ class PageController extends ControllerBase {
       $pages[] = $page;
     }
 
-    return new JsonResponse($pages);
+    $response = new CacheableJsonResponse($pages);
+
+    foreach ($nodes as $node) {
+      $response->addCacheableDependency($node);
+    }
+
+    $response->addCacheableDependency($cacheMetadata);
+
+    return $response;
 
   }
 

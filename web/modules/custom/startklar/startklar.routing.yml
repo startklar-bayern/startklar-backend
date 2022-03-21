@@ -60,8 +60,6 @@ startklar.page.list:
   defaults:
     _title: 'Pages'
     _controller: '\Drupal\startklar\Controller\PageController::index'
-  options:
-    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
 
