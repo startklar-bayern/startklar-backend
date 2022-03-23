@@ -4,4 +4,12 @@ status: true
 dependencies: {  }
 name: sharepic_preview
 label: sharepic_preview
-effects: {  }
+effects:
+  e82588d1-8ac4-4d57-88f1-103bf37c500e:
+    uuid: e82588d1-8ac4-4d57-88f1-103bf37c500e
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 312
+      height: 312
+      anchor: center-center
