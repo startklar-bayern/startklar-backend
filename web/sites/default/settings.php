@@ -771,6 +771,8 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 }
 $settings['config_sync_directory'] = '../config/sync';
 
+$settings['config_exclude_modules'] = ['devel'];
+
 $databases['default']['default'] = [
   'database' => getenv('MYSQL_DATABASE'),
   'driver' => 'mysql',
