@@ -1,6 +1,0 @@
-services:
-  startklar.event_subscriber:
-    class: Drupal\startklar\EventSubscriber\StartklarSubscriber
-    arguments: []
-    tags:
-      - { name: event_subscriber }
