@@ -3,25 +3,18 @@ langcode: de
 status: true
 dependencies:
   config:
-    - field.field.node.sharepic.body
     - field.field.node.sharepic.field_image
+    - field.field.node.sharepic.field_share_title
+    - field.field.node.sharepic.field_sharepic_body
     - node.type.sharepic
   module:
     - image
-    - text
     - user
 id: node.sharepic.default
 targetEntityType: node
 bundle: sharepic
 mode: default
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
-    region: content
   field_image:
     type: image
     label: above
@@ -30,6 +23,21 @@ content:
       image_style: ''
     third_party_settings: {  }
     weight: 102
+    region: content
+  field_share_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_sharepic_body:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
     region: content
   links:
     settings: {  }

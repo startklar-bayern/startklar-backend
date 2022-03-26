@@ -21,7 +21,10 @@ class SharePic {
   #[OA\Property(description: "An image URL for a reduced version that should be used for sharing", format: "string", example: "https://backend.startklar.bayern/sites/default/files/styles/sharpic_share/public/images/123.jpg")]
   public string $imageShareUrl;
 
-  #[OA\Property(description: "A text that should be shared together with the image. Can contain HTML.", format: "string", example: "Ich bin <strong>startklar</strong>. Du auch?")]
+  #[OA\Property(description: "A title that should be shared together with the image.", format: "string", example: "Bock auf Lagerfeuer?")]
+  public string $title;
+
+  #[OA\Property(description: "A text that should be shared together with the image.", format: "string", example: "Ich bin STARTKLAR!\r\nDu auch?")]
   public string $body;
 
   #[OA\Property(description: "A description of the image content that can be used for the alt tag.", format: "string", example: "Lachende Personen am Lagerfeuer")]

@@ -1,0 +1,19 @@
+uuid: 187c82f2-0964-4291-aa63-533b36f9a8cf
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sharepic_body
+    - node.type.sharepic
+id: node.sharepic.field_sharepic_body
+field_name: field_sharepic_body
+entity_type: node
+bundle: sharepic
+label: Body
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

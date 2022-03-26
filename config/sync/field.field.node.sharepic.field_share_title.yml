@@ -1,0 +1,19 @@
+uuid: 9163133a-0450-4b83-8e6d-89f72e04f28d
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_share_title
+    - node.type.sharepic
+id: node.sharepic.field_share_title
+field_name: field_share_title
+entity_type: node
+bundle: sharepic
+label: 'Titel für Sharing'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

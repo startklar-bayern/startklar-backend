@@ -95,7 +95,8 @@ class SharepicController extends ControllerBase {
 
       $pic = new SharePic();
       $pic->id = $node->id();
-      $pic->body = $node->get('body')->value;
+      $pic->title = $node->get('field_share_title')->value;
+      $pic->body = $node->get('field_sharepic_body')->value;
       $pic->width = $image->get('width')->getCastedValue();
       $pic->height = $image->get('height')->getCastedValue();
       $pic->altText = $image->get('alt')->getValue();
