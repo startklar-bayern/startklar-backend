@@ -66,7 +66,7 @@ class SharepicController extends ControllerBase {
     $nodeStorage = $this->entityTypeManager->getStorage('node');
     $result = $nodeStorage->getQuery()
       ->condition('type', 'sharepic')
-      ->sort('created', 'DESC')
+      ->sort('created', 'ASC')
       ->execute();
 
     $nodes = $nodeStorage->loadMultiple($result);
