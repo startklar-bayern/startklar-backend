@@ -61,6 +61,14 @@ startklar.page.list:
   requirements:
     _access: 'TRUE'
 
+startklar.newsarticle.list:
+  path: '/api/news'
+  defaults:
+    _title: 'News'
+    _controller: '\Drupal\startklar\Controller\NewsController::index'
+  requirements:
+    _access: 'TRUE'
+
 startklar.newsletter.subscribe:
   path: '/api/newsletter'
   methods: 'POST'

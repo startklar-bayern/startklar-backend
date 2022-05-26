@@ -1,0 +1,38 @@
+uuid: be3ab04f-df9a-46a4-a178-caa175ac3b92
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_preview_image
+    - node.type.article
+  module:
+    - image
+id: node.article.field_preview_image
+field_name: field_preview_image
+entity_type: node
+bundle: article
+label: Vorschaubild
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: images/news
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: 2000x2000
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

@@ -3,15 +3,11 @@ langcode: de
 status: true
 dependencies:
   config:
-    - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
-    - field.field.node.article.comment
-    - field.field.node.article.field_image
-    - field.field.node.article.field_tags
-    - image.style.large
+    - field.field.node.article.field_images
+    - field.field.node.article.field_preview_image
     - node.type.article
   module:
-    - comment
     - image
     - text
     - user
@@ -29,31 +25,23 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  comment:
-    type: comment_default
-    label: above
-    settings:
-      view_mode: default
-      pager_id: 0
-    third_party_settings: {  }
-    weight: 110
-    region: content
-  field_image:
+  field_images:
     type: image
-    label: hidden
+    label: above
     settings:
       image_link: ''
-      image_style: large
+      image_style: ''
     third_party_settings: {  }
-    weight: -1
+    weight: 101
     region: content
-  field_tags:
-    type: entity_reference_label
+  field_preview_image:
+    type: image
     label: above
     settings:
-      link: true
+      image_link: ''
+      image_style: ''
     third_party_settings: {  }
-    weight: 10
+    weight: 102
     region: content
   links:
     settings: {  }
