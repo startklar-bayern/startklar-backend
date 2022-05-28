@@ -91,7 +91,7 @@ class FaqController extends ControllerBase {
       $faq->id = $node->id();
       $faq->question = $node->label();
       $faq->answer = $node->get('body')->value;
-      $faq->isNew = $node->get('field_new')->value;
+      $faq->isNew = $node->get('field_new')->value == TRUE;
 
       $faqs[] = $faq;
     }
