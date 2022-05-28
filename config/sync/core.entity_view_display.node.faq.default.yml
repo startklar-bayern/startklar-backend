@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.faq.body
+    - field.field.node.faq.field_new
     - field.field.node.faq.field_weight
     - node.type.faq
   module:
@@ -20,6 +21,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_new:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 103
     region: content
   field_weight:
     type: number_integer

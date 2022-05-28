@@ -1,0 +1,23 @@
+uuid: ec971ce3-1408-4060-93e3-6b9de2f5f3db
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_new
+    - node.type.faq
+id: node.faq.field_new
+field_name: field_new
+entity_type: node
+bundle: faq
+label: Neu
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

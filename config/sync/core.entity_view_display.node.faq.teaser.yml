@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.faq.body
+    - field.field.node.faq.field_new
     - field.field.node.faq.field_weight
     - node.type.faq
   module:
@@ -29,5 +30,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_new: true
   field_weight: true
   langcode: true
