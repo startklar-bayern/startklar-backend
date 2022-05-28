@@ -66,7 +66,7 @@ class AgController extends ControllerBase {
     $cacheableMetadata = CacheableMetadata::createFromRenderArray([
       '#cache' => [
         'tags' => [
-          'node_list:article',
+          'node_list:ag',
         ],
       ],
     ]);
