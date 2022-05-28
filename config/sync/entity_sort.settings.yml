@@ -1,0 +1,7 @@
+weight_fields:
+  node:
+    ag: field_weight
+    article: ''
+    faq: field_weight
+    page: ''
+    sharepic: field_weight

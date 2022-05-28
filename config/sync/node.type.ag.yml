@@ -1,0 +1,17 @@
+uuid: 4221a002-b26b-4b55-9628-823fbf0fce63
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Arbeitsgruppe
+type: ag
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: true

@@ -1,0 +1,22 @@
+uuid: cbdf164d-749f-4f27-a68b-ab3de77d028e
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.ag
+id: node.ag.promote
+field_name: promote
+entity_type: node
+bundle: ag
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

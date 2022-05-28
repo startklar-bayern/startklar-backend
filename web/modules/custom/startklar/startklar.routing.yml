@@ -88,3 +88,11 @@ startklar.newsletter.info:
     _controller: '\Drupal\startklar\Controller\NewsletterController::info'
   requirements:
     _access: 'TRUE'
+
+startklar.ag.list:
+  path: '/api/ags'
+  defaults:
+    _title: 'Arbeitsgruppen'
+    _controller: '\Drupal\startklar\Controller\AgController::index'
+  requirements:
+    _access: 'TRUE'

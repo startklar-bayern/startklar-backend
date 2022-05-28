@@ -23,6 +23,7 @@
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
         "drupal/devel": "^4.1",
+        "drupal/entity_sort": "^1.0@beta",
         "drupal/maillog": "^1.0@beta",
         "drupal/openapi_ui_swagger": "^1.0@RC",
         "drupal/pathauto": "^1.9",

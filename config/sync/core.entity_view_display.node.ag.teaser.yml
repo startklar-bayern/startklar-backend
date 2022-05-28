@@ -1,0 +1,41 @@
+uuid: 7bd136d4-f1cf-40f3-b52d-6e872308158c
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.ag.body
+    - field.field.node.ag.field_contact_mail
+    - field.field.node.ag.field_contact_name
+    - field.field.node.ag.field_contact_phone
+    - field.field.node.ag.field_icon
+    - field.field.node.ag.field_weight
+    - node.type.ag
+  module:
+    - text
+    - user
+id: node.ag.teaser
+targetEntityType: node
+bundle: ag
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_contact_mail: true
+  field_contact_name: true
+  field_contact_phone: true
+  field_icon: true
+  field_weight: true
+  langcode: true

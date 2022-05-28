@@ -1,0 +1,11 @@
+uuid: d291b723-4398-45cd-b0cb-78a1aa43b9cb
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.ag
+id: node.ag
+target_entity_type_id: node
+target_bundle: ag
+default_langcode: site_default
+language_alterable: false
