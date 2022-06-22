@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\node\NodeInterface;
 use Drupal\startklar\Model\MenuLink;
 use Drupal\startklar\Model\Page;
 use OpenApi\Attributes as OA;
