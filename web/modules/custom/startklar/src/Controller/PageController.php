@@ -61,6 +61,7 @@ class PageController extends ControllerBase {
     $nodeStorage = $this->entityTypeManager->getStorage('node');
     $result = $nodeStorage->getQuery()
       ->condition('type', 'page')
+      ->condition('status', NodeInterface::PUBLISHED)
       ->sort('created', 'DESC')
       ->execute();
 

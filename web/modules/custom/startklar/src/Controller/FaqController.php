@@ -8,6 +8,7 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\node\NodeInterface;
 use Drupal\startklar\Model\Faq;
 use Drupal\startklar\Model\FaqAskBody;
 use Drupal\startklar\ValidationException;
@@ -77,7 +78,7 @@ class FaqController extends ControllerBase {
 
     $nids = $nodeStorage->getQuery()
       ->condition('type', 'faq')
-      ->condition('status', TRUE)
+      ->condition('status', NodeInterface::PUBLISHED)
       ->sort('field_weight')
       ->execute();
 

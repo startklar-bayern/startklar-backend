@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\node\NodeInterface;
 use Drupal\startklar\Model\AG;
 use OpenApi\Attributes as OA;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -55,6 +56,7 @@ class AgController extends ControllerBase {
     $nodeStorage = $this->entityTypeManager->getStorage('node');
     $result = $nodeStorage->getQuery()
       ->condition('type', 'ag')
+      ->condition('status', NodeInterface::PUBLISHED)
       ->sort('field_weight')
       ->execute();
 

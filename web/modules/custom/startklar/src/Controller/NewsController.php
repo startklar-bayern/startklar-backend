@@ -55,6 +55,7 @@ class NewsController extends ControllerBase {
   public function index(): JsonResponse {
     $nodeStorage = $this->entityTypeManager->getStorage('node');
     $result = $nodeStorage->getQuery()
+      ->condition('status', NodeInterface::PUBLISHED)
       ->condition('type', 'article')
       ->sort('created', 'DESC')
       ->execute();
