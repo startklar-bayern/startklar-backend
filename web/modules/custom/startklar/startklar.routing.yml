@@ -96,3 +96,14 @@ startklar.ag.list:
     _controller: '\Drupal\startklar\Controller\AgController::index'
   requirements:
     _access: 'TRUE'
+
+startklar.anmeldung.create:
+  path: '/api/anmeldung'
+  methods: 'POST'
+  defaults:
+    _title: 'Anmeldung'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::add'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
