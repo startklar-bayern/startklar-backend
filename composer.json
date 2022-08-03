@@ -31,6 +31,7 @@
         "mnsami/composer-custom-directory-installer": "^2.0",
         "sendinblue/api-v3-sdk": "^7.4",
         "symfony/property-access": "^6.1",
+        "symfony/validator": "^4.4",
         "vlucas/phpdotenv": "^5.1",
         "webflo/drupal-finder": "^1.2",
         "zircote/swagger-php": "^4.2"
