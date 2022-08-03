@@ -28,8 +28,9 @@ class Person implements GroupSequenceProviderInterface {
   /**
    * @Assert\NotBlank()
    * @Assert\Date()
+   * @Assert\LessThanOrEqual("2009-06-08")
+   * @Assert\GreaterThanOrEqual("1923-06-08")
    */
-  // TODO: min max
   public string $geburtsdatum;
 
   /**
