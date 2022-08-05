@@ -97,12 +97,12 @@ startklar.ag.list:
   requirements:
     _access: 'TRUE'
 
-startklar.anmeldung.create:
-  path: '/api/anmeldung'
-  methods: 'POST'
+startklar.anmeldung.update:
+  path: '/api/anmeldung/group/{id}'
+  methods: 'PUT'
   defaults:
     _title: 'Anmeldung'
-    _controller: '\Drupal\startklar\Controller\AnmeldungController::add'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::update'
   options:
     no_cache: 'TRUE'
   requirements:
