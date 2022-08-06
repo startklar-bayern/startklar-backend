@@ -3,11 +3,12 @@
 namespace Drupal\startklar\Controller;
 
 use Drupal\startklar\Model\Anmeldung;
-use Laminas\Diactoros\Response\JsonResponse;
+use Drupal\startklar\Model\CreateAnmeldungBody;
 use OpenApi\Attributes as OA;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validation;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnmeldungController extends StartklarControllerBase {
 
@@ -23,11 +24,57 @@ class AnmeldungController extends StartklarControllerBase {
     return new static();
   }
 
+  #[OA\Post(
+    path: '/anmeldung/group',
+    operationId: 'create_anmeldung',
+    description: 'Prepares a group Anmeldung and sends a link to fill data to the given email address',
+    summary: 'Create a group Anmeldung',
+    requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: '#components/schemas/CreateAnmeldungBody')),
+    tags: ['Anmeldung'],
+    responses: [
+      new OA\Response(response: 200, description: "OK", content: new OA\JsonContent(
+        properties: [
+          new OA\Property('status', type: 'string', example: 'success'),
+          new OA\Property('message', type: 'string', example: 'Created'),
+        ],
+        type: "object",
+      )),
+      new OA\Response(response: 400, description: "Validation error", content: new OA\JsonContent(
+        properties: [
+          new OA\Property('status', type: 'string', example: 'error'),
+          new OA\Property('errors', type: 'array', items: new OA\Items(
+            properties: [
+              new OA\Property('property', description: 'Which property has the error', type: 'string', example: 'vorname'),
+              new OA\Property('message', type: 'string', example: 'Field "vorname" is required!'),
+            ],
+          )),
+        ],
+        type: "object",
+      )),
+      new OA\Response(response: 500, description: 'Server error'),
+    ]
+  )]
+  public function new(Request $request) {
+    $body = $this->getBody($request, CreateAnmeldungBody::class);
+
+    if ($body instanceof ResponseInterface) {
+      return $body;
+    }
+
+    if ($response = $this->isInvalid($body)) {
+      return $response;
+    }
+
+    print_r($body);
+    die();
+  }
+
   // TODO: document authentication
   #[OA\Put(
     path: '/anmeldung/group/{groupId}',
     operationId: 'update_anmeldung',
-    description: 'Create or update a group Anmeldung',
+    description: 'Update a group Anmeldung',
+    summary: 'Update a group Anmeldung',
     requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: '#components/schemas/Anmeldung')),
     tags: ['Anmeldung'],
     parameters: [
@@ -64,33 +111,29 @@ class AnmeldungController extends StartklarControllerBase {
     ]
   )]
   public function update(Request $request) {
+    // TODO: Authentication
+    // TODO: Load group by ID
+    $body = $this->getBody($request, Anmeldung::class);
 
-    $person = $this->serializer->deserialize($request->getContent(), Anmeldung::class, 'json');
-
-    $validator = Validation::createValidatorBuilder()
-      ->enableAnnotationMapping()
-      ->getValidator();
-
-    $violations = $validator->validate($person);
-
-    if (count($violations) > 0) {
-      $response = [
-        'status' => 'error',
-        'errors' => [],
-      ];
-
-      foreach ($violations as $violation) {
-        $response['errors'][] = [
-          'property' => $violation->getPropertyPath(),
-          'message' => $violation->getMessage(),
-        ];
-      }
-
-      return new JsonResponse($response, 400);
+    if ($body instanceof Response) {
+      return $body;
     }
 
-    print_r($person);
+    if ($response = $this->isInvalid($body)) {
+      return $response;
+    }
+
+    // TODO: Validate conditions that are based on the complete object
+    // TODO: Update group
+    // TODO: Check if people were deleted, delete them
+    // TODO: check if peope were added, add them
+    // TODO: If this is the first update, send notification mail
+    // TODO: Check if file of führungszeugnis has changed, and if so: require a new review
+    // TODO: Save the node(s)
+
+    print_r($body);
     die();
   }
+
 
 }

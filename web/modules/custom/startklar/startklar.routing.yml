@@ -97,12 +97,67 @@ startklar.ag.list:
   requirements:
     _access: 'TRUE'
 
-startklar.anmeldung.update:
+startklar.anmeldung.group.create:
+  path: '/api/anmeldung/group'
+  methods: 'POST'
+  defaults:
+    _title: 'Create Anmeldung'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::new'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.anmeldung.group.update:
   path: '/api/anmeldung/group/{id}'
   methods: 'PUT'
   defaults:
-    _title: 'Anmeldung'
+    _title: 'Update Anmeldung'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::update'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.anmeldung.temp_storage.exists:
+  path: '/api/anmeldung/tempStorage/{id}'
+  methods: 'HEAD'
+  defaults:
+    _title: 'Anmeldung TempStorage exists'
+    _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::exists'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.anmeldung.temp_storage.set:
+  path: '/api/anmeldung/tempStorage/{id}'
+  methods: 'PUT'
+  defaults:
+    _title: 'Anmeldung TempStorage set'
+    _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::setValue'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.anmeldung.temp_storage.get:
+  path: '/api/anmeldung/tempStorage/{id}'
+  methods: 'GET'
+  defaults:
+    _title: 'Anmeldung TempStorage get'
+    _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::getValue'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+startklar.anmeldung.temp_storage.delete:
+  path: '/api/anmeldung/tempStorage/{id}'
+  methods: 'DELETE'
+  defaults:
+    _title: 'Anmeldung TempStorage delete'
+    _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::deleteValue'
   options:
     no_cache: 'TRUE'
   requirements:
