@@ -4,6 +4,8 @@ namespace Drupal\startklar\Controller;
 
 use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\CreateAnmeldungBody;
+use Drupal\startklar\Session\AnmeldungType;
+use Firebase\JWT\JWT;
 use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -11,9 +13,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnmeldungController extends StartklarControllerBase {
+  protected string $JWT_KEY;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct() {
     parent::__construct();
+
+    $jwtKey = getenv('STARTKLAR_JWT_KEY');
+
+    if (empty($jwtKey) || strlen($jwtKey) == 0) {
+      throw new \Exception("The environment variable 'STARTKLAR_JWT_KEY' is not set.");
+    }
+
+    $this->JWT_KEY = $jwtKey;
   }
 
 
@@ -65,6 +79,24 @@ class AnmeldungController extends StartklarControllerBase {
       return $response;
     }
 
+    // TODO: Generate group id
+    $groupId = 'Mut-123';
+
+    // TODO: Generate group node and store
+
+    $jwt = JWT::encode([
+      'iss' => $request->getHttpHost(),
+      'sub' => $groupId,
+      'type' => AnmeldungType::GROUP,
+      'iat' => time(),
+      'nbf' => time(),
+      'exp' => strtotime("2023-12-31"),
+    ], $this->JWT_KEY, 'HS256');
+
+    print $jwt;
+
+    // TODO: Send mail
+
     print_r($body);
     die();
   }
@@ -75,6 +107,7 @@ class AnmeldungController extends StartklarControllerBase {
     operationId: 'update_anmeldung',
     description: 'Update a group Anmeldung',
     summary: 'Update a group Anmeldung',
+    security: [['jwt' => []]],
     requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: '#components/schemas/Anmeldung')),
     tags: ['Anmeldung'],
     parameters: [

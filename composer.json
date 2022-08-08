@@ -28,6 +28,7 @@
         "drupal/openapi_ui_swagger": "^1.0@RC",
         "drupal/pathauto": "^1.9",
         "drush/drush": "^10.6",
+        "firebase/php-jwt": "^6.3",
         "mnsami/composer-custom-directory-installer": "^2.0",
         "sendinblue/api-v3-sdk": "^7.4",
         "symfony/property-access": "^6.1",

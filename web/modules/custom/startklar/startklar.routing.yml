@@ -33,6 +33,7 @@ startklar.faq.list:
     _controller: '\Drupal\startklar\Controller\FaqController::index'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.faq.ask:
   path: '/api/faqs/question'
@@ -44,6 +45,7 @@ startklar.faq.ask:
     no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.sharepic.list:
   path: '/api/sharepics'
@@ -52,6 +54,7 @@ startklar.sharepic.list:
     _controller: '\Drupal\startklar\Controller\SharepicController::index'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.page.list:
   path: '/api/pages'
@@ -60,6 +63,7 @@ startklar.page.list:
     _controller: '\Drupal\startklar\Controller\PageController::index'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.newsarticle.list:
   path: '/api/news'
@@ -68,6 +72,7 @@ startklar.newsarticle.list:
     _controller: '\Drupal\startklar\Controller\NewsController::index'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.newsletter.subscribe:
   path: '/api/newsletter'
@@ -79,6 +84,7 @@ startklar.newsletter.subscribe:
     no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.newsletter.info:
   path: '/api/newsletter'
@@ -88,6 +94,7 @@ startklar.newsletter.info:
     _controller: '\Drupal\startklar\Controller\NewsletterController::info'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.ag.list:
   path: '/api/ags'
@@ -96,6 +103,7 @@ startklar.ag.list:
     _controller: '\Drupal\startklar\Controller\AgController::index'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.group.create:
   path: '/api/anmeldung/group'
@@ -107,6 +115,7 @@ startklar.anmeldung.group.create:
     no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.group.update:
   path: '/api/anmeldung/group/{id}'
@@ -115,9 +124,11 @@ startklar.anmeldung.group.update:
     _title: 'Update Anmeldung'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::update'
   options:
+    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.temp_storage.exists:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -126,9 +137,11 @@ startklar.anmeldung.temp_storage.exists:
     _title: 'Anmeldung TempStorage exists'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::exists'
   options:
+    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.temp_storage.set:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -136,10 +149,13 @@ startklar.anmeldung.temp_storage.set:
   defaults:
     _title: 'Anmeldung TempStorage set'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::setValue'
+    _format: 'json'
   options:
+    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.temp_storage.get:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -148,9 +164,11 @@ startklar.anmeldung.temp_storage.get:
     _title: 'Anmeldung TempStorage get'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::getValue'
   options:
+    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
 
 startklar.anmeldung.temp_storage.delete:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -159,6 +177,8 @@ startklar.anmeldung.temp_storage.delete:
     _title: 'Anmeldung TempStorage delete'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::deleteValue'
   options:
+    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
