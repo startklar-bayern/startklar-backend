@@ -4,11 +4,13 @@ namespace Drupal\startklar\Controller;
 
 use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\CreateAnmeldungBody;
+use Drupal\startklar\Service\GroupService;
 use Drupal\startklar\Session\AnmeldungType;
 use Firebase\JWT\JWT;
 use OpenApi\Attributes as OA;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,9 +18,14 @@ class AnmeldungController extends StartklarControllerBase {
   protected string $JWT_KEY;
 
   /**
+   * @var \Drupal\startklar\Service\GroupService
+   */
+  protected GroupService $groupService;
+
+  /**
    * @throws \Exception
    */
-  public function __construct() {
+  public function __construct(GroupService $groupService) {
     parent::__construct();
 
     $jwtKey = getenv('STARTKLAR_JWT_KEY');
@@ -28,6 +35,7 @@ class AnmeldungController extends StartklarControllerBase {
     }
 
     $this->JWT_KEY = $jwtKey;
+    $this->groupService = $groupService;
   }
 
 
@@ -35,7 +43,7 @@ class AnmeldungController extends StartklarControllerBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static();
+    return new static($container->get('startklar.groups'));
   }
 
   #[OA\Post(
@@ -69,6 +77,7 @@ class AnmeldungController extends StartklarControllerBase {
     ]
   )]
   public function new(Request $request) {
+    /** @var CreateAnmeldungBody $body */
     $body = $this->getBody($request, CreateAnmeldungBody::class);
 
     if ($body instanceof ResponseInterface) {
@@ -79,26 +88,22 @@ class AnmeldungController extends StartklarControllerBase {
       return $response;
     }
 
-    // TODO: Generate group id
-    $groupId = 'Mut-123';
-
-    // TODO: Generate group node and store
+    $node = $this->groupService->new($body->mail);
 
     $jwt = JWT::encode([
       'iss' => $request->getHttpHost(),
-      'sub' => $groupId,
+      'sub' => $node->label(),
       'type' => AnmeldungType::GROUP,
       'iat' => time(),
       'nbf' => time(),
       'exp' => strtotime("2023-12-31"),
     ], $this->JWT_KEY, 'HS256');
 
-    print $jwt;
-
-    // TODO: Send mail
-
-    print_r($body);
-    die();
+    return new JsonResponse([
+      'status' => 'success',
+      'message' => 'Anmeldung was created. The JWT is just here for testing, will be removed once on prod. The JWT will be sent to the user by email.',
+      'jwt' => $jwt,
+    ]);
   }
 
   // TODO: document authentication

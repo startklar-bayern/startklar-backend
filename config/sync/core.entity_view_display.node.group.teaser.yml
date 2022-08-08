@@ -1,0 +1,23 @@
+uuid: 96800958-3dc3-4b91-bc48-db9a8fa1c2be
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.group.field_mail
+    - node.type.group
+  module:
+    - user
+id: node.group.teaser
+targetEntityType: node
+bundle: group
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_mail: true
+  langcode: true

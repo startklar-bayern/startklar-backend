@@ -1,0 +1,28 @@
+uuid: 0a1106ea-22a0-4046-88b4-70fd3a9e6451
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.group.field_mail
+    - node.type.group
+  module:
+    - user
+id: node.group.default
+targetEntityType: node
+bundle: group
+mode: default
+content:
+  field_mail:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

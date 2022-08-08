@@ -1,0 +1,22 @@
+uuid: 09db2df7-7093-46cc-973b-14acedbdf0e4
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.group
+id: node.group.status
+field_name: status
+entity_type: node
+bundle: group
+label: Veröffentlicht
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

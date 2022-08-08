@@ -8,3 +8,7 @@ services:
     class: Drupal\startklar\Access\AnmeldungAccessChecker
     tags:
       - { name: access_check, applies_to: _anmeldung_access_check }
+
+  startklar.groups:
+    class: Drupal\startklar\Service\GroupService
+    arguments: ['@entity_type.manager']
