@@ -3,17 +3,32 @@
 namespace Drupal\startklar\Model;
 
 use Drupal\startklar\StartklarHelper;
+use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 #[OA\Schema(
-  required: ['id', 'vorname', 'nachname', 'geburtsdatum', 'geschlecht', 'strasse', 'plz', 'ort', 'telfon', 'mail', 'essen', 'anreise']
+  required: [
+    'id',
+    'vorname',
+    'nachname',
+    'geburtsdatum',
+    'geschlecht',
+    'strasse',
+    'plz',
+    'ort',
+    'telfon',
+    'mail',
+    'essen',
+    'anreise',
+  ]
 )]
 /**
  * @Assert\GroupSequenceProvider()
  */
 class Person implements GroupSequenceProviderInterface {
+
   #[OA\Property(description: "UUID of the person. For new people: UUID has to be generated in frontend.", format: "uuid")]
   /**
    * @Assert\NotBlank()
@@ -39,10 +54,14 @@ class Person implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2009-06-08")
    * @Assert\GreaterThanOrEqual("1923-06-08")
    */
-  // TODO: Geburtsdatum Leitung
+    // TODO: Geburtsdatum Leitung
   public string $geburtsdatum;
 
-  #[OA\Property(description: "Gender of the person", type: "string", enum: [Geschlecht::Male, Geschlecht::Female, Geschlecht::Diverse])]
+  #[OA\Property(description: "Gender of the person", type: "string", enum: [
+    Geschlecht::Male,
+    Geschlecht::Female,
+    Geschlecht::Diverse,
+  ])]
   /**
    * @Assert\NotBlank()
    * @Assert\Choice({Geschlecht::Male, Geschlecht::Female, Geschlecht::Diverse}, message=StartklarHelper::INVALID_CHOICE_MESSAGE)
@@ -99,7 +118,11 @@ class Person implements GroupSequenceProviderInterface {
    */
   public ?string $aufsichtsperson;
 
-  #[OA\Property(description: "Preferences for food", type: "string", enum: [Essen::Normal, Essen::Vegetarisch, Essen::Vegan])]
+  #[OA\Property(description: "Preferences for food", type: "string", enum: [
+    Essen::Normal,
+    Essen::Vegetarisch,
+    Essen::Vegan,
+  ])]
   /**
    * @Assert\NotBlank()
    * @Assert\Choice({Essen::Normal, Essen::Vegetarisch, Essen::Vegan}, message=StartklarHelper::INVALID_CHOICE_MESSAGE)
@@ -124,11 +147,13 @@ class Person implements GroupSequenceProviderInterface {
   /**
    * @Assert\Uuid()
    */
-  // TODO: File exists
+    // TODO: File exists
   public ?string $fuehrungszeugnis;
 
   #[OA\Property(description: "ID of the Schutzkonzept meeting event", type: "int")]
-  // TODO
+  /**
+   * @TaxonomyReferenceConstraint(vocuabluary="termine_schutzkonzept")
+   */
   public ?int $termin_schutzkonzept;
 
   public function getGroupSequence() {

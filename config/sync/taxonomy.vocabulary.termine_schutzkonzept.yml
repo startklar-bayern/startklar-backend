@@ -1,0 +1,8 @@
+uuid: 5f965db8-24c9-449b-8c7d-0d40eb9796d2
+langcode: de
+status: true
+dependencies: {  }
+name: 'Termine Schutzkonzept'
+vid: termine_schutzkonzept
+description: ''
+weight: 0
