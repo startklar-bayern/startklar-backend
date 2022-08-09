@@ -83,20 +83,20 @@ class Person implements GroupSequenceProviderInterface {
   /**
    * @Assert\NotBlank(groups="underage", message="This value should not be blank for people under 18 years before the end date of the event.")
    */
-  public string $telefon_eltern;
+  public ?string $telefon_eltern;
 
   #[OA\Property(description: "Mail address of parents. Required if person is underage. ", type: "string", format: "email")]
   /**
    * @Assert\NotBlank(groups="underage", message="This value should not be blank for people under 18 years before the end date of the event.")
    * @Assert\Email()
    */
-  public string $mail_eltern;
+  public ?string $mail_eltern;
 
   #[OA\Property(description: "UUID of the person who is taking care of this person. Required if underage.", type: "string", format: "uuid")]
   /**
    * @Assert\NotBlank(groups="underage", message="This value should not be blank for people under 18 years before the end date of the event.")
    */
-  public string $aufsichtsperson;
+  public ?string $aufsichtsperson;
 
   #[OA\Property(description: "Preferences for food", type: "string", enum: [Essen::Normal, Essen::Vegetarisch, Essen::Vegan])]
   /**
@@ -106,11 +106,11 @@ class Person implements GroupSequenceProviderInterface {
   public string $essen;
 
   #[OA\Property(description: "Preferences for food", type: "string", example: "Nuss-Allergie\\nViel Schokolade")]
-  public string $essen_anmerkungen;
+  public ?string $essen_anmerkungen;
 
   #[OA\Property(description: "UUID of a full paying sibling", type: "string", format: "uuid")]
   // TODO
-  public string $geschwisterkind;
+  public ?string $geschwisterkind;
 
   #[OA\Property(ref: '#/components/schemas/PersonAnreise', description: "Information about how and when the person will come to the event", type: "object")]
   /**
@@ -121,11 +121,11 @@ class Person implements GroupSequenceProviderInterface {
 
   #[OA\Property(description: "UUID of the file that represents the Führungszeugnis. Required if Aufsichtsperson or Gruppenleitung", type: "string", format: "uuid")]
   // TODO
-  public string $fuehrungszeugnis;
+  public ?string $fuehrungszeugnis;
 
   #[OA\Property(description: "ID of the Schutzkonzept meeting event", type: "int")]
   // TODO
-  public int $termin_schutzkonzept;
+  public ?int $termin_schutzkonzept;
 
   public function getGroupSequence() {
     $geburtsdatum = new \DateTime($this->geburtsdatum);
