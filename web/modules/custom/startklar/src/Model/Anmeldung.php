@@ -2,12 +2,16 @@
 
 namespace Drupal\startklar\Model;
 
+use Drupal\startklar\Validation\SiblingConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[OA\Schema(
   required: ['name', 'dv', 'anreise', 'leitung', 'jugendschutzgesetz_akzeptiert']
 )]
+/**
+ * @SiblingConstraint()
+ */
 class Anmeldung {
 
   #[OA\Property(description: "The name of the group", format: "string", example: "Kolpingjugend Dietfurt")]

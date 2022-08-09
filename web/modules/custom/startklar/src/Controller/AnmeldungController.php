@@ -106,7 +106,6 @@ class AnmeldungController extends StartklarControllerBase {
     ]);
   }
 
-  // TODO: document authentication
   #[OA\Put(
     path: '/anmeldung/group/{groupId}',
     operationId: 'update_anmeldung',
@@ -148,8 +147,7 @@ class AnmeldungController extends StartklarControllerBase {
       new OA\Response(response: 500, description: 'Server error'),
     ]
   )]
-  public function update(Request $request) {
-    // TODO: Authentication
+  public function update(Request $request, string $id) {
     // TODO: Load group by ID
     $body = $this->getBody($request, Anmeldung::class);
 
