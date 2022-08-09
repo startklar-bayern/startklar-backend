@@ -4,6 +4,7 @@ namespace Drupal\startklar\Controller;
 
 use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\CreateAnmeldungBody;
+use Drupal\startklar\Model\SchutzkonzeptTermin;
 use Drupal\startklar\Service\GroupService;
 use Drupal\startklar\Session\AnmeldungType;
 use Firebase\JWT\JWT;
@@ -171,5 +172,40 @@ class AnmeldungController extends StartklarControllerBase {
     die();
   }
 
+  #[OA\Get(
+    path: '/anmeldung/termine-schutzkonzept',
+    operationId: 'get_termine_schutzkonept',
+    description: 'Get Schutzkonzept Termine',
+    tags: ['Anmeldung'],
+    responses: [
+      new OA\Response(
+        response: 200,
+        description: "OK",
+        content: new OA\JsonContent(type: "array", items: new OA\Items(ref: "#/components/schemas/SchutzkonzeptTermin"))
+      ),
+    ]
+  )]
+  public function getTermineSchutzkonzept() {
+    /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
+    $termStorage = $this->entityTypeManager()->getStorage('taxonomy_term');
+
+    $termine = $termStorage->loadByProperties(['vid' => 'termine_schutzkonzept']);
+
+    usort($termine, function($a, $b) {
+      return strcmp($a->get('field_date')->value, $b->get('field_date')->value);
+    });
+
+    $result = [];
+
+    foreach ($termine as $termin) {
+      $item = new SchutzkonzeptTermin();
+      $item->id = $termin->id();
+      $item->date = $termin->get('field_date')->value;
+
+      $result[] = $item;
+    }
+
+    return new JsonResponse($result);
+  }
 
 }
