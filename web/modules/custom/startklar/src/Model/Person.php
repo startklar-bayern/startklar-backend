@@ -121,7 +121,10 @@ class Person implements GroupSequenceProviderInterface {
   public PersonAnreise $anreise;
 
   #[OA\Property(description: "UUID of the file that represents the Führungszeugnis. Required if Aufsichtsperson or Gruppenleitung", type: "string", format: "uuid")]
-  // TODO
+  /**
+   * @Assert\Uuid()
+   */
+  // TODO: File exists
   public ?string $fuehrungszeugnis;
 
   #[OA\Property(description: "ID of the Schutzkonzept meeting event", type: "int")]
