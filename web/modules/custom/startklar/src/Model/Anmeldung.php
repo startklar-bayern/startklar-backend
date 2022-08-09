@@ -35,7 +35,6 @@ class Anmeldung {
    * @Assert\NotBlank()
    * @TaxonomyReferenceConstraint(vocuabluary="dvs")
    */
-  // TODO
   public int $dv;
 
   #[OA\Property(ref: '#/components/schemas/Anreise', description: "Information about how and when the group will come to the event", type: "object")]

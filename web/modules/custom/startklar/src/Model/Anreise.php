@@ -3,6 +3,7 @@
 namespace Drupal\startklar\Model;
 
 use Drupal\startklar\StartklarHelper;
+use Drupal\startklar\Validation\AnreiseConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
  * @Assert\GroupSequenceProvider()
+ * @AnreiseConstraint()
  */
 #[OA\Schema(
   required: ['typ', 'ziel', 'ankunft', 'abfahrt']
@@ -37,7 +39,6 @@ class Anreise implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2023-06-11T23:59:59+02:00")
    * @Assert\GreaterThanOrEqual("2023-06-08T00:00:00+02:00")
    */
-  // TODO: abfahrt nach ankunft
   public string $ankunft;
 
   #[OA\Property(description: "When will you leave", type: "string", format: 'date-time', example: '2023-06-11T13:00:00+02:00')]
@@ -47,7 +48,6 @@ class Anreise implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2023-06-11T23:59:59+02:00")
    * @Assert\GreaterThanOrEqual("2023-06-08T00:00:00+02:00")
    */
-  // TODO: abfahrt nach ankunft
   public string $abfahrt;
 
   public function getGroupSequence() {
