@@ -3,6 +3,7 @@
 namespace Drupal\startklar\Model;
 
 use Drupal\startklar\StartklarHelper;
+use Drupal\startklar\Validation\FileReferenceConstraint;
 use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -146,8 +147,8 @@ class Person implements GroupSequenceProviderInterface {
   #[OA\Property(description: "UUID of the file that represents the Führungszeugnis. Required if Aufsichtsperson or Gruppenleitung", type: "string", format: "uuid")]
   /**
    * @Assert\Uuid()
+   * @FileReferenceConstraint()
    */
-    // TODO: File exists
   public ?string $fuehrungszeugnis;
 
   #[OA\Property(description: "ID of the Schutzkonzept meeting event", type: "int")]
