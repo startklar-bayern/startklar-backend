@@ -1,0 +1,29 @@
+uuid: 674a75b2-8e43-4134-be92-ce9f5a7f229e
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dv
+    - node.type.group
+    - taxonomy.vocabulary.dvs
+id: node.group.field_dv
+field_name: field_dv
+entity_type: node
+bundle: group
+label: DV
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      dvs: dvs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

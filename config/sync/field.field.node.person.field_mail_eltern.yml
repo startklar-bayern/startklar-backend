@@ -1,0 +1,19 @@
+uuid: 2231175d-e890-4c97-8d50-aefb0a5b5ed7
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mail_eltern
+    - node.type.person
+id: node.person.field_mail_eltern
+field_name: field_mail_eltern
+entity_type: node
+bundle: person
+label: 'E-Mail Eltern'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

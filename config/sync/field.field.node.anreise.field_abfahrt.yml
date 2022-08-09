@@ -1,0 +1,21 @@
+uuid: 1100c566-5a29-4597-904e-917063d79090
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_abfahrt
+    - node.type.anreise
+  module:
+    - datetime
+id: node.anreise.field_abfahrt
+field_name: field_abfahrt
+entity_type: node
+bundle: anreise
+label: Abfahrt
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

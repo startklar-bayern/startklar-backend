@@ -1,0 +1,29 @@
+uuid: 0757063a-dc6d-499e-8f3d-bf1f2fef6c20
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_leitung
+    - node.type.group
+    - node.type.person
+id: node.group.field_leitung
+field_name: field_leitung
+entity_type: node
+bundle: group
+label: Leitung
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: b23e86dc-0393-4741-99af-ac6469969c89
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ort
+    - node.type.person
+id: node.person.field_ort
+field_name: field_ort
+entity_type: node
+bundle: person
+label: Ort
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

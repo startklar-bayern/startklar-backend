@@ -8,3 +8,5 @@ content_access_roles_gids:
   administrator: 4
 content_access_node_type:
   group: 'a:2:{s:8:"view_own";a:1:{i:0;s:13:"administrator";}s:4:"view";a:1:{i:0;s:13:"administrator";}}'
+  person: 'a:2:{s:8:"view_own";a:1:{i:0;s:13:"administrator";}s:4:"view";a:1:{i:0;s:13:"administrator";}}'
+  anreise: 'a:2:{s:8:"view_own";a:1:{i:0;s:13:"administrator";}s:4:"view";a:1:{i:0;s:13:"administrator";}}'

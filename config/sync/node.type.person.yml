@@ -1,0 +1,17 @@
+uuid: a7265c7b-b62a-4984-8f52-724f0b428956
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Person
+type: person
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

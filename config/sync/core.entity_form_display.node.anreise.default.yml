@@ -1,20 +1,20 @@
-uuid: fda01554-51c3-4cfc-8dd0-a9631dc45e0c
+uuid: 9d6ce998-6af2-46ff-9c01-e5ddd7b3e448
 langcode: de
 status: true
 dependencies:
   config:
-    - field.field.node.group.field_anreise
-    - field.field.node.group.field_dv
-    - field.field.node.group.field_leitung
-    - field.field.node.group.field_mail
-    - field.field.node.group.field_name
-    - field.field.node.group.field_teilnehmer
-    - node.type.group
+    - field.field.node.anreise.field_abfahrt
+    - field.field.node.anreise.field_ankunft
+    - field.field.node.anreise.field_mit_gruppe
+    - field.field.node.anreise.field_typ
+    - field.field.node.anreise.field_ziel
+    - node.type.anreise
   module:
+    - datetime
     - path
-id: node.group.default
+id: node.anreise.default
 targetEntityType: node
-bundle: group
+bundle: anreise
 mode: default
 content:
   created:
@@ -23,61 +23,36 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_anreise:
-    type: entity_reference_autocomplete
-    weight: 126
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_dv:
-    type: entity_reference_autocomplete
-    weight: 123
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_leitung:
-    type: entity_reference_autocomplete
+  field_abfahrt:
+    type: datetime_default
     weight: 124
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-  field_mail:
-    type: email_default
-    weight: 121
+  field_ankunft:
+    type: datetime_default
+    weight: 123
     region: content
-    settings:
-      placeholder: ''
-      size: 60
+    settings: {  }
     third_party_settings: {  }
-  field_name:
-    type: string_textfield
-    weight: 122
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_teilnehmer:
-    type: entity_reference_autocomplete
+  field_mit_gruppe:
+    type: boolean_checkbox
     weight: 125
     region: content
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      display_label: true
+    third_party_settings: {  }
+  field_typ:
+    type: options_select
+    weight: 121
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_ziel:
+    type: options_select
+    weight: 122
+    region: content
+    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select

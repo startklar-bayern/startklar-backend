@@ -1,0 +1,191 @@
+uuid: d9b711b7-626a-4a94-9db1-7a146a14379c
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.person.field_anreise
+    - field.field.node.person.field_aufsichtsperson
+    - field.field.node.person.field_essen
+    - field.field.node.person.field_essen_anmerkungen
+    - field.field.node.person.field_fuehrungszeugnis
+    - field.field.node.person.field_fuehrungszeugnis_geprueft
+    - field.field.node.person.field_geburtsdatum
+    - field.field.node.person.field_geschlecht
+    - field.field.node.person.field_geschwisterkind
+    - field.field.node.person.field_mail
+    - field.field.node.person.field_mail_eltern
+    - field.field.node.person.field_nachname
+    - field.field.node.person.field_ort
+    - field.field.node.person.field_plz
+    - field.field.node.person.field_strasse
+    - field.field.node.person.field_telefon
+    - field.field.node.person.field_telefon_eltern
+    - field.field.node.person.field_termin_schutzkonzept
+    - field.field.node.person.field_vorname
+    - node.type.person
+  module:
+    - datetime
+    - options
+    - user
+id: node.person.default
+targetEntityType: node
+bundle: person
+mode: default
+content:
+  field_anreise:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 119
+    region: content
+  field_aufsichtsperson:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 113
+    region: content
+  field_essen:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 114
+    region: content
+  field_essen_anmerkungen:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 115
+    region: content
+  field_fuehrungszeugnis:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 117
+    region: content
+  field_fuehrungszeugnis_geprueft:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_geburtsdatum:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_geschlecht:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_geschwisterkind:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 116
+    region: content
+  field_mail:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_mail_eltern:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_nachname:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_ort:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_plz:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_strasse:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_telefon:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_telefon_eltern:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_termin_schutzkonzept:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 118
+    region: content
+  field_vorname:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,23 @@
+uuid: b8ee7736-fee2-4cd6-8a59-933d57817b4c
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mit_gruppe
+    - node.type.anreise
+id: node.anreise.field_mit_gruppe
+field_name: field_mit_gruppe
+entity_type: node
+bundle: anreise
+label: 'Mit Gruppe'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean
