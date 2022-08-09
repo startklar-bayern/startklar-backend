@@ -39,6 +39,12 @@ class UuidReferenceExistsConstraintValidator extends PersonValidatorBase {
           ->atPath($path . '.' . $fieldName)
           ->addViolation();
       }
+
+      if ($referencedPerson->id == $person->id) {
+        $this->context->buildViolation("A person cannot reference itself as " . $fieldName . ".")
+          ->atPath($path . '.' . $fieldName)
+          ->addViolation();
+      }
     }
   }
 

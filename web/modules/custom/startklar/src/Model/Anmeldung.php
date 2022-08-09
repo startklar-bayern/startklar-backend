@@ -2,6 +2,7 @@
 
 namespace Drupal\startklar\Model;
 
+use Drupal\startklar\Validation\AufsichtspersonConstraint;
 use Drupal\startklar\Validation\SiblingConstraint;
 use Drupal\startklar\Validation\UuidReferenceExistsConstraint;
 use Drupal\startklar\Validation\UuidsUniqueConstraint;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UuidsUniqueConstraint()
  * @UuidReferenceExistsConstraint()
  * @SiblingConstraint()
+ * @AufsichtspersonConstraint()
  */
 class Anmeldung {
 
