@@ -199,3 +199,15 @@ startklar.anmeldung.temp_storage.delete:
   requirements:
     _anmeldung_access_check: 'TRUE'
     _format: 'json'
+
+startklar.files.upload:
+  path: '/api/files/{id}'
+  methods: 'POST'
+  defaults:
+    _title: 'Upload file'
+    _controller: '\Drupal\startklar\Controller\FileController::upload'
+  options:
+    _auth: [ 'anmeldung_jwt' ]
+    no_cache: 'TRUE'
+  requirements:
+    _anmeldung_access_check: 'TRUE'

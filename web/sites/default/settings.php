@@ -783,3 +783,5 @@ $databases['default']['default'] = [
   'prefix' => '',
   'username' => getenv('MYSQL_USER'),
 ];
+
+$settings['file_private_path'] = '../private-files';

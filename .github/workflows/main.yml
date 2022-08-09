@@ -37,7 +37,7 @@ jobs:
       - name: upload
         uses: burnett01/rsync-deployments@5.2
         with:
-          switches: --exclude '.env' --exclude '.git' --exclude '.github' --exclude 'web/sites/default/files' --exclude 'web/sites/default/settings.local.php' -avzr --delete
+          switches: --exclude '.env' --exclude '.git' --exclude '.github' --exclude 'web/sites/default/files' --exclude 'private-files' --exclude 'web/sites/default/settings.local.php' -avzr --delete
           path: ./
           remote_path: /var/www/vhosts/startklar.bayern/httpdocs/backend/
           remote_host: bahuma.io
@@ -57,7 +57,7 @@ jobs:
             ../vendor/bin/drush updb -y &&
             ../vendor/bin/drush cim -y &&
             ../vendor/bin/drush cr
-            
+
       - name: notify
         uses: appleboy/telegram-action@master
         with:
@@ -66,7 +66,7 @@ jobs:
           message: |
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
-            
+
             Repository: ${{ github.repository }}
-            
+
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
