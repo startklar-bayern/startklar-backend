@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\startklar\Validation;
+namespace Drupal\startklar\Validation\Helper;
 
 use Drupal\startklar\Model\Anmeldung;
 

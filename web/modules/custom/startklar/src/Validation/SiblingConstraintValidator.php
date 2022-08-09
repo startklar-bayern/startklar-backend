@@ -4,6 +4,7 @@ namespace Drupal\startklar\Validation;
 
 use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\Person;
+use Drupal\startklar\Validation\Helper\PersonValidatorBase;
 use Symfony\Component\Validator\Constraint;
 
 class SiblingConstraintValidator extends PersonValidatorBase {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\startklar\Validation;
+namespace Drupal\startklar\Validation\Helper;
 
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
