@@ -122,6 +122,16 @@ startklar.anmeldung.termineSchutzkonzept.index:
     _access: 'TRUE'
     _format: 'json'
 
+startklar.anmeldung.dvs.index:
+  path: '/api/anmeldung/dvs'
+  methods: 'GET'
+  defaults:
+    _title: 'DVs'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::getDVs'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'
+
 startklar.anmeldung.group.create:
   path: '/api/anmeldung/group'
   methods: 'POST'

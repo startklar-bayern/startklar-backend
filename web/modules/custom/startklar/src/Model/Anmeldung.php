@@ -6,6 +6,7 @@ use Drupal\startklar\Validation\AufsichtspersonConstraint;
 use Drupal\startklar\Validation\FuehrungszeugnisConstraint;
 use Drupal\startklar\Validation\PersonWithLegalAgeConstraint;
 use Drupal\startklar\Validation\SiblingConstraint;
+use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
 use Drupal\startklar\Validation\UuidReferenceExistsConstraint;
 use Drupal\startklar\Validation\UuidsUniqueConstraint;
 use OpenApi\Attributes as OA;
@@ -32,6 +33,7 @@ class Anmeldung {
   #[OA\Property(description: "ID of the Diözesanverband", format: "int64")]
   /**
    * @Assert\NotBlank()
+   * @TaxonomyReferenceConstraint(vocuabluary="dvs")
    */
   // TODO
   public int $dv;

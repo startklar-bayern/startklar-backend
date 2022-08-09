@@ -1,0 +1,11 @@
+uuid: 5f796615-fdfc-4b44-a831-66f0875bb4bf
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dvs
+id: taxonomy_term.dvs
+target_entity_type_id: taxonomy_term
+target_bundle: dvs
+default_langcode: site_default
+language_alterable: false

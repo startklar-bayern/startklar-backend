@@ -1,0 +1,22 @@
+uuid: ac3e1776-213f-40f5-a2e2-97787e7f572f
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.datei
+id: node.datei.promote
+field_name: promote
+entity_type: node
+bundle: datei
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

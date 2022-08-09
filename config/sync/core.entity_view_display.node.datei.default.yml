@@ -1,0 +1,39 @@
+uuid: b0e99700-a344-410f-9b27-02d3b4e8d4d9
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.datei.field_file
+    - field.field.node.datei.field_subject_id
+    - node.type.datei
+  module:
+    - file
+    - user
+id: node.datei.default
+targetEntityType: node
+bundle: datei
+mode: default
+content:
+  field_file:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_subject_id:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

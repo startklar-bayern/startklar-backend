@@ -55,7 +55,6 @@ class Person implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2009-06-08")
    * @Assert\GreaterThanOrEqual("1923-06-08")
    */
-    // TODO: Geburtsdatum Leitung
   public string $geburtsdatum;
 
   #[OA\Property(description: "Gender of the person", type: "string", enum: [

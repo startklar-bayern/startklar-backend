@@ -4,6 +4,7 @@ namespace Drupal\startklar\Controller;
 
 use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\CreateAnmeldungBody;
+use Drupal\startklar\Model\DV;
 use Drupal\startklar\Model\SchutzkonzeptTermin;
 use Drupal\startklar\Service\GroupService;
 use Drupal\startklar\Session\AnmeldungType;
@@ -189,11 +190,14 @@ class AnmeldungController extends StartklarControllerBase {
     /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
     $termStorage = $this->entityTypeManager()->getStorage('taxonomy_term');
 
-    $termine = $termStorage->loadByProperties(['vid' => 'termine_schutzkonzept']);
+    $result = $termStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('vid', 'termine_schutzkonzept')
+      ->sort('field_date')
+      ->accessCheck(FALSE)
+      ->execute();
 
-    usort($termine, function($a, $b) {
-      return strcmp($a->get('field_date')->value, $b->get('field_date')->value);
-    });
+    $termine = $termStorage->loadMultiple($result);
 
     $result = [];
 
@@ -201,6 +205,45 @@ class AnmeldungController extends StartklarControllerBase {
       $item = new SchutzkonzeptTermin();
       $item->id = $termin->id();
       $item->date = $termin->get('field_date')->value;
+
+      $result[] = $item;
+    }
+
+    return new JsonResponse($result);
+  }
+
+  #[OA\Get(
+    path: '/anmeldung/dvs',
+    operationId: 'get_dvs',
+    description: 'Get all DVs',
+    tags: ['Anmeldung'],
+    responses: [
+      new OA\Response(
+        response: 200,
+        description: "OK",
+        content: new OA\JsonContent(type: "array", items: new OA\Items(ref: "#/components/schemas/DV"))
+      ),
+    ]
+  )]
+  public function getDVs() {
+    /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
+    $termStorage = $this->entityTypeManager()->getStorage('taxonomy_term');
+
+    $result = $termStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('vid', 'dvs')
+      ->sort('weight')
+      ->accessCheck(FALSE)
+      ->execute();
+
+    $dvs = $termStorage->loadMultiple($result);
+
+    $result = [];
+
+    foreach ($dvs as $dv) {
+      $item = new DV();
+      $item->id = $dv->id();
+      $item->name = $dv->label();
 
       $result[] = $item;
     }

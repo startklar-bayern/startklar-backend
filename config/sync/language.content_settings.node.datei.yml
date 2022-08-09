@@ -1,0 +1,11 @@
+uuid: 16de50c0-0ca8-4006-afd0-1ac69fe8f68d
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.datei
+id: node.datei
+target_entity_type_id: node
+target_bundle: datei
+default_langcode: site_default
+language_alterable: false
