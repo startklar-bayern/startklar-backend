@@ -3,6 +3,7 @@
 namespace Drupal\startklar\Model;
 
 use Drupal\startklar\Validation\SiblingConstraint;
+use Drupal\startklar\Validation\UuidsUniqueConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -10,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
   required: ['name', 'dv', 'anreise', 'leitung', 'jugendschutzgesetz_akzeptiert']
 )]
 /**
+ * @UuidsUniqueConstraint()
  * @SiblingConstraint()
  */
 class Anmeldung {
