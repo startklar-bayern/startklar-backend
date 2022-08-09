@@ -134,7 +134,9 @@ class Person implements GroupSequenceProviderInterface {
   public ?string $essen_anmerkungen;
 
   #[OA\Property(description: "UUID of a full paying sibling", type: "string", format: "uuid")]
-  // TODO
+  /**
+   * @Assert\Uuid()
+   */
   public ?string $geschwisterkind;
 
   #[OA\Property(ref: '#/components/schemas/PersonAnreise', description: "Information about how and when the person will come to the event", type: "object")]

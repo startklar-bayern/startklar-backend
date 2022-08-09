@@ -4,6 +4,7 @@ namespace Drupal\startklar\Model;
 
 use Drupal\startklar\Validation\AufsichtspersonConstraint;
 use Drupal\startklar\Validation\FuehrungszeugnisConstraint;
+use Drupal\startklar\Validation\PersonWithLegalAgeConstraint;
 use Drupal\startklar\Validation\SiblingConstraint;
 use Drupal\startklar\Validation\UuidReferenceExistsConstraint;
 use Drupal\startklar\Validation\UuidsUniqueConstraint;
@@ -32,6 +33,7 @@ class Anmeldung {
   /**
    * @Assert\NotBlank()
    */
+  // TODO
   public int $dv;
 
   #[OA\Property(ref: '#/components/schemas/Anreise', description: "Information about how and when the group will come to the event", type: "object")]
@@ -45,6 +47,7 @@ class Anmeldung {
   /**
    * @Assert\NotBlank()
    * @Assert\Valid()
+   * @PersonWithLegalAgeConstraint()
    */
   public Person $leitung;
 
