@@ -132,6 +132,16 @@ startklar.anmeldung.dvs.index:
     _access: 'TRUE'
     _format: 'json'
 
+startklar.anmeldung.tshirt_groessen.index:
+  path: '/api/anmeldung/tshirt-groessen'
+  methods: 'GET'
+  defaults:
+    _title: 'DVs'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::getTshirtGroessen'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'
+
 startklar.anmeldung.group.create:
   path: '/api/anmeldung/group'
   methods: 'POST'

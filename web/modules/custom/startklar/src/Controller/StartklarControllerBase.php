@@ -3,7 +3,7 @@
 namespace Drupal\startklar\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Laminas\Diactoros\Response\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;

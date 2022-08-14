@@ -30,7 +30,7 @@ class Anmeldung {
    */
   public string $name;
 
-  #[OA\Property(description: "ID of the Diözesanverband", format: "int64")]
+  #[OA\Property(description: "ID of the Diözesanverband. Can be gathered from another endpoint.", format: "int64")]
   /**
    * @Assert\NotBlank()
    * @TaxonomyReferenceConstraint(vocuabluary="dvs")

@@ -6,6 +6,7 @@ use Drupal\startklar\Model\Anmeldung;
 use Drupal\startklar\Model\CreateAnmeldungBody;
 use Drupal\startklar\Model\DV;
 use Drupal\startklar\Model\SchutzkonzeptTermin;
+use Drupal\startklar\Model\TshirtGroesse;
 use Drupal\startklar\Service\GroupService;
 use Drupal\startklar\Session\AnmeldungType;
 use Firebase\JWT\JWT;
@@ -244,6 +245,45 @@ class AnmeldungController extends StartklarControllerBase {
       $item = new DV();
       $item->id = $dv->id();
       $item->name = $dv->label();
+
+      $result[] = $item;
+    }
+
+    return new JsonResponse($result);
+  }
+
+  #[OA\Get(
+    path: '/anmeldung/tshirt-groessen',
+    operationId: 'get_tshirt_groessen',
+    description: 'Get all T-Shirt Größen',
+    tags: ['Anmeldung'],
+    responses: [
+      new OA\Response(
+        response: 200,
+        description: "OK",
+        content: new OA\JsonContent(type: "array", items: new OA\Items(ref: "#/components/schemas/TshirtGroesse"))
+      ),
+    ]
+  )]
+  public function getTshirtGroessen() {
+    /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
+    $termStorage = $this->entityTypeManager()->getStorage('taxonomy_term');
+
+    $result = $termStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('vid', 't_shirt_groessen')
+      ->sort('weight')
+      ->accessCheck(FALSE)
+      ->execute();
+
+    $tshirtGroessen = $termStorage->loadMultiple($result);
+
+    $result = [];
+
+    foreach ($tshirtGroessen as $tshirtGroesse) {
+      $item = new TshirtGroesse();
+      $item->id = $tshirtGroesse->id();
+      $item->name = $tshirtGroesse->label();
 
       $result[] = $item;
     }

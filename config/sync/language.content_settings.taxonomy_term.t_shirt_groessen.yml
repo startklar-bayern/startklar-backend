@@ -1,0 +1,11 @@
+uuid: 7043d74f-27dd-4ee6-a624-c9a33308211d
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.t_shirt_groessen
+id: taxonomy_term.t_shirt_groessen
+target_entity_type_id: taxonomy_term
+target_bundle: t_shirt_groessen
+default_langcode: site_default
+language_alterable: false

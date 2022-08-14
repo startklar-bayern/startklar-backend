@@ -118,6 +118,13 @@ class Person implements GroupSequenceProviderInterface {
    */
   public ?string $aufsichtsperson;
 
+  #[OA\Property(description: "T-Shit size of this person", format: "int64")]
+  /**
+   * @Assert\NotBlank()
+   * @TaxonomyReferenceConstraint(vocuabluary="t_shirt_groessen")
+   */
+  public int $tshirt_groesse;
+
   #[OA\Property(description: "Preferences for food", type: "string", enum: [
     Essen::Normal,
     Essen::Vegetarisch,
@@ -145,14 +152,14 @@ class Person implements GroupSequenceProviderInterface {
    */
   public PersonAnreise $anreise;
 
-  #[OA\Property(description: "UUID of the file that represents the Führungszeugnis. Required if Aufsichtsperson or Gruppenleitung", type: "string", format: "uuid")]
+  #[OA\Property(description: "UUID of the file that represents the Führungszeugnis. Required if Aufsichtsperson or Gruppenleitung.", type: "string", format: "uuid")]
   /**
    * @Assert\Uuid()
    * @FileReferenceConstraint()
    */
   public ?string $fuehrungszeugnis;
 
-  #[OA\Property(description: "ID of the Schutzkonzept meeting event", type: "int")]
+  #[OA\Property(description: "ID of the Schutzkonzept meeting event. Can be gathered from another endpoint.", type: "int")]
   /**
    * @TaxonomyReferenceConstraint(vocuabluary="termine_schutzkonzept")
    */
