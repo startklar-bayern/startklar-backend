@@ -12,7 +12,7 @@ class TshirtGroesse {
   #[OA\Property(format: "int64")]
   public int $id;
 
-  #[OA\Property(format: "string")]
+  #[OA\Property(format: "string", example: "XXL")]
   public string $name;
 
 }
