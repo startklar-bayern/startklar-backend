@@ -19,13 +19,16 @@ class AnreiseConstraintValidator extends StartklarConstraintValidatorBase {
       return;
     }
 
-    $ankunft = new \DateTime($value->ankunft);
-    $abfahrt = new \DateTime($value->abfahrt);
+    if (!empty($value->ankunft) && !empty($value->abfahrt)) {
+      $ankunft = new \DateTime($value->ankunft);
+      $abfahrt = new \DateTime($value->abfahrt);
 
-    if ($abfahrt < $ankunft) {
-      $this->context->buildViolation($constraint->message)
-        ->addViolation();
+      if ($abfahrt < $ankunft) {
+        $this->context->buildViolation($constraint->message)
+          ->addViolation();
+      }
     }
+
   }
 
 }

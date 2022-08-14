@@ -23,14 +23,14 @@ class Anreise implements GroupSequenceProviderInterface {
    * @Assert\NotBlank(groups="separat")
    * @Assert\Choice({AnreiseTyp::MitDV, AnreiseTyp::Selbststaendig}, message=StartklarHelper::INVALID_CHOICE_MESSAGE, groups="separat")
    */
-  public string $typ;
+  public ?string $typ;
 
   #[OA\Property(description: "Where will you come to. Backup if no transport by DV possible", type: "string", enum: [AnreiseZiel::Direkt, AnreiseZiel::ZugHilpoltstein, AnreiseZiel::ZugHilpoltstein])]
   /**
    * @Assert\NotBlank(groups="separat")
    * @Assert\Choice({AnreiseZiel::Direkt, AnreiseZiel::ZugAllersberg, AnreiseZiel::ZugHilpoltstein}, message=StartklarHelper::INVALID_CHOICE_MESSAGE, groups="separat")
    */
-  public string $ziel;
+  public ?string $ziel;
 
   #[OA\Property(description: "When will you arrive", type: "string", format: 'date-time', example: '2023-06-08T10:00:00+02:00')]
   /**
@@ -39,7 +39,7 @@ class Anreise implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2023-06-11T23:59:59+02:00")
    * @Assert\GreaterThanOrEqual("2023-06-08T00:00:00+02:00")
    */
-  public string $ankunft;
+  public ?string $ankunft;
 
   #[OA\Property(description: "When will you leave", type: "string", format: 'date-time', example: '2023-06-11T13:00:00+02:00')]
   /**
@@ -48,7 +48,7 @@ class Anreise implements GroupSequenceProviderInterface {
    * @Assert\LessThanOrEqual("2023-06-11T23:59:59+02:00")
    * @Assert\GreaterThanOrEqual("2023-06-08T00:00:00+02:00")
    */
-  public string $abfahrt;
+  public ?string $abfahrt;
 
   public function getGroupSequence() {
     return [
