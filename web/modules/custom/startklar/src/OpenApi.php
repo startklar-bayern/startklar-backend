@@ -15,6 +15,14 @@ use OpenApi\Attributes as OA;
   ],
   externalDocs: new OA\ExternalDocumentation(description: "Swaggger UI for this file", url: "https://backend.startklar.bayern/api"),
 )]
+#[OA\SecurityScheme(
+  securityScheme: "jwt",
+  type: 'http',
+  description: "JWT Authentication. Pass the Json Web Token that was sent to the user via email.",
+  name: "JWT Authentication",
+  bearerFormat: "JWT",
+  scheme: 'bearer',
+)]
 class OpenApi {
 
 }

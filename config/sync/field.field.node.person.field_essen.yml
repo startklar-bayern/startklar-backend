@@ -1,0 +1,21 @@
+uuid: 292c5d1a-da1c-413d-959e-e2239021c6af
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_essen
+    - node.type.person
+  module:
+    - options
+id: node.person.field_essen
+field_name: field_essen
+entity_type: node
+bundle: person
+label: Essen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

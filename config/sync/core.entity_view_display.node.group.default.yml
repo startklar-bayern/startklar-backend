@@ -1,0 +1,73 @@
+uuid: 0a1106ea-22a0-4046-88b4-70fd3a9e6451
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.group.field_anreise
+    - field.field.node.group.field_dv
+    - field.field.node.group.field_leitung
+    - field.field.node.group.field_mail
+    - field.field.node.group.field_name
+    - field.field.node.group.field_teilnehmer
+    - node.type.group
+  module:
+    - user
+id: node.group.default
+targetEntityType: node
+bundle: group
+mode: default
+content:
+  field_anreise:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_dv:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_leitung:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_mail:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_teilnehmer:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

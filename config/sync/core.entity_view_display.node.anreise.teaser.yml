@@ -1,0 +1,31 @@
+uuid: c68d4fe7-0828-4cfe-ac4f-b15c41ca1410
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.anreise.field_abfahrt
+    - field.field.node.anreise.field_ankunft
+    - field.field.node.anreise.field_mit_gruppe
+    - field.field.node.anreise.field_typ
+    - field.field.node.anreise.field_ziel
+    - node.type.anreise
+  module:
+    - user
+id: node.anreise.teaser
+targetEntityType: node
+bundle: anreise
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_abfahrt: true
+  field_ankunft: true
+  field_mit_gruppe: true
+  field_typ: true
+  field_ziel: true
+  langcode: true

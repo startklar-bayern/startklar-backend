@@ -1,0 +1,20 @@
+uuid: 0dde0c2d-9831-4dfd-90db-51806d8185f2
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_termin_schutzkonzept
+field_name: field_termin_schutzkonzept
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

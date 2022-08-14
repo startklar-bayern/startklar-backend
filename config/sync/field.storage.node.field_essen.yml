@@ -1,0 +1,30 @@
+uuid: bfcf754c-1434-4bce-bb08-959bb5e4eec3
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_essen
+field_name: field_essen
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: normal
+      label: normal
+    -
+      value: vegetarisch
+      label: vegetarisch
+    -
+      value: vegan
+      label: vegan
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

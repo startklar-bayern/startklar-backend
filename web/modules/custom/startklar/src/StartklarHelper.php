@@ -9,6 +9,8 @@ use Drupal\startklar\Model\ImageWithTitle;
 
 class StartklarHelper {
 
+  const INVALID_CHOICE_MESSAGE = "The value you selected is not a valid choice. Valid choices are: {{ choices }}";
+
   public static function buildImage(FieldItemInterface $image, string $imageStyle, CacheableMetadata &$cache, $withTitle = false) : Image|ImageWithTitle {
     /** @var \Drupal\Core\File\FileUrlGeneratorInterface $fileUrlGenerator */
     $fileUrlGenerator = \Drupal::service('file_url_generator');

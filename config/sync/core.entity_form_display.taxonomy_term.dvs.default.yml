@@ -1,0 +1,24 @@
+uuid: ca16829f-88a1-4f21-af0c-4021f2e9acd5
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dvs
+id: taxonomy_term.dvs.default
+targetEntityType: taxonomy_term
+bundle: dvs
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  status: true

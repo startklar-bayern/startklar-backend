@@ -1,0 +1,30 @@
+uuid: 06725c03-ef31-48a2-bb3a-4f8e5482705a
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_geschlecht
+field_name: field_geschlecht
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: m
+      label: männlich
+    -
+      value: w
+      label: weiblich
+    -
+      value: d
+      label: divers
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

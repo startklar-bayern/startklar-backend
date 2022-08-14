@@ -1,0 +1,8 @@
+uuid: c4aa0ded-f243-455c-a7d0-046de4f4463e
+langcode: de
+status: true
+dependencies: {  }
+name: 'T-Shirt Größen'
+vid: t_shirt_groessen
+description: ''
+weight: 0

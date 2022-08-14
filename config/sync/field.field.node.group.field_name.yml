@@ -1,0 +1,19 @@
+uuid: 3ec4d1ec-02f9-4c24-8427-5d1191ad6620
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_name
+    - node.type.group
+id: node.group.field_name
+field_name: field_name
+entity_type: node
+bundle: group
+label: Name
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

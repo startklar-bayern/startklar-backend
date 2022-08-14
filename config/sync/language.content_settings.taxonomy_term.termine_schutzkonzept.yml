@@ -1,0 +1,11 @@
+uuid: 562a3a14-591c-4595-b371-1e0bd3bd8988
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.termine_schutzkonzept
+id: taxonomy_term.termine_schutzkonzept
+target_entity_type_id: taxonomy_term
+target_bundle: termine_schutzkonzept
+default_langcode: site_default
+language_alterable: false

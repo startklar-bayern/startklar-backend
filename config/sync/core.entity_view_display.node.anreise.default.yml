@@ -1,0 +1,69 @@
+uuid: b6fbc4b3-1d72-43c9-857f-907368542f7f
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.anreise.field_abfahrt
+    - field.field.node.anreise.field_ankunft
+    - field.field.node.anreise.field_mit_gruppe
+    - field.field.node.anreise.field_typ
+    - field.field.node.anreise.field_ziel
+    - node.type.anreise
+  module:
+    - datetime
+    - options
+    - user
+id: node.anreise.default
+targetEntityType: node
+bundle: anreise
+mode: default
+content:
+  field_abfahrt:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_ankunft:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_mit_gruppe:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_typ:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_ziel:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

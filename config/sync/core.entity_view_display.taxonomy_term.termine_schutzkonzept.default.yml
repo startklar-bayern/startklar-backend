@@ -1,0 +1,33 @@
+uuid: 7ff63fc7-470b-415f-ae91-a4a68783fc86
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.termine_schutzkonzept.field_date
+    - taxonomy.vocabulary.termine_schutzkonzept
+  module:
+    - datetime
+    - text
+id: taxonomy_term.termine_schutzkonzept.default
+targetEntityType: taxonomy_term
+bundle: termine_schutzkonzept
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

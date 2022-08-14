@@ -1,0 +1,33 @@
+uuid: 96800958-3dc3-4b91-bc48-db9a8fa1c2be
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.group.field_anreise
+    - field.field.node.group.field_dv
+    - field.field.node.group.field_leitung
+    - field.field.node.group.field_mail
+    - field.field.node.group.field_name
+    - field.field.node.group.field_teilnehmer
+    - node.type.group
+  module:
+    - user
+id: node.group.teaser
+targetEntityType: node
+bundle: group
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_anreise: true
+  field_dv: true
+  field_leitung: true
+  field_mail: true
+  field_name: true
+  field_teilnehmer: true
+  langcode: true

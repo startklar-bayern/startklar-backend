@@ -1,0 +1,21 @@
+uuid: 2e58f1a6-538b-4fdc-8a56-a481fb67e9dc
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_typ
+    - node.type.anreise
+  module:
+    - options
+id: node.anreise.field_typ
+field_name: field_typ
+entity_type: node
+bundle: anreise
+label: Typ
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

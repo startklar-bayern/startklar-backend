@@ -1,0 +1,29 @@
+uuid: 39e32a3a-b4ea-449a-bd4f-459ff3260817
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_termin_schutzkonzept
+    - node.type.person
+    - taxonomy.vocabulary.termine_schutzkonzept
+id: node.person.field_termin_schutzkonzept
+field_name: field_termin_schutzkonzept
+entity_type: node
+bundle: person
+label: 'Termin Schutzkonzept'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      termine_schutzkonzept: termine_schutzkonzept
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

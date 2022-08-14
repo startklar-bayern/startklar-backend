@@ -1,0 +1,28 @@
+uuid: 8caf306c-b29f-4ad3-8c88-700a53190dc9
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_aufsichtsperson
+    - node.type.person
+id: node.person.field_aufsichtsperson
+field_name: field_aufsichtsperson
+entity_type: node
+bundle: person
+label: Aufsichtsperson
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

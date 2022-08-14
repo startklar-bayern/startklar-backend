@@ -1,0 +1,22 @@
+uuid: aec57ee7-afb4-440f-b066-47eadbfb2082
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.anreise
+id: node.anreise.promote
+field_name: promote
+entity_type: node
+bundle: anreise
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

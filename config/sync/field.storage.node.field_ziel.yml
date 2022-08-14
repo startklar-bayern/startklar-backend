@@ -1,0 +1,30 @@
+uuid: 299d4930-9d87-4bfd-882a-decd9f8062a8
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_ziel
+field_name: field_ziel
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: direkt
+      label: 'direkt zum Zeltplatz'
+    -
+      value: zug_allersberg
+      label: 'mit dem Zug nach Allersberg'
+    -
+      value: zug_hilpoltstein
+      label: 'mit dem Zug nach Hilpoltstein'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

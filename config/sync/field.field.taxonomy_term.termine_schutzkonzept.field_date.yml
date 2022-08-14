@@ -1,0 +1,21 @@
+uuid: 00e3a261-bba8-42dd-8510-5fdf9e6b5317
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_date
+    - taxonomy.vocabulary.termine_schutzkonzept
+  module:
+    - datetime
+id: taxonomy_term.termine_schutzkonzept.field_date
+field_name: field_date
+entity_type: taxonomy_term
+bundle: termine_schutzkonzept
+label: Datum
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

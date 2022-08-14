@@ -1,0 +1,28 @@
+uuid: b9848d0f-28e0-4175-9406-5c17ca0739c0
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geschwisterkind
+    - node.type.person
+id: node.person.field_geschwisterkind
+field_name: field_geschwisterkind
+entity_type: node
+bundle: person
+label: Geschwisterkind
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

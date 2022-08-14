@@ -1,0 +1,59 @@
+uuid: 4eda77da-f9c6-4da7-9d2c-33b0779faf2d
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.person.field_anreise
+    - field.field.node.person.field_aufsichtsperson
+    - field.field.node.person.field_essen
+    - field.field.node.person.field_essen_anmerkungen
+    - field.field.node.person.field_fuehrungszeugnis
+    - field.field.node.person.field_fuehrungszeugnis_geprueft
+    - field.field.node.person.field_geburtsdatum
+    - field.field.node.person.field_geschlecht
+    - field.field.node.person.field_geschwisterkind
+    - field.field.node.person.field_mail
+    - field.field.node.person.field_mail_eltern
+    - field.field.node.person.field_nachname
+    - field.field.node.person.field_ort
+    - field.field.node.person.field_plz
+    - field.field.node.person.field_strasse
+    - field.field.node.person.field_telefon
+    - field.field.node.person.field_telefon_eltern
+    - field.field.node.person.field_termin_schutzkonzept
+    - field.field.node.person.field_vorname
+    - node.type.person
+  module:
+    - user
+id: node.person.teaser
+targetEntityType: node
+bundle: person
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_anreise: true
+  field_aufsichtsperson: true
+  field_essen: true
+  field_essen_anmerkungen: true
+  field_fuehrungszeugnis: true
+  field_fuehrungszeugnis_geprueft: true
+  field_geburtsdatum: true
+  field_geschlecht: true
+  field_geschwisterkind: true
+  field_mail: true
+  field_mail_eltern: true
+  field_nachname: true
+  field_ort: true
+  field_plz: true
+  field_strasse: true
+  field_telefon: true
+  field_telefon_eltern: true
+  field_termin_schutzkonzept: true
+  field_vorname: true
+  langcode: true

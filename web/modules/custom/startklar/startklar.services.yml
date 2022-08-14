@@ -1,0 +1,14 @@
+services:
+  startklar.authentication.anmeldung_jwt:
+    class: Drupal\startklar\Authentication\AnmeldungJWTAuthenticationProvider
+    tags:
+      - { name: authentication_provider, provider_id: 'anmeldung_jwt', priority: 10}
+
+  access_check.startklar.anmeldung_access_check:
+    class: Drupal\startklar\Access\AnmeldungAccessChecker
+    tags:
+      - { name: access_check, applies_to: _anmeldung_access_check }
+
+  startklar.groups:
+    class: Drupal\startklar\Service\GroupService
+    arguments: ['@entity_type.manager']

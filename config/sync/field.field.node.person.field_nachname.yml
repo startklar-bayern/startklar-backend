@@ -1,0 +1,19 @@
+uuid: a8527449-eecb-4737-a24d-723ccbe6766b
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nachname
+    - node.type.person
+id: node.person.field_nachname
+field_name: field_nachname
+entity_type: node
+bundle: person
+label: Nachname
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

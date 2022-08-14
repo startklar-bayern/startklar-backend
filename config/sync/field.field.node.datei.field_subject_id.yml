@@ -1,0 +1,19 @@
+uuid: 8ad2bc74-4bfb-43bc-95c3-e2ff59268129
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subject_id
+    - node.type.datei
+id: node.datei.field_subject_id
+field_name: field_subject_id
+entity_type: node
+bundle: datei
+label: 'Gruppe / Helfer'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

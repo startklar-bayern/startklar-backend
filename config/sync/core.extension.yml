@@ -15,6 +15,7 @@ module:
   comment: 0
   config: 0
   contact: 0
+  content_access: 0
   contextual: 0
   ctools: 0
   datetime: 0
@@ -44,6 +45,7 @@ module:
   path_alias: 0
   rdf: 0
   search: 0
+  serialization: 0
   shortcut: 0
   startklar: 0
   system: 0

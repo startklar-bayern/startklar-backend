@@ -1,0 +1,19 @@
+uuid: 1df9c27e-b63b-4a05-8556-d01b14d31858
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_essen_anmerkungen
+field_name: field_essen_anmerkungen
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
