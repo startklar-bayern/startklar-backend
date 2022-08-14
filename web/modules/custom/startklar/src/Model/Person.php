@@ -19,8 +19,9 @@ use Symfony\Component\Validator\GroupSequenceProviderInterface;
     'strasse',
     'plz',
     'ort',
-    'telfon',
+    'telefon',
     'mail',
+    'tshirt_groesse',
     'essen',
     'anreise',
   ]

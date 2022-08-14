@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
+use Drupal\startklar\Model\Anmeldung;
 
 /**
  * GroupService service.
@@ -19,6 +20,11 @@ class GroupService {
    */
   protected $entityTypeManager;
 
+  /**
+   * @var \Drupal\startklar\Service\PersonService
+   */
+  private PersonService $personService;
+
   protected NodeStorageInterface $nodeStorage;
 
   /**
@@ -27,11 +33,12 @@ class GroupService {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, PersonService $personService) {
     $this->entityTypeManager = $entity_type_manager;
 
     /** @var \Drupal\node\NodeStorageInterface $nodeStorage */
     $this->nodeStorage = $this->entityTypeManager->getStorage('node');
+    $this->personService = $personService;
   }
 
   /**
@@ -44,7 +51,7 @@ class GroupService {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    * @throws \Drupal\startklar\Service\NotFoundException
    */
-  public function getById($id): ?\Drupal\Core\Entity\EntityInterface {
+  public function getById($id): ?NodeInterface {
 
     $result = $this->nodeStorage->getQuery()
       ->condition('type', 'group')
@@ -77,6 +84,20 @@ class GroupService {
     // TODO: Send mail
 
     return $node;
+  }
+
+  public function update(NodeInterface $group, Anmeldung $anmeldung) {
+    $this->personService->new($anmeldung->leitung);
+    // TODO: Update anmeldung fields
+    // TODO: Create people that are referenced first
+    // TODO: Create and update people
+
+    // TODO: Check if people were deleted, delete them
+    // TODO: check if peope were added, add them
+    // TODO: If this is the first update, send notification mail
+    // TODO: Check if file of führungszeugnis has changed, and if so: require a new review
+    // TODO: Save the node(s)
+
   }
 
   /**

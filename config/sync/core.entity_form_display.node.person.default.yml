@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
     - field.field.node.person.field_termin_schutzkonzept
+    - field.field.node.person.field_tshirt_groesse
     - field.field.node.person.field_vorname
     - node.type.person
   module:
@@ -177,6 +178,16 @@ content:
   field_termin_schutzkonzept:
     type: entity_reference_autocomplete
     weight: 138
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_tshirt_groesse:
+    type: entity_reference_autocomplete
+    weight: 140
     region: content
     settings:
       match_operator: CONTAINS

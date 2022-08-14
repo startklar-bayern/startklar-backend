@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
     - field.field.node.person.field_termin_schutzkonzept
+    - field.field.node.person.field_tshirt_groesse
     - field.field.node.person.field_vorname
     - node.type.person
   module:
@@ -55,5 +56,6 @@ hidden:
   field_telefon: true
   field_telefon_eltern: true
   field_termin_schutzkonzept: true
+  field_tshirt_groesse: true
   field_vorname: true
   langcode: true

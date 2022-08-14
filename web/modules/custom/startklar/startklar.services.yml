@@ -11,4 +11,12 @@ services:
 
   startklar.groups:
     class: Drupal\startklar\Service\GroupService
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@startklar.persons']
+
+  startklar.persons:
+    class: Drupal\startklar\Service\PersonService
+    arguments: ['@entity_type.manager', '@startklar.anreise']
+
+  startklar.anreise:
+    class: Drupal\startklar\Service\AnreiseService
+    arguments: ['@entity_type.manager', '@uuid']

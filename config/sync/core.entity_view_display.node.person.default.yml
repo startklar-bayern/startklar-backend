@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
     - field.field.node.person.field_termin_schutzkonzept
+    - field.field.node.person.field_tshirt_groesse
     - field.field.node.person.field_vorname
     - node.type.person
   module:
@@ -33,10 +34,11 @@ bundle: person
 mode: default
 content:
   field_anreise:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: above
     settings:
-      link: true
+      view_mode: default
+      link: false
     third_party_settings: {  }
     weight: 119
     region: content
@@ -173,6 +175,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 118
+    region: content
+  field_tshirt_groesse:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 120
     region: content
   field_vorname:
     type: string
