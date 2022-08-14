@@ -58,6 +58,7 @@ class AgController extends ControllerBase {
       ->condition('type', 'ag')
       ->condition('status', NodeInterface::PUBLISHED)
       ->sort('field_weight')
+      ->accessCheck(FALSE)
       ->execute();
 
     /** @var \Drupal\node\NodeInterface[] $nodes */

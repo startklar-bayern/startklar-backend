@@ -69,6 +69,7 @@ class SharepicController extends ControllerBase {
       ->condition('status', NodeInterface::PUBLISHED)
       ->condition('type', 'sharepic')
       ->sort('created', 'ASC')
+      ->accessCheck(FALSE)
       ->execute();
 
     $nodes = $nodeStorage->loadMultiple($result);

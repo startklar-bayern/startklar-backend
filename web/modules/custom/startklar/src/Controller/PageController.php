@@ -64,6 +64,7 @@ class PageController extends ControllerBase {
       ->condition('type', 'page')
       ->condition('status', NodeInterface::PUBLISHED)
       ->sort('created', 'DESC')
+      ->accessCheck(FALSE)
       ->execute();
 
     /** @var \Drupal\node\NodeInterface[] $nodes */

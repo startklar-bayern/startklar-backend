@@ -59,6 +59,7 @@ class NewsController extends ControllerBase {
       ->condition('status', NodeInterface::PUBLISHED)
       ->condition('type', 'article')
       ->sort('created', 'DESC')
+      ->accessCheck(FALSE)
       ->execute();
 
     /** @var \Drupal\node\NodeInterface[] $nodes */

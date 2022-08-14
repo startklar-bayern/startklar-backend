@@ -80,6 +80,7 @@ class FaqController extends ControllerBase {
       ->condition('type', 'faq')
       ->condition('status', NodeInterface::PUBLISHED)
       ->sort('field_weight')
+      ->accessCheck(FALSE)
       ->execute();
 
     $faqNodes = $nodeStorage->loadMultiple($nids);
