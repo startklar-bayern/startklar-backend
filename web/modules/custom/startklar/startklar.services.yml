@@ -27,4 +27,4 @@ services:
 
   send_in_blue:
     class: Drupal\startklar\Service\SendInBlueService
-    arguments: []
+    arguments: ['@request_stack']
