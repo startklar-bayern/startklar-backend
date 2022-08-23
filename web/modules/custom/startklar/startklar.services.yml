@@ -24,3 +24,7 @@ services:
   startklar.files:
     class: Drupal\startklar\Service\FileService
     arguments: ['@entity_type.manager', '@uuid']
+
+  send_in_blue:
+    class: Drupal\startklar\Service\SendInBlueService
+    arguments: []

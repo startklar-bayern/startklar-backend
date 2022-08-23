@@ -9,15 +9,11 @@ use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Url;
 use Drupal\startklar\Model\NewsletterSubscribeBody;
+use Drupal\startklar\Service\SendInBlueService;
 use Drupal\startklar\ValidationException;
-use GuzzleHttp\Client;
 use OpenApi\Attributes as OA;
-use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\ApiException;
-use SendinBlue\Client\Configuration;
-use SendinBlue\Client\Model\CreateDoiContact;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,25 +24,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class NewsletterController extends ControllerBase {
 
-  /**
-   * The email.validator service.
-   */
   protected EmailValidatorInterface $emailValidator;
 
-  /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
   protected $entityTypeManager;
 
-  protected string $API_KEY;
-
-  protected int $LIST_ID;
-
-  protected int $DOI_TEMPLATE_ID;
-
-  protected string $FRONTEND_URL;
+  private SendInBlueService $sendInBlueService;
 
   const CACHE_TAG = 'startklar_newsletter_subscriber_count';
 
@@ -58,14 +40,10 @@ class NewsletterController extends ControllerBase {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(EmailValidatorInterface $email_validator, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EmailValidatorInterface $email_validator, EntityTypeManagerInterface $entity_type_manager, SendInBlueService $sendInBlueService) {
     $this->emailValidator = $email_validator;
     $this->entityTypeManager = $entity_type_manager;
-
-    $this->API_KEY = getenv('SEND_IN_BLUE_API_KEY');
-    $this->LIST_ID = intval(getenv('SEND_IN_BLUE_LIST_ID'));
-    $this->DOI_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_DOUBLE_OPT_IN_TEMPLATE_ID'));
-    $this->FRONTEND_URL = getenv('FRONTEND_URL');
+    $this->sendInBlueService = $sendInBlueService;
   }
 
   /**
@@ -74,7 +52,8 @@ class NewsletterController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('email.validator'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('send_in_blue')
     );
   }
 
@@ -125,18 +104,8 @@ class NewsletterController extends ControllerBase {
       }
 
 
-      // Get SendInBlueClient
-      $apiClient = $this->getApiClient();
-
-      // Create contact
-      $createDoiContact = new CreateDoiContact();
-      $createDoiContact->setTemplateId($this->DOI_TEMPLATE_ID);
-      $createDoiContact->setEmail($body->mail);
-      $createDoiContact->setIncludeListIds([$this->LIST_ID]);
-      $createDoiContact->setRedirectionUrl(Url::fromUri($this->FRONTEND_URL, ['query' => ['emailConfirmed' => TRUE]])->setAbsolute(TRUE)->toString());
-
       try {
-        $apiClient->createDoiContact($createDoiContact);
+        $this->sendInBlueService->subscribeToNewsletter($body->mail);
 
         Cache::invalidateTags([self::CACHE_TAG]);
 
@@ -191,14 +160,11 @@ class NewsletterController extends ControllerBase {
     ]
   )]
   public function info() {
-    $apiClient = $this->getApiClient();
-
     if ($cache = \Drupal::cache()->get(self::CACHE_TAG)) {
       $subscriberCount = $cache->data;
     }
     else {
-      $list = $apiClient->getList($this->LIST_ID);
-      $subscriberCount = $list->getTotalSubscribers();
+      $subscriberCount = $this->sendInBlueService->getNewsletterSubscriberCount();
       \Drupal::cache()
         ->set(self::CACHE_TAG, $subscriberCount, CacheBackendInterface::CACHE_PERMANENT, [self::CACHE_TAG]);
     }
@@ -218,12 +184,6 @@ class NewsletterController extends ControllerBase {
     $response->addCacheableDependency($cache);
 
     return $response;
-  }
-
-  protected function getApiClient() {
-    $config = Configuration::getDefaultConfiguration()
-      ->setApiKey('api-key', $this->API_KEY);
-    return new ContactsApi(new Client(), $config);
   }
 
   protected function successResponse(): Response {
