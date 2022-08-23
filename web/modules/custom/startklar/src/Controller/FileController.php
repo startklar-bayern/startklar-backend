@@ -114,7 +114,7 @@ class FileController extends ControllerBase {
 
     $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg', 'tiff'];
 
-    if (!in_array($uploadedFile, $allowedExtensions)) {
+    if (!in_array($uploadedFile->guessExtension(), $allowedExtensions)) {
       return new JsonResponse([
         'status' => 'error',
         'message' => 'Only these formats are allowed: ' . join(', ', $allowedExtensions),
