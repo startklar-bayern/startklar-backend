@@ -9,6 +9,7 @@ use Drupal\startklar\Model\SchutzkonzeptTermin;
 use Drupal\startklar\Model\TshirtGroesse;
 use Drupal\startklar\Service\GroupService;
 use Drupal\startklar\Service\NotFoundException;
+use Drupal\startklar\Service\SendInBlueService;
 use Drupal\startklar\Session\AnmeldungType;
 use Firebase\JWT\JWT;
 use OpenApi\Attributes as OA;
@@ -27,9 +28,14 @@ class AnmeldungController extends StartklarControllerBase {
   protected GroupService $groupService;
 
   /**
+   * @var \Drupal\startklar\Service\SendInBlueService
+   */
+  protected SendInBlueService $sendInBlueService;
+
+  /**
    * @throws \Exception
    */
-  public function __construct(GroupService $groupService) {
+  public function __construct(GroupService $groupService, SendInBlueService $sendInBlueService) {
     parent::__construct();
 
     $jwtKey = getenv('STARTKLAR_JWT_KEY');
@@ -40,6 +46,7 @@ class AnmeldungController extends StartklarControllerBase {
 
     $this->JWT_KEY = $jwtKey;
     $this->groupService = $groupService;
+    $this->sendInBlueService = $sendInBlueService;
   }
 
 
@@ -47,7 +54,10 @@ class AnmeldungController extends StartklarControllerBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('startklar.groups'));
+    return new static(
+      $container->get('startklar.groups'),
+      $container->get('send_in_blue')
+    );
   }
 
   #[OA\Post(
@@ -102,6 +112,8 @@ class AnmeldungController extends StartklarControllerBase {
       'nbf' => time(),
       'exp' => strtotime("2023-12-31"),
     ], $this->JWT_KEY, 'HS256');
+
+    $this->sendInBlueService->sendGruppenanmeldungEmail($body->mail, $node->label(), $jwt);
 
     return new JsonResponse([
       'status' => 'success',
@@ -171,7 +183,6 @@ class AnmeldungController extends StartklarControllerBase {
       return $response;
     }
 
-    // TODO: Update group
     /** @var Anmeldung $body */
     $this->groupService->update($group, $body);
 

@@ -78,6 +78,8 @@ class PersonService {
 
     $node->save();
 
+    // TODO: Add to sendinblue mailing list
+
     return $node;
   }
 
@@ -92,6 +94,8 @@ class PersonService {
     }
 
     $node->delete();
+
+    // TODO: Remove from sendinblue mailing list (maybe first check if email is used for another person?)
   }
 
   protected function setPersonValues (NodeInterface &$node, Person $person) {
