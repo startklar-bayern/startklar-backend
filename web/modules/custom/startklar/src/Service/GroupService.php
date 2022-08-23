@@ -100,10 +100,6 @@ class GroupService {
     $this->setGroupValues($group, $anmeldung);
     $group->save();
 
-    // TODO: Update anmeldung fields
-    // TODO: Create people that are referenced first
-    // TODO: Create and update people
-
     // TODO: Check if people were deleted, delete them
     // TODO: check if peope were added, add them
     // TODO: If this is the first update, send notification mail
@@ -190,7 +186,17 @@ class GroupService {
     else {
       /** @var NodeInterface $person */
       $person = $node->field_leitung->entity;
-      $this->personService->update($person, $anmeldung->leitung);
+
+      // Check if a different person is now Leitung
+      if ($person->label() !== $anmeldung->leitung->id) {
+        $this->personService->delete($person);
+        $node->set('field_leitung', NULL);
+        $person = $this->personService->new($anmeldung->leitung);
+        $node->set('field_leitung', $person);
+      } else {
+        $this->personService->update($person, $anmeldung->leitung);
+      }
+
     }
 
     foreach ($anmeldung->teilnehmer as $teilnehmer) {
@@ -199,9 +205,34 @@ class GroupService {
       if (!$person) {
         $person = $this->personService->new($teilnehmer);
         $node->field_teilnehmer[] = $person;
-      } else {
+      }
+      else {
         $this->personService->update($person, $teilnehmer);
       }
+    }
+
+    // Remove deleted people
+    $teilehmerIds = array_map(function ($teilehmer) {
+      return $teilehmer->id;
+    }, $anmeldung->teilnehmer);
+
+    $itemsToRemove = [];
+
+    $teilnehmerFieldItems = $node->get('field_teilnehmer');
+
+    for ($i = 0; $i < count($teilnehmerFieldItems); $i++) {
+      $fieldItem = $teilnehmerFieldItems[$i];
+
+      if (!in_array($fieldItem->entity->label(), $teilehmerIds)) {
+        $itemsToRemove[] = $i;
+      }
+    }
+
+    $itemsToRemove = array_reverse($itemsToRemove);
+
+    foreach ($itemsToRemove as $index) {
+      $this->personService->delete($teilnehmerFieldItems[$index]->entity);
+      $node->get('field_teilnehmer')->removeItem($index);
     }
   }
 

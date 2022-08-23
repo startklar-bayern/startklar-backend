@@ -15,9 +15,12 @@ class PersonService {
 
   protected NodeStorageInterface $nodeStorage;
 
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, AnreiseService $anreiseService) {
+  protected FileService $fileService;
+
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, AnreiseService $anreiseService, FileService $fileService) {
     $this->entityTypeManager = $entity_type_manager;
     $this->anreiseService = $anreiseService;
+    $this->fileService = $fileService;
 
     /** @var \Drupal\node\NodeStorageInterface $nodeStorage */
     $this->nodeStorage = $this->entityTypeManager->getStorage('node');
@@ -83,6 +86,14 @@ class PersonService {
     $node->save();
   }
 
+  public function delete(NodeInterface $node) {
+    if ($anreise = $node->field_anreise->entity) {
+      $anreise->delete();
+    }
+
+    $node->delete();
+  }
+
   protected function setPersonValues (NodeInterface &$node, Person $person) {
     $requiredSimpleFields = [
       'title' => 'id',
@@ -139,6 +150,20 @@ class PersonService {
       /** @var NodeInterface $anreise */
       $anreise = $node->field_anreise->entity;
       $this->anreiseService->update($anreise, $person->anreise);
+    }
+
+    if (isset($person->fuehrungszeugnis)) {
+      if ($oldEntity = $node->get('field_fuehrungszeugnis')->entity) {
+        if ($oldEntity->label() !== $person->fuehrungszeugnis) {
+          // A new file was uploaded.
+          $node->set('field_fuehrungszeugnis_geprueft', FALSE);
+        }
+      }
+
+      $fuehrungszeugnis = $this->fileService->get($person->fuehrungszeugnis);
+      $node->set('field_fuehrungszeugnis', $fuehrungszeugnis);
+    } else {
+      $node->set('field_fuehrungszeugnis', NULL);
     }
 
     // TODO: fuehrungszeugnis

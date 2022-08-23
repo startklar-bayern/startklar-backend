@@ -15,8 +15,12 @@ services:
 
   startklar.persons:
     class: Drupal\startklar\Service\PersonService
-    arguments: ['@entity_type.manager', '@startklar.anreise']
+    arguments: ['@entity_type.manager', '@startklar.anreise', '@startklar.files']
 
   startklar.anreise:
     class: Drupal\startklar\Service\AnreiseService
+    arguments: ['@entity_type.manager', '@uuid']
+
+  startklar.files:
+    class: Drupal\startklar\Service\FileService
     arguments: ['@entity_type.manager', '@uuid']
