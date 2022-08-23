@@ -37,7 +37,7 @@ jobs:
       - name: upload
         uses: burnett01/rsync-deployments@5.2
         with:
-          switches: --exclude '.env' --exclude '.git' --exclude '.github' --exclude 'web/sites/default/files' --exclude 'private-files' --exclude 'web/sites/default/settings.local.php' -avzr --delete
+          switches: --exclude '.env' --exclude '.git' --exclude '.github' --exclude 'web/sites/default/files' --exclude 'private-files/*' --include 'private-files/.gitkeep' --exclude 'web/sites/default/settings.local.php' -avzr --delete
           path: ./
           remote_path: /var/www/vhosts/startklar.bayern/httpdocs/backend/
           remote_host: bahuma.io
