@@ -78,6 +78,11 @@ class PersonService {
     return $node;
   }
 
+  public function update(NodeInterface &$node, Person $person) {
+    $this->setPersonValues($node, $person);
+    $node->save();
+  }
+
   protected function setPersonValues (NodeInterface &$node, Person $person) {
     $requiredSimpleFields = [
       'title' => 'id',
@@ -101,27 +106,39 @@ class PersonService {
       'target_id' => $person->tshirt_groesse,
     ]);
 
-    if ($person->termin_schutzkonzept) {
+    if (isset($person->termin_schutzkonzept)) {
       $node->set('field_termin_schutzkonzept', [
         'target_id' => $person->termin_schutzkonzept,
       ]);
+    } else {
+      $node->set('field_termin_schutzkonzept', NULL);
     }
 
-    if ($person->telefon_eltern) {
+    if (isset($person->telefon_eltern)) {
       $node->set('field_telefon_eltern', $person->telefon_eltern);
+    } else {
+      $node->set('field_telefon_eltern', NULL);
     }
 
-    if ($person->mail_eltern) {
+    if (isset($person->mail_eltern)) {
       $node->set('field_mail_eltern', $person->mail_eltern);
+    } else {
+      $node->set('field_mail_eltern', NULL);
     }
 
-    if ($person->essen_anmerkungen) {
+    if (isset($person->essen_anmerkungen)) {
       $node->set('field_essen_anmerkungen', $person->essen_anmerkungen);
+    } else {
+      $node->set('field_essen_anmerkungen', NULL);
     }
 
     if (!$node->field_anreise->entity) {
       $anreise = $this->anreiseService->new($person->anreise);
       $node->set('field_anreise', $anreise);
+    } else {
+      /** @var NodeInterface $anreise */
+      $anreise = $node->field_anreise->entity;
+      $this->anreiseService->update($anreise, $person->anreise);
     }
 
     // TODO: fuehrungszeugnis

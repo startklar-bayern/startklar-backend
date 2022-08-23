@@ -41,15 +41,37 @@ class AnreiseService {
     return $node;
   }
 
+  public function update(NodeInterface &$node, Anreise $anreise) {
+    $this->setAnreiseValues($node, $anreise);
+    $node->save();
+  }
+
   protected function setAnreiseValues(NodeInterface &$node, Anreise $anreise): void {
-    $node->set('field_typ', $anreise->typ);
-    $node->set('field_ziel', $anreise->ziel);
+    if (isset($anreise->typ)) {
+      $node->set('field_typ', $anreise->typ);
+    } else {
+      $node->set('field_typ', NULL);
+    }
 
-    $ankunft = new DrupalDateTime($anreise->ankunft);
-    $node->set('field_ankunft', $ankunft->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
+    if (isset($anreise->ziel)) {
+      $node->set('field_ziel', $anreise->ziel);
+    } else {
+      $node->set('field_ziel', NULL);
+    }
 
-    $abfahrt = new DrupalDateTime($anreise->abfahrt);
-    $node->set('field_abfahrt', $abfahrt->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
+    if (isset($anreise->ankunft)) {
+      $ankunft = new DrupalDateTime($anreise->ankunft);
+      $node->set('field_ankunft', $ankunft->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
+    } else {
+      $node->set('field_ankunft', NULL);
+    }
+
+    if (isset($anreise->abfahrt)) {
+      $abfahrt = new DrupalDateTime($anreise->abfahrt);
+      $node->set('field_abfahrt', $abfahrt->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
+    } else {
+      $node->set('field_abfahrt', NULL);
+    }
 
     if ($anreise instanceof PersonAnreise) {
       $node->set('field_mit_gruppe', $anreise->mit_gruppe);
