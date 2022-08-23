@@ -166,10 +166,9 @@ class PersonService {
       $node->set('field_fuehrungszeugnis', NULL);
     }
 
-    // TODO: fuehrungszeugnis
-
-    // TODO: aufsichtsperson
-    // TODO: geschwisterkind
+    // Set to null temporarily to ensure all people are created first
+    $node->set('field_geschwisterkind', NULL);
+    $node->set('field_aufsichtsperson', NULL);
   }
 
 }

@@ -8,6 +8,7 @@ use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\startklar\Model\Anmeldung;
+use Drupal\startklar\Model\Person;
 
 /**
  * GroupService service.
@@ -100,11 +101,7 @@ class GroupService {
     $this->setGroupValues($group, $anmeldung);
     $group->save();
 
-    // TODO: Check if people were deleted, delete them
-    // TODO: check if peope were added, add them
     // TODO: If this is the first update, send notification mail
-    // TODO: Check if file of führungszeugnis has changed, and if so: require a new review
-    // TODO: Save the node(s)
 
   }
 
@@ -211,7 +208,29 @@ class GroupService {
       }
     }
 
-    // Remove deleted people
+    $this->deleteRemovedTeilnehmer($node, $anmeldung);
+
+    // Set entity references
+    $this->setReferencedPeople($node->get('field_leitung')->entity, $anmeldung->leitung);
+
+    foreach ($anmeldung->teilnehmer as $teilnehmer) {
+      /** @var NodeInterface $teilnehmerNode */
+      $teilnehmerNode = $this->personService->getById($teilnehmer->id);
+      $this->setReferencedPeople($teilnehmerNode, $teilnehmer);
+    }
+  }
+
+  protected function findPersonByUuid(string $uuid, FieldItemListInterface $fieldItemList): NodeInterface|bool {
+    foreach ($fieldItemList as $fieldItem) {
+      if ($fieldItem->entity && $fieldItem->entity->label() == $uuid) {
+        return $fieldItem->entity;
+      }
+    }
+
+    return FALSE;
+  }
+
+  protected function deleteRemovedTeilnehmer(NodeInterface &$node, Anmeldung $anmeldung) {
     $teilehmerIds = array_map(function ($teilehmer) {
       return $teilehmer->id;
     }, $anmeldung->teilnehmer);
@@ -236,14 +255,22 @@ class GroupService {
     }
   }
 
-  protected function findPersonByUuid(string $uuid, FieldItemListInterface $fieldItemList): NodeInterface|bool {
-    foreach ($fieldItemList as $fieldItem) {
-      if ($fieldItem->entity && $fieldItem->entity->label() == $uuid) {
-        return $fieldItem->entity;
-      }
+  protected function setReferencedPeople(NodeInterface &$personNode, Person $person) {
+    if (isset($person->geschwisterkind)) {
+      $geschwisterkind = $this->personService->getById($person->geschwisterkind);
+      $personNode->set('field_geschwisterkind', [
+        'target_id' => $geschwisterkind->id(),
+      ]);
     }
 
-    return FALSE;
+    if (isset($person->aufsichtsperson)) {
+      $aufsichtsperson = $this->personService->getById($person->aufsichtsperson);
+      $personNode->set('field_aufsichtsperson', [
+        'target_id' => $aufsichtsperson->id(),
+      ]);
+    }
+
+    $personNode->save();
   }
 
 }
