@@ -6,8 +6,12 @@ use Drupal\Core\Url;
 use GuzzleHttp\Client;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
+use SendinBlue\Client\ApiException;
 use SendinBlue\Client\Configuration;
+use SendinBlue\Client\Model\AddContactToList;
+use SendinBlue\Client\Model\CreateContact;
 use SendinBlue\Client\Model\CreateDoiContact;
+use SendinBlue\Client\Model\RemoveContactFromList;
 use SendinBlue\Client\Model\SendSmtpEmail;
 use SendinBlue\Client\Model\SendSmtpEmailTo;
 
@@ -25,13 +29,16 @@ class SendInBlueService {
 
   protected string $GRUPPENANMELDUNG_TEMPLATE_ID;
 
+  protected int $TEILNEHMER_LIST_ID;
+
   public function __construct() {
     $this->API_KEY = getenv('SEND_IN_BLUE_API_KEY');
-    $this->NEWSLETTER_LIST_ID = intval(getenv('SEND_IN_BLUE_LIST_ID'));
+    $this->NEWSLETTER_LIST_ID = intval(getenv('SEND_IN_BLUE_NEWSLETTER_LIST_ID'));
     $this->DOI_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_DOUBLE_OPT_IN_TEMPLATE_ID'));
     $this->FRONTEND_URL = getenv('FRONTEND_URL');
     $this->FRONTEND_URL_ANMELDUNG = getenv('FRONTEND_URL_ANMELDUNG');
     $this->GRUPPENANMELDUNG_TEMPLATE_ID = getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID');
+    $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
   }
 
   protected function getApiClient() {
@@ -84,6 +91,53 @@ class SendInBlueService {
     ];
 
     $apiInstance->sendTransacEmail($sendSmtpEmail);
+  }
+
+  /**
+   * @throws \SendinBlue\Client\ApiException
+   */
+  public function addTeilnehmer($mail) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    $apiClient = $this->getApiClient();
+
+    $contact = new CreateContact();
+    $contact->setEmail($mail);
+    $contact->setListIds([$this->TEILNEHMER_LIST_ID]);
+
+    try {
+      $apiClient->createContact($contact);
+    } catch (ApiException $e) {
+      $body = json_decode($e->getResponseBody());
+
+      if ($body && $body->code == 'duplicate_parameter') {
+        // Contact already exists. Add it to list.
+        try {
+          $apiClient->addContactToList($this->TEILNEHMER_LIST_ID, new AddContactToList(['emails' => [$mail]]));
+        } catch (ApiException $e) {
+          $body = json_decode($e->getResponseBody());
+          if ($body && $body->code == 'invalid_parameter') {
+            // Contact is already in list. everything fine.
+          } else {
+            throw $e;
+          }
+        }
+      } else {
+        throw $e;
+      }
+    }
+  }
+
+  public function removeTeilnehmer($mail) {
+    $apiClient = $this->getApiClient();
+
+    try {
+      $apiClient->removeContactFromList($this->TEILNEHMER_LIST_ID, new RemoveContactFromList([
+        'emails' => [$mail],
+      ]));
+    } catch (ApiException $e) {
+      // If it cannot be removed, it was not in the list.
+    }
   }
 
 }
