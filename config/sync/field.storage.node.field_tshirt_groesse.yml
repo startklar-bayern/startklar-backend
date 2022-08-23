@@ -1,0 +1,20 @@
+uuid: 6de22022-d5f0-49ee-8291-b3ffe677f921
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_tshirt_groesse
+field_name: field_tshirt_groesse
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

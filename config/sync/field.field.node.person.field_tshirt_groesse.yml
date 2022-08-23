@@ -1,0 +1,29 @@
+uuid: 5302df3b-d8b2-4887-a4f1-555a7701b716
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tshirt_groesse
+    - node.type.person
+    - taxonomy.vocabulary.t_shirt_groessen
+id: node.person.field_tshirt_groesse
+field_name: field_tshirt_groesse
+entity_type: node
+bundle: person
+label: 'T-Shirt Größe'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      t_shirt_groessen: t_shirt_groessen
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
