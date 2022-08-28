@@ -13,7 +13,6 @@ use Drupal\startklar\Service\SendInBlueService;
 use Drupal\startklar\Session\AnmeldungType;
 use Firebase\JWT\JWT;
 use OpenApi\Attributes as OA;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,7 +93,7 @@ class AnmeldungController extends StartklarControllerBase {
     /** @var CreateAnmeldungBody $body */
     $body = $this->getBody($request, CreateAnmeldungBody::class);
 
-    if ($body instanceof ResponseInterface) {
+    if ($body instanceof Response) {
       return $body;
     }
 
