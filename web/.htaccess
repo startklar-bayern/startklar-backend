@@ -186,10 +186,3 @@ AddEncoding gzip svgz
   RequestHeader unset Proxy
 </IfModule>
 
-
-#### CUSTOMIZATIONS
-
-# CORS
-<IfModule mod_headers.c>
-  Header set Access-Control-Allow-Origin "*"
-</IfModule>
