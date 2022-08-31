@@ -1,19 +1,20 @@
-uuid: 77db9a8e-2b2d-4af5-83a9-fd55170d02b4
+uuid: f51779b9-fb9f-4e25-8352-924830a192dc
 langcode: de
 status: true
 dependencies:
   config:
     - field.storage.node.field_dv
+    - field.storage.node.field_fuehrungszeugnis_geprueft
+    - field.storage.node.field_nachname
     - field.storage.node.field_name
-    - node.type.group
+    - field.storage.node.field_vorname
+    - node.type.person
     - system.menu.admin
-    - taxonomy.vocabulary.dvs
   module:
     - node
-    - taxonomy
     - user
-id: gruppen
-label: Gruppen
+id: teilnehmer
+label: Teilnehmer
 module: views
 description: ''
 tag: ''
@@ -26,19 +27,19 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Gruppen
+      title: Teilnehmer
       fields:
-        created:
-          id: created
+        title:
+          id: title
           table: node_field_data
-          field: created
-          relationship: none
+          field: title
+          relationship: reverse__node__field_teilnehmer
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: created
+          entity_field: title
           plugin_id: field
-          label: Erstellt
+          label: Gruppen-ID
           exclude: false
           alter:
             alter_text: false
@@ -80,11 +81,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: timestamp
+          type: string
           settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -95,17 +94,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
+        field_name:
+          id: field_name
+          table: node__field_name
+          field: field_name
+          relationship: reverse__node__field_teilnehmer
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
           plugin_id: field
-          label: ID
+          label: Gruppen-Name
           exclude: false
           alter:
             alter_text: false
@@ -125,8 +122,8 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: false
-            ellipsis: false
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -164,7 +161,7 @@ display:
           id: field_dv
           table: node__field_dv
           field: field_dv
-          relationship: none
+          relationship: reverse__node__field_teilnehmer
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -223,15 +220,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_name:
-          id: field_name
-          table: node__field_name
-          field: field_name
+        field_nachname:
+          id: field_nachname
+          table: node__field_nachname
+          field: field_nachname
           relationship: none
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Name
+          label: Nachname
           exclude: false
           alter:
             alter_text: false
@@ -286,17 +283,78 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        status:
-          id: status
-          table: node_field_data
-          field: status
+        field_vorname:
+          id: field_vorname
+          table: node__field_vorname
+          field: field_vorname
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: status
           plugin_id: field
-          label: Abgeschlossen
+          label: Vorname
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_fuehrungszeugnis_geprueft:
+          id: field_fuehrungszeugnis_geprueft
+          table: node__field_fuehrungszeugnis_geprueft
+          field: field_fuehrungszeugnis_geprueft
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Führungszeugnis geprüft'
           exclude: false
           alter:
             alter_text: false
@@ -520,7 +578,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: dropbutton
-          label: Dropbutton
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -553,7 +611,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -566,11 +624,12 @@ display:
             view_node: view_node
             edit_node: edit_node
             delete_node: delete_node
-            created: '0'
             title: '0'
-            field_dv: '0'
             field_name: '0'
-            status: '0'
+            field_dv: '0'
+            field_vorname: '0'
+            field_nachname: '0'
+            field_fuehrungszeugnis_geprueft: '0'
       pager:
         type: mini
         options:
@@ -617,17 +676,153 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Es haben sich bisher noch keine Gruppen angemeldet, die du sehen darfst und die den gesetzten Filtern entsprechen.'
+            value: 'Es haben sich bisher noch keine Teilnehmer angemeldet, die du sehen darfst und die den gesetzten Filtern entsprechen.'
             format: basic_html
           tokenize: false
-      sorts: {  }
+      sorts:
+        field_nachname_value:
+          id: field_nachname_value
+          table: node__field_nachname
+          field: field_nachname_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        field_vorname_value:
+          id: field_vorname_value
+          table: node__field_vorname
+          field: field_vorname_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            person: person
+          group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_nachname_value:
+          id: field_nachname_value
+          table: node__field_nachname
+          field: field_nachname_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_nachname_value_op
+            label: Nachname
+            description: ''
+            use_operator: false
+            operator: field_nachname_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_nachname_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_vorname_value:
+          id: field_vorname_value
+          table: node__field_vorname
+          field: field_vorname_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vorname_value_op
+            label: Vorname
+            description: ''
+            use_operator: false
+            operator: field_vorname_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_vorname_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         title:
           id: title
           table: node_field_data
           field: title
-          relationship: none
+          relationship: reverse__node__field_teilnehmer
           group_type: group
           admin_label: ''
           entity_type: node
@@ -639,7 +834,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: ID
+            label: Gruppen-ID
             description: ''
             use_operator: false
             operator: title_op
@@ -667,24 +862,11 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          value:
-            group: group
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
         field_name_value:
           id: field_name_value
           table: node__field_name
           field: field_name_value
-          relationship: none
+          relationship: reverse__node__field_teilnehmer
           group_type: group
           admin_label: ''
           plugin_id: string
@@ -694,7 +876,7 @@ display:
           exposed: true
           expose:
             operator_id: field_name_value_op
-            label: Name
+            label: Gruppen-Name
             description: ''
             use_operator: false
             operator: field_name_value_op
@@ -722,78 +904,28 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_dv_target_id:
-          id: field_dv_target_id
-          table: node__field_dv
-          field: field_dv_target_id
+        field_fuehrungszeugnis_geprueft_value:
+          id: field_fuehrungszeugnis_geprueft_value
+          table: node__field_fuehrungszeugnis_geprueft
+          field: field_fuehrungszeugnis_geprueft_value
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: taxonomy_index_tid
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_dv_target_id_op
-            label: DV
-            description: ''
-            use_operator: false
-            operator: field_dv_target_id_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_dv_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              content_editor: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          vid: dvs
-          type: select
-          hierarchy: false
-          limit: true
-          error_message: true
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: status
           plugin_id: boolean
           operator: '='
-          value: '1'
+          value: ''
           group: 1
           exposed: true
           expose:
             operator_id: ''
-            label: Abgeschlossen
+            label: 'Führungszeugnis geprüft'
             description: ''
             use_operator: false
-            operator: status_op
+            operator: field_fuehrungszeugnis_geprueft_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: status
-            required: false
+            identifier: field_fuehrungszeugnis_geprueft_value
+            required: true
             remember: false
             multiple: false
             remember_roles:
@@ -801,18 +933,26 @@ display:
               anonymous: '0'
               content_editor: '0'
               administrator: '0'
-          is_grouped: false
+          is_grouped: true
           group_info:
-            label: ''
+            label: 'Führungszeugnis geprüft'
             description: ''
-            identifier: ''
+            identifier: field_fuehrungszeugnis_geprueft_value
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1:
+                title: ja
+                operator: '='
+                value: '1'
+              2:
+                title: nein
+                operator: '='
+                value: '0'
       filter_groups:
         operator: AND
         groups:
@@ -824,32 +964,19 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            created: created
             title: title
-            field_dv: field_dv
             field_name: field_name
-            status: status
+            field_dv: field_dv
+            field_vorname: field_vorname
+            field_nachname: field_nachname
+            field_fuehrungszeugnis_geprueft: field_fuehrungszeugnis_geprueft
             view_node: view_node
             edit_node: edit_node
             delete_node: delete_node
             dropbutton: dropbutton
-          default: created
+          default: title
           info:
-            created:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_dv:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -863,7 +990,28 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            status:
+            field_dv:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vorname:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_nachname:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_fuehrungszeugnis_geprueft:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -914,7 +1062,17 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        reverse__node__field_teilnehmer:
+          id: reverse__node__field_teilnehmer
+          table: node_field_data
+          field: reverse__node__field_teilnehmer
+          relationship: none
+          group_type: group
+          admin_label: Gruppe
+          entity_type: node
+          plugin_id: entity_reverse
+          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -925,12 +1083,14 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_dv'
+        - 'config:field.storage.node.field_fuehrungszeugnis_geprueft'
+        - 'config:field.storage.node.field_nachname'
         - 'config:field.storage.node.field_name'
+        - 'config:field.storage.node.field_vorname'
   page_1:
     id: page_1
     display_title: Page
@@ -938,10 +1098,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/startklar/gruppen
+      path: admin/startklar/teilnehmer
       menu:
         type: normal
-        title: Gruppen
+        title: Teilnehmer
         menu_name: admin
         parent: ''
     cache_metadata:
@@ -951,9 +1111,11 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_dv'
+        - 'config:field.storage.node.field_fuehrungszeugnis_geprueft'
+        - 'config:field.storage.node.field_nachname'
         - 'config:field.storage.node.field_name'
+        - 'config:field.storage.node.field_vorname'
