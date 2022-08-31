@@ -28,3 +28,9 @@ services:
   send_in_blue:
     class: Drupal\startklar\Service\SendInBlueService
     arguments: ['@request_stack']
+
+  startklar.event_subscriber:
+    class: Drupal\startklar\EventSubscriber\PermissionEventSubscriber
+    arguments: ['@entity_type.manager', '@node.grant_storage']
+    tags:
+      - { name: event_subscriber }

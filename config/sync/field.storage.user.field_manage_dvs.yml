@@ -1,0 +1,20 @@
+uuid: 1780763e-032d-444f-bb8d-164ddcc280ff
+langcode: de
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - user
+id: user.field_manage_dvs
+field_name: field_manage_dvs
+entity_type: user
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

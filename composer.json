@@ -25,10 +25,11 @@
         "drupal/core-recommended": "^9.3",
         "drupal/devel": "^4.1",
         "drupal/entity_sort": "^1.0@beta",
+        "drupal/hook_event_dispatcher": "^3.2",
         "drupal/maillog": "^1.0@beta",
         "drupal/openapi_ui_swagger": "^1.0@RC",
         "drupal/pathauto": "^1.9",
-        "drush/drush": "^10.6",
+        "drush/drush": "^11.1",
         "firebase/php-jwt": "^6.3",
         "mnsami/composer-custom-directory-installer": "^2.0",
         "sendinblue/api-v3-sdk": "^7.4",
@@ -94,6 +95,9 @@
             "drupal/core": "-p2"
         },
         "patches": {
+            "drupal/hook_event_dispatcher": {
+                "Remove Legacy generator": "https://www.drupal.org/files/issues/2022-02-28/3266861-3.patch"
+            }
         }
     }
 }

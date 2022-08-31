@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\user\Entity\User;
+
 /**
  * Implements hook_mail().
  */
@@ -11,4 +13,77 @@ function startklar_mail($key, &$message, $params) {
 
       break;
   }
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
+
+  $grants = [];
+
+  if ($node->bundle() == 'group') {
+    if ($node->get('field_dv')->entity) {
+      $dvId = $node->get('field_dv')->entity->id();
+      $grants[] = [
+        'realm' => 'startklar_dv',
+        'gid' => $dvId,
+        'grant_view' => $node->isPublished(),
+        'grant_update' => 0,
+        'grant_delete' => 0,
+      ];
+    }
+
+    return $grants;
+  }
+
+  if ($node->bundle() == 'person') {
+    $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+    $query = $nodeStorage->getQuery()
+      ->condition('type', 'group')
+      ->accessCheck(FALSE);
+
+    $conditionGroup = $query->orConditionGroup();
+    $conditionGroup->condition('field_teilnehmer', $node->id(), 'CONTAINS');
+    $conditionGroup->condition('field_leitung', $node->id(), 'CONTAINS');
+
+    $query->condition($conditionGroup);
+
+    $result = $query->execute();
+
+    if (count($result) > 0) {
+      $group = $nodeStorage->load(reset($result));
+
+      if ($group->get('field_dv')->entity) {
+        $dvId = $group->get('field_dv')->entity->id();
+
+        $grants[] = [
+          'realm' => 'startklar_dv',
+          'gid' => $dvId,
+          'grant_view' => $node->isPublished(),
+          'grant_update' => 0,
+          'grant_delete' => 0,
+        ];
+      }
+    } else {
+      \Drupal::logger('startklar')->error('Cannot load group for person ' . $node->id() . ' to generate access records');
+    }
+  }
+
+  return $grants;
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function startklar_node_grants(\Drupal\Core\Session\AccountInterface $account, $op) {
+  $grants = [];
+
+  $user = User::load($account->id());
+
+  foreach ($user->get('field_manage_dvs') as $fieldItem) {
+    $grants['startklar_dv'][] = $fieldItem->target_id;
+  }
+
+  return $grants;
 }

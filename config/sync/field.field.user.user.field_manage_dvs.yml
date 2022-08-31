@@ -1,0 +1,30 @@
+uuid: 26c258d8-397b-4c62-b802-d20e6d4b514b
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_manage_dvs
+    - taxonomy.vocabulary.dvs
+  module:
+    - user
+id: user.user.field_manage_dvs
+field_name: field_manage_dvs
+entity_type: user
+bundle: user
+label: 'Manage DVs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      dvs: dvs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

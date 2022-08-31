@@ -99,6 +99,7 @@ class GroupService {
 
   public function update(NodeInterface $group, Anmeldung $anmeldung) {
     $this->setGroupValues($group, $anmeldung);
+    $group->setPublished();
     $group->save();
 
     // TODO: If this is the first update, send notification mail

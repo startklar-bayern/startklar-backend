@@ -4,3 +4,10 @@ description: API endpoints for the Startklar Website
 package: Custom
 core: 8.x
 core_version_requirement: ^8 || ^9
+dependencies:
+  - hook_event_dispatcher:core_event_dispatcher
+  - drupal:node
+  - drupal:taxonomy
+  - drupal:field
+  - drupal:image
+  - drupal:options
