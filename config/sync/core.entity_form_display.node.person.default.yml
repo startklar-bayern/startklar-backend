@@ -3,6 +3,7 @@ langcode: de
 status: true
 dependencies:
   config:
+    - field.field.node.person.field_anmerkungen
     - field.field.node.person.field_anreise
     - field.field.node.person.field_aufsichtsperson
     - field.field.node.person.field_essen
@@ -37,6 +38,14 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_anmerkungen:
+    type: string_textarea
+    weight: 141
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_anreise:
     type: entity_reference_autocomplete

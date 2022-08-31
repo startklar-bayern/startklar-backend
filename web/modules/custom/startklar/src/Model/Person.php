@@ -140,6 +140,9 @@ class Person implements GroupSequenceProviderInterface {
   #[OA\Property(description: "Preferences for food", type: "string", example: "Nuss-Allergie\\nViel Schokolade")]
   public ?string $essen_anmerkungen;
 
+  #[OA\Property(description: "Things about the person we should know", type: "string", example: "Wespen-Allergie, Schlafwandler...")]
+  public ?string $anmerkungen;
+
   #[OA\Property(description: "UUID of a full paying sibling", type: "string", format: "uuid")]
   /**
    * @Assert\Uuid()

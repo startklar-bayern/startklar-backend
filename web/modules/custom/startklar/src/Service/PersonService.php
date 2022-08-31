@@ -7,6 +7,7 @@ use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\startklar\Model\Person;
+use Drupal\startklar\Model\PersonAnreise;
 
 class PersonService {
   protected EntityTypeManagerInterface$entityTypeManager;
@@ -147,6 +148,12 @@ class PersonService {
       $node->set('field_essen_anmerkungen', NULL);
     }
 
+    if (isset($person->anmerkungen)) {
+      $node->set('field_anmerkungen', $person->anmerkungen);
+    } else {
+      $node->set('field_anmerkungen', NULL);
+    }
+
     if (!$node->field_anreise->entity) {
       $anreise = $this->anreiseService->new($person->anreise);
       $node->set('field_anreise', $anreise);
@@ -173,6 +180,58 @@ class PersonService {
     // Set to null temporarily to ensure all people are created first
     $node->set('field_geschwisterkind', NULL);
     $node->set('field_aufsichtsperson', NULL);
+  }
+
+  public function toDto(NodeInterface $entity): Person {
+    $person = new Person();
+    $person->id = $entity->label();
+    $person->vorname = $entity->field_vorname->value;
+    $person->nachname = $entity->field_nachname->value;
+    $person->geburtsdatum = $entity->field_geburtsdatum->value;
+    $person->geschlecht = $entity->field_geschlecht->value;
+    $person->strasse = $entity->field_strasse->value;
+    $person->plz = $entity->field_plz->value;
+    $person->ort = $entity->field_ort->value;
+    $person->telefon = $entity->field_telefon->value;
+    $person->mail = $entity->field_mail->value;
+    if (!$entity->field_telefon_eltern->isEmpty()) {
+      $person->telefon_eltern = $entity->field_telefon_eltern->value;
+    }
+
+    if (!$entity->field_mail_eltern->isEmpty()) {
+      $person->mail_eltern = $entity->field_mail_eltern->value;
+    }
+
+    if (!$entity->field_aufsichtsperson->isEmpty()) {
+      $person->aufsichtsperson = $entity->field_aufsichtsperson->entity->label();#
+    }
+
+    $person->tshirt_groesse = $entity->field_tshirt_groesse->target_id;
+    $person->essen = $entity->field_essen->value;
+
+    if (!$entity->field_essen_anmerkungen->isEmpty()) {
+      $person->essen_anmerkungen = $entity->field_essen_anmerkungen->value;
+    }
+
+    if (!$entity->field_anmerkungen->isEmpty()) {
+      $person->anmerkungen = $entity->field_anmerkungen->value;
+    }
+
+    if (!$entity->field_geschwisterkind->isEmpty()) {
+      $person->geschwisterkind = $entity->field_geschwisterkind->entity->label();
+    }
+
+    $person->anreise = $this->anreiseService->toDto($entity->field_anreise->entity, PersonAnreise::class);
+
+    if (!$entity->field_fuehrungszeugnis->isEmpty()) {
+      $person->fuehrungszeugnis = $entity->field_fuehrungszeugnis->entity->label();
+    }
+
+    if (!$entity->field_termin_schutzkonzept->isEmpty()) {
+      $person->termin_schutzkonzept = $entity->field_termin_schutzkonzept->target_id;
+    }
+
+    return $person;
   }
 
 }

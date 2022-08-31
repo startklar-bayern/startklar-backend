@@ -1,0 +1,19 @@
+uuid: 0c1d779c-2ff1-4fc4-a6df-95a6372add07
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_anmerkungen
+    - node.type.person
+id: node.person.field_anmerkungen
+field_name: field_anmerkungen
+entity_type: node
+bundle: person
+label: Anmerkungen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnmeldungController extends StartklarControllerBase {
+
   protected string $JWT_KEY;
 
   /**
@@ -116,8 +117,9 @@ class AnmeldungController extends StartklarControllerBase {
 
     return new JsonResponse([
       'status' => 'success',
-      'message' => 'Anmeldung was created. The JWT is just here for testing, will be removed once on prod. The JWT will be sent to the user by email.',
+      'message' => 'Anmeldung was created. The JWT and groupId is just here for testing, will be removed once on prod. The JWT will be sent to the user by email.',
       'jwt' => $jwt, // TODO: remove
+      'groupId' => $node->label(), // TODO: remove
     ]);
   }
 
@@ -130,7 +132,7 @@ class AnmeldungController extends StartklarControllerBase {
     requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: '#components/schemas/Anmeldung')),
     tags: ['Anmeldung'],
     parameters: [
-      new OA\Parameter(name: 'groupId', description: 'Id of the group', in: 'path', required: true, schema: new OA\Schema(type: 'string', example: 'Tatkraft-157'))
+      new OA\Parameter(name: 'groupId', description: 'Id of the group', in: 'path', required: TRUE, schema: new OA\Schema(type: 'string', example: 'Tatkraft-157')),
     ],
     responses: [
       new OA\Response(response: 200, description: "OK", content: new OA\JsonContent(
@@ -185,8 +187,62 @@ class AnmeldungController extends StartklarControllerBase {
     /** @var Anmeldung $body */
     $this->groupService->update($group, $body);
 
-    print_r($body);
-    die();
+    return new JsonResponse([
+      'status' => 'success',
+      'message' => 'Anmeldung updated',
+    ]);
+  }
+
+  #[OA\Get(
+    path: '/anmeldung/group/{groupId}',
+    operationId: 'get_anmeldung',
+    description: 'Get a group Anmeldung',
+    summary: 'Get a group Anmeldung',
+    security: [['jwt' => []]],
+    requestBody: new OA\RequestBody(content: new OA\JsonContent(ref: '#components/schemas/Anmeldung')),
+    tags: ['Anmeldung'],
+    parameters: [
+      new OA\Parameter(name: 'groupId', description: 'Id of the group', in: 'path', required: TRUE, schema: new OA\Schema(type: 'string', example: 'Tatkraft-123')),
+    ],
+    responses: [
+      new OA\Response(response: 200, description: "OK", content: new OA\JsonContent(ref: '#components/schemas/Anmeldung')),
+      new OA\Response(response: 400, description: 'Not yet submitted', content: new OA\JsonContent(
+        properties: [
+          new OA\Property('status', type: 'string', example: 'error'),
+          new OA\Property('message', type: 'string', example: 'Group with id Tatkraft-123 was not yet sbmitted'),
+        ],
+        type: "object",
+      )),
+      new OA\Response(response: 404, description: 'Not found', content: new OA\JsonContent(
+        properties: [
+          new OA\Property('status', type: 'string', example: 'error'),
+          new OA\Property('message', type: 'string', example: 'Group with id Tatkraft-123 was not found'),
+        ],
+        type: "object",
+      )),
+      new OA\Response(response: 500, description: 'Server error'),
+    ]
+  )]
+  public function get(string $id): JsonResponse {
+    try {
+      $group = $this->groupService->getById($id);
+
+      if (!$group->isPublished()) {
+        return new JsonResponse([
+          'status' => 'error',
+          'message' => 'Group with id ' . $id . ' was not yet submitted',
+        ], 400);
+      }
+
+      $anmeldung = $this->groupService->toDto($group);
+
+      return new JsonResponse($anmeldung);
+    } catch (NotFoundException) {
+      return new JsonResponse([
+        'status' => 'error',
+        'message' => 'Group with id ' . $id . ' was not found',
+      ], 404);
+    }
   }
 
   #[OA\Get(

@@ -8,6 +8,7 @@ use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\startklar\Model\Anmeldung;
+use Drupal\startklar\Model\Anreise;
 use Drupal\startklar\Model\Person;
 
 /**
@@ -261,6 +262,29 @@ class GroupService {
     }
 
     $personNode->save();
+  }
+
+  public function toDto(NodeInterface $groupNode): Anmeldung {
+    $anmeldung = new Anmeldung();
+    $anmeldung->name = $groupNode->get('field_name')->value;
+    $anmeldung->dv = $groupNode->get('field_dv')->target_id;
+    $anmeldung->anreise = $this->anreiseService->toDto($groupNode->get('field_anreise')->entity, Anreise::class);
+
+    $anmeldung->teilnehmer = [];
+
+    foreach ($groupNode->field_teilnehmer as $fieldItem) {
+      $person = $this->personService->toDto($fieldItem->entity);
+
+      if ($person->id == $groupNode->field_leitung->entity->label()) {
+        $anmeldung->leitung = $person;
+      } else {
+        $anmeldung->teilnehmer[] = $person;
+      }
+    }
+
+    $anmeldung->jugendschutzgesetz_akzeptiert = true;
+
+    return $anmeldung;
   }
 
 }

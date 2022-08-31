@@ -3,6 +3,7 @@ langcode: de
 status: true
 dependencies:
   config:
+    - field.field.node.person.field_anmerkungen
     - field.field.node.person.field_anreise
     - field.field.node.person.field_aufsichtsperson
     - field.field.node.person.field_essen
@@ -33,6 +34,13 @@ targetEntityType: node
 bundle: person
 mode: default
 content:
+  field_anmerkungen:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 121
+    region: content
   field_anreise:
     type: entity_reference_entity_view
     label: above

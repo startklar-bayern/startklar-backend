@@ -167,6 +167,19 @@ startklar.anmeldung.group.update:
     _anmeldung_access_check: 'TRUE'
     _format: 'json'
 
+startklar.anmeldung.group.get:
+  path: '/api/anmeldung/group/{id}'
+  methods: 'GET'
+  defaults:
+    _title: 'Get Anmeldung'
+    _controller: '\Drupal\startklar\Controller\AnmeldungController::get'
+  options:
+    _auth: [ 'anmeldung_jwt' ]
+    no_cache: 'TRUE'
+  requirements:
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
+
 startklar.anmeldung.temp_storage.exists:
   path: '/api/anmeldung/tempStorage/{id}'
   methods: 'HEAD'

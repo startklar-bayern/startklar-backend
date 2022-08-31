@@ -77,4 +77,32 @@ class AnreiseService {
       $node->set('field_mit_gruppe', $anreise->mit_gruppe);
     }
   }
+
+  public function toDto(NodeInterface $entity, string $class): Anreise|PersonAnreise {
+    /** @var PersonAnreise|Anreise $anreise */
+    $anreise = new $class;
+
+    if ($anreise instanceof PersonAnreise) {
+      $anreise->mit_gruppe = $entity->field_mit_gruppe->value;
+    }
+
+    if (!$entity->field_typ->isEmpty()) {
+      $anreise->typ = $entity->field_typ->value;
+    }
+
+    if (!$entity->field_ziel->isEmpty()) {
+      $anreise->ziel = $entity->field_ziel->value;
+    }
+
+    if (!$entity->field_ankunft->isEmpty()) {
+      $anreise->ankunft = $entity->field_ankunft->value;
+    }
+
+    if (!$entity->field_abfahrt->isEmpty()) {
+      $anreise->abfahrt = $entity->field_abfahrt->value;
+    }
+
+    return $anreise;
+  }
+
 }

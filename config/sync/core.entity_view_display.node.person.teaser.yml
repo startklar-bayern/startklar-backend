@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.person.field_anmerkungen
     - field.field.node.person.field_anreise
     - field.field.node.person.field_aufsichtsperson
     - field.field.node.person.field_essen
@@ -38,6 +39,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_anmerkungen: true
   field_anreise: true
   field_aufsichtsperson: true
   field_essen: true
