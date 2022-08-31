@@ -5,6 +5,9 @@ namespace Drupal\startklar\Service;
 use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Url;
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\MessageFormatter;
+use GuzzleHttp\Middleware;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
 use SendinBlue\Client\ApiException;
@@ -87,7 +90,12 @@ class SendInBlueService {
   public function sendGruppenanmeldungEmail(string $recipient, string $groupId, string $jwt) {
     $config = Configuration::getDefaultConfiguration()
       ->setApiKey('api-key', $this->API_KEY);
-    $apiInstance = new TransactionalEmailsApi(null, $config);
+
+    $stack = HandlerStack::create();
+    $stack->push(Middleware::log(\Drupal::logger('sendinblue_log'), new MessageFormatter('{req_body} - {res_body}')));
+    $client = new Client(['handler' => $stack]);
+
+    $apiInstance = new TransactionalEmailsApi($client, $config);
 
     $sendSmtpEmail = new SendSmtpEmail();
     $sendSmtpEmail->setTo([new SendSmtpEmailTo(['email' => $recipient])]);
