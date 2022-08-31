@@ -11,3 +11,4 @@ dependencies:
   - drupal:field
   - drupal:image
   - drupal:options
+  - drupal:serialization
