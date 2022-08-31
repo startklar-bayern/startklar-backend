@@ -68,12 +68,6 @@ class PermissionEventSubscriber implements EventSubscriberInterface {
               $this->nodeGrantStorage->write($person, $grants);
             }
           }
-
-          $leitung = $event->getOriginalEntity()->field_leitung->entity;
-          if ($leitung) {
-            $grants = $accessControlHandler->acquireGrants($leitung);
-            $this->nodeGrantStorage->write($leitung, $grants);
-          }
         }
 
         foreach ($group->field_teilnehmer as $fieldItem) {
@@ -83,12 +77,6 @@ class PermissionEventSubscriber implements EventSubscriberInterface {
             $grants = $accessControlHandler->acquireGrants($person);
             $this->nodeGrantStorage->write($person, $grants);
           }
-        }
-
-        $leitung = $group->field_leitung->entity;
-        if ($leitung) {
-          $grants = $accessControlHandler->acquireGrants($leitung);
-          $this->nodeGrantStorage->write($leitung, $grants);
         }
       }
 

@@ -177,27 +177,12 @@ class GroupService {
       $this->anreiseService->update($anreise, $anmeldung->anreise);
     }
 
-    if (!$node->field_leitung->entity) {
-      $person = $this->personService->new($anmeldung->leitung);
-      $node->set('field_leitung', $person);
-    }
-    else {
-      /** @var NodeInterface $person */
-      $person = $node->field_leitung->entity;
+    $people = $anmeldung->teilnehmer;
+    $people[] = $anmeldung->leitung;
 
-      // Check if a different person is now Leitung
-      if ($person->label() !== $anmeldung->leitung->id) {
-        $this->personService->delete($person);
-        $node->set('field_leitung', NULL);
-        $person = $this->personService->new($anmeldung->leitung);
-        $node->set('field_leitung', $person);
-      } else {
-        $this->personService->update($person, $anmeldung->leitung);
-      }
 
-    }
 
-    foreach ($anmeldung->teilnehmer as $teilnehmer) {
+    foreach ($people as $teilnehmer) {
       $person = $this->findPersonByUuid($teilnehmer->id, $node->get('field_teilnehmer'));
 
       if (!$person) {
@@ -209,11 +194,12 @@ class GroupService {
       }
     }
 
+    $leitungNode = $this->personService->getById($anmeldung->leitung->id);
+    $node->set('field_leitung', $leitungNode);
+
     $this->deleteRemovedTeilnehmer($node, $anmeldung);
 
     // Set entity references
-    $this->setReferencedPeople($node->get('field_leitung')->entity, $anmeldung->leitung);
-
     foreach ($anmeldung->teilnehmer as $teilnehmer) {
       /** @var NodeInterface $teilnehmerNode */
       $teilnehmerNode = $this->personService->getById($teilnehmer->id);
@@ -232,9 +218,12 @@ class GroupService {
   }
 
   protected function deleteRemovedTeilnehmer(NodeInterface &$node, Anmeldung $anmeldung) {
+    $people = $anmeldung->teilnehmer;
+    $people[] = $anmeldung->leitung;
+
     $teilehmerIds = array_map(function ($teilehmer) {
       return $teilehmer->id;
-    }, $anmeldung->teilnehmer);
+    }, $people);
 
     $itemsToRemove = [];
 
