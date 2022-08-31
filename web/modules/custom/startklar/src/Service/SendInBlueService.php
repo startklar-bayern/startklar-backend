@@ -5,9 +5,6 @@ namespace Drupal\startklar\Service;
 use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Url;
 use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\MessageFormatter;
-use GuzzleHttp\Middleware;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
 use SendinBlue\Client\ApiException;
@@ -31,7 +28,7 @@ class SendInBlueService {
 
   protected string $FRONTEND_URL_ANMELDUNG;
 
-  protected string $GRUPPENANMELDUNG_TEMPLATE_ID;
+  protected int $GRUPPENANMELDUNG_TEMPLATE_ID;
 
   protected int $TEILNEHMER_LIST_ID;
 
@@ -43,7 +40,7 @@ class SendInBlueService {
     $this->DOI_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_DOUBLE_OPT_IN_TEMPLATE_ID'));
     $this->FRONTEND_URL = getenv('FRONTEND_URL');
     $this->FRONTEND_URL_ANMELDUNG = getenv('FRONTEND_URL_ANMELDUNG');
-    $this->GRUPPENANMELDUNG_TEMPLATE_ID = getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID');
+    $this->GRUPPENANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
     $this->isDebugMode = str_starts_with($requestStack->getMainRequest()->getHttpHost(), 'localhost');
   }
@@ -91,11 +88,7 @@ class SendInBlueService {
     $config = Configuration::getDefaultConfiguration()
       ->setApiKey('api-key', $this->API_KEY);
 
-    $stack = HandlerStack::create();
-    $stack->push(Middleware::log(\Drupal::logger('sendinblue_log'), new MessageFormatter('{req_body} - {res_body}')));
-    $client = new Client(['handler' => $stack]);
-
-    $apiInstance = new TransactionalEmailsApi($client, $config);
+    $apiInstance = new TransactionalEmailsApi(null, $config);
 
     $sendSmtpEmail = new SendSmtpEmail();
     $sendSmtpEmail->setTo([new SendSmtpEmailTo(['email' => $recipient])]);
