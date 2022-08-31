@@ -1,0 +1,14 @@
+uuid: 7f88d8c3-4d8b-4f40-a68d-04e4cf343769
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.teilnehmerverwaltung
+  module:
+    - user
+id: user_remove_role_action.teilnehmerverwaltung
+label: 'Den ausgewählten Benutzern die Rolle Teilnehmerverwaltung entziehen'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: teilnehmerverwaltung

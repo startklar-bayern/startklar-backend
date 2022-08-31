@@ -1,0 +1,16 @@
+uuid: cf55c7f5-0860-46b2-8966-a9954740da2e
+langcode: de
+status: true
+dependencies:
+  module:
+    - startklar
+    - system
+id: teilnehmerverwaltung
+label: Teilnehmerverwaltung
+weight: 4
+is_admin: null
+permissions:
+  - 'access content'
+  - 'access startklar groups'
+  - 'access startklar helfer'
+  - 'access startklar teilnehmer'

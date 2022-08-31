@@ -1,16 +1,11 @@
 uuid: e2082179-32d8-4b37-962c-675f1209f93b
 langcode: de
 status: true
-dependencies:
-  config:
-    - filter.format.restricted_html
-  module:
-    - filter
+dependencies: {  }
 _core:
   default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
 id: anonymous
 label: Gast
 weight: 0
 is_admin: false
-permissions:
-  - 'use text format restricted_html'
+permissions: {  }

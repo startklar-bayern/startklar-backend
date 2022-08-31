@@ -2,3 +2,12 @@ administer startklar configuration:
   title: 'Administer startklar configuration'
   description: 'Optional description.'
   restrict access: true
+
+access startklar groups:
+  title: 'Access STARTKLAR Groups'
+
+access startklar teilnehmer:
+  title: 'Access STARTKLAR Teilnehmer'
+
+access startklar helfer:
+  title: 'Access STARTKLAR Helfer'
