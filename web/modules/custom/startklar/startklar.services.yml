@@ -34,3 +34,9 @@ services:
     arguments: ['@entity_type.manager', '@node.grant_storage']
     tags:
       - { name: event_subscriber }
+
+  startklar.event_subscriber:
+    class: Drupal\startklar\EventSubscriber\ReferenceDeletionSubscriber
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: event_subscriber }
