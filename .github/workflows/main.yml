@@ -57,7 +57,7 @@ jobs:
             ../vendor/bin/drush updb -y &&
             ../vendor/bin/drush cim -y &&
             ../vendor/bin/drush cr &&
-            ../vendor/bin/drush php-eval 'node_access_rebuild($batch_mode = TRUE);'
+            ../vendor/bin/drush php-eval 'node_access_rebuild();'
 
       - name: notify
         uses: appleboy/telegram-action@master

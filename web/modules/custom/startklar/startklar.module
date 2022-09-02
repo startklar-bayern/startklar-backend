@@ -19,52 +19,45 @@ function startklar_mail($key, &$message, $params) {
  * Implements hook_node_access_records().
  */
 function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
-
   $grants = [];
 
   if ($node->bundle() == 'group') {
     if ($node->get('field_dv')->entity) {
-      $dvId = $node->get('field_dv')->entity->id();
-      $grants[] = [
-        'realm' => 'startklar_dv',
-        'gid' => $dvId,
-        'grant_view' => $node->isPublished(),
-        'grant_update' => 0,
-        'grant_delete' => 0,
-      ];
+      _startklar_add_grants_by_group($node, $node, $grants);
     }
-
-    return $grants;
   }
 
   if ($node->bundle() == 'person') {
-    $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
-    $result = $nodeStorage->getQuery()
-      ->condition('type', 'group')
-      ->condition('field_teilnehmer', $node->id(), 'CONTAINS')
-      ->accessCheck(FALSE)
-      ->execute();
+    $group = _startklar_get_group_by_person($node);
 
-    if (count($result) > 0) {
-      $group = $nodeStorage->load(reset($result));
-
-      if ($group->get('field_dv')->entity) {
-        $dvId = $group->get('field_dv')->entity->id();
-
-        $grants[] = [
-          'realm' => 'startklar_dv',
-          'gid' => $dvId,
-          'grant_view' => $node->isPublished(),
-          'grant_update' => 0,
-          'grant_delete' => 0,
-        ];
-      }
-    }
-    else {
+    if (!$group) {
       \Drupal::logger('startklar')
         ->error('Cannot load group for person ' . $node->id() . ' to generate access records');
+    } else {
+      _startklar_add_grants_by_group($group, $node, $grants);
     }
   }
+
+  if ($node->bundle() == 'anreise') {
+    $group = _startklar_get_group_by_anreise($node);
+
+    if (!$group) {
+      $person = _startklar_get_person_by_anreise($node);
+
+      if ($person) {
+        $group = _startklar_get_group_by_person($person);
+      }
+    }
+
+    if (!$group) {
+      \Drupal::logger('startklar')
+        ->error('Cannot load group for anreise ' . $node->id() . ' to generate access records');
+    } else {
+      _startklar_add_grants_by_group($group, $node, $grants);
+    }
+  }
+
+  \Drupal::logger('startklar_permissions')->debug($node->id() . ': ' . print_r($grants, TRUE));
 
   return $grants;
 }
@@ -82,4 +75,66 @@ function startklar_node_grants(\Drupal\Core\Session\AccountInterface $account, $
   }
 
   return $grants;
+}
+
+function _startklar_add_grants_by_group(\Drupal\node\NodeInterface $group, \Drupal\node\NodeInterface $node, &$grants) {
+  if ($group->get('field_dv')->entity) {
+    $dvId = $group->get('field_dv')->entity->id();
+
+    $grants[] = [
+      'realm' => 'startklar_dv',
+      'gid' => $dvId,
+      'grant_view' => $node->isPublished(),
+      'grant_update' => 0,
+      'grant_delete' => 0,
+    ];
+  }
+}
+
+function _startklar_get_group_by_person(\Drupal\node\NodeInterface $person) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  $result = $nodeStorage->getQuery()
+    ->condition('type', 'group')
+    ->condition('field_teilnehmer', $person->id(), 'CONTAINS')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (count($result) > 0) {
+    return $nodeStorage->load(reset($result));
+  }
+
+  return false;
+}
+
+function _startklar_get_person_by_anreise(\Drupal\node\NodeInterface $anreise) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  $result = $nodeStorage->getQuery()
+    ->condition('type', 'person')
+    ->condition('field_anreise', $anreise->id())
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (count($result) > 0) {
+    return $nodeStorage->load(reset($result));
+  }
+
+  return false;
+}
+
+function _startklar_get_group_by_anreise(\Drupal\node\NodeInterface $anreise) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  $result = $nodeStorage->getQuery()
+    ->condition('type', 'group')
+    ->condition('field_anreise', $anreise->id())
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (count($result) > 0) {
+    return $nodeStorage->load(reset($result));
+  }
+
+  return false;
 }

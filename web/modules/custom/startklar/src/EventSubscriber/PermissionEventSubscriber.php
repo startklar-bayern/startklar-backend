@@ -51,32 +51,59 @@ class PermissionEventSubscriber implements EventSubscriberInterface {
   }
 
   public function onEntityUpdate(EntityUpdateEvent $event) {
-    if ($event->getEntity() instanceof NodeInterface && $event->getEntity()->bundle() == 'group') {
-      /** @var NodeInterface $group */
-      $group = $event->getEntity();
+    if ($event->getEntity() instanceof NodeInterface) {
+      /** @var NodeInterface $node */
+      $node = $event->getEntity();
+
+      /** @var NodeInterface $originalNode */
+      $originalNode = $event->getOriginalEntity();
 
       /** @var \Drupal\node\NodeAccessControlHandlerInterface $accessControlHandler */
       $accessControlHandler = $this->entityTypeManager->getAccessControlHandler('node');
 
-      if ($group->hasField('field_dv')) {
-        if ($event->getOriginalEntity()) {
-          foreach ($event->getOriginalEntity()->field_teilnehmer as $fieldItem) {
-            $person = $fieldItem->entity;
-
-            if ($person) {
-              $grants = $accessControlHandler->acquireGrants($person);
-              $this->nodeGrantStorage->write($person, $grants);
-            }
-          }
-        }
-
-        foreach ($group->field_teilnehmer as $fieldItem) {
+      if ($node->hasField('field_dv')) {
+        foreach ($originalNode->field_teilnehmer as $fieldItem) {
           $person = $fieldItem->entity;
 
           if ($person) {
             $grants = $accessControlHandler->acquireGrants($person);
             $this->nodeGrantStorage->write($person, $grants);
+
+            $anreise = $person->field_anreise->entity;
+            if ($anreise) {
+              $grants = $accessControlHandler->acquireGrants($anreise);
+              $this->nodeGrantStorage->write($anreise, $grants);
+            }
           }
+        }
+
+        foreach ($node->field_teilnehmer as $fieldItem) {
+          $person = $fieldItem->entity;
+
+          if ($person) {
+            $grants = $accessControlHandler->acquireGrants($person);
+            $this->nodeGrantStorage->write($person, $grants);
+
+            $anreise = $person->field_anreise->entity;
+            if ($anreise) {
+              $grants = $accessControlHandler->acquireGrants($anreise);
+              $this->nodeGrantStorage->write($anreise, $grants);
+            }
+          }
+        }
+      }
+
+      if ($node->hasField('field_anreise')) {
+        $anreise = $originalNode->field_anreise->entity;
+        if ($anreise) {
+          $grants = $accessControlHandler->acquireGrants($anreise);
+          $this->nodeGrantStorage->write($anreise, $grants);
+        }
+
+        $anreise = $node->field_anreise->entity;
+        if ($anreise) {
+          $grants = $accessControlHandler->acquireGrants($anreise);
+          $this->nodeGrantStorage->write($anreise, $grants);
         }
       }
 

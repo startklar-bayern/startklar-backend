@@ -29,13 +29,13 @@ services:
     class: Drupal\startklar\Service\SendInBlueService
     arguments: ['@request_stack']
 
-  startklar.event_subscriber:
+  startklar.permission_event_subscriber:
     class: Drupal\startklar\EventSubscriber\PermissionEventSubscriber
     arguments: ['@entity_type.manager', '@node.grant_storage']
     tags:
       - { name: event_subscriber }
 
-  startklar.event_subscriber:
+  startklar.reference_deletion_subscriber:
     class: Drupal\startklar\EventSubscriber\ReferenceDeletionSubscriber
     arguments: ['@entity_type.manager']
     tags:

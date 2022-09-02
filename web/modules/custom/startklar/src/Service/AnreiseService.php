@@ -47,6 +47,20 @@ class AnreiseService {
   }
 
   protected function setAnreiseValues(NodeInterface &$node, Anreise $anreise): void {
+    if ($anreise instanceof PersonAnreise) {
+      $node->set('field_mit_gruppe', $anreise->mit_gruppe);
+
+      // Early return. Do not set other fields, if person comes together with group.
+      if ($anreise->mit_gruppe == TRUE) {
+        $node->set('field_typ', NULL);
+        $node->set('field_ziel', NULL);
+        $node->set('field_ankunft', NULL);
+        $node->set('field_abfahrt', NULL);
+
+        return;
+      }
+    }
+
     if (isset($anreise->typ)) {
       $node->set('field_typ', $anreise->typ);
     } else {
@@ -71,10 +85,6 @@ class AnreiseService {
       $node->set('field_abfahrt', $abfahrt->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE))->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
     } else {
       $node->set('field_abfahrt', NULL);
-    }
-
-    if ($anreise instanceof PersonAnreise) {
-      $node->set('field_mit_gruppe', $anreise->mit_gruppe);
     }
   }
 
