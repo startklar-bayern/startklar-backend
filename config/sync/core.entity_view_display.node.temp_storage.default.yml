@@ -1,0 +1,28 @@
+uuid: c307e938-d8a3-431d-822e-6f842ed2dd1a
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.temp_storage.field_value
+    - node.type.temp_storage
+  module:
+    - user
+id: node.temp_storage.default
+targetEntityType: node
+bundle: temp_storage
+mode: default
+content:
+  field_value:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

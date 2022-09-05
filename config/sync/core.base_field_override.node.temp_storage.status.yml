@@ -1,0 +1,22 @@
+uuid: f365200a-b822-4d66-98e4-1cc0a30a5632
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.temp_storage
+id: node.temp_storage.status
+field_name: status
+entity_type: node
+bundle: temp_storage
+label: Veröffentlicht
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

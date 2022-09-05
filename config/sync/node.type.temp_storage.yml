@@ -1,0 +1,17 @@
+uuid: abca177c-b670-40d9-86f7-6c4ecbdd8ce9
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: TempStorage
+type: temp_storage
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

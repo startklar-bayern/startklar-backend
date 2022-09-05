@@ -1,0 +1,22 @@
+uuid: 0c3bfbe5-949a-4e14-bd6b-aa046945453a
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.temp_storage
+id: node.temp_storage.promote
+field_name: promote
+entity_type: node
+bundle: temp_storage
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

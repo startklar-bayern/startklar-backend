@@ -1,0 +1,11 @@
+uuid: b9731676-a1b2-42b5-a4f2-6d3d3a6f7f82
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.temp_storage
+id: node.temp_storage
+target_entity_type_id: node
+target_bundle: temp_storage
+default_langcode: site_default
+language_alterable: false

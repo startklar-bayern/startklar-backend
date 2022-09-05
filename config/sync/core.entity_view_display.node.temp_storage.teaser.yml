@@ -1,0 +1,23 @@
+uuid: 77278371-03a7-4771-98b8-e74f0265ba64
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.temp_storage.field_value
+    - node.type.temp_storage
+  module:
+    - user
+id: node.temp_storage.teaser
+targetEntityType: node
+bundle: temp_storage
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_value: true
+  langcode: true

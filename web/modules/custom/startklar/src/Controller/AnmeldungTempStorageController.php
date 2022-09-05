@@ -2,9 +2,28 @@
 
 namespace Drupal\startklar\Controller;
 
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\startklar\Service\NotFoundException;
+use Drupal\startklar\Service\TempStorageService;
+use Laminas\Diactoros\Response\JsonResponse;
 use OpenApi\Attributes as OA;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class AnmeldungTempStorageController {
+class AnmeldungTempStorageController extends ControllerBase {
+  protected TempStorageService $tempStorageService;
+
+  public function __construct(TempStorageService $tempStorageService) {
+    $this->tempStorageService = $tempStorageService;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static (
+      $container->get('startklar.temp_storage')
+    );
+  }
+
 
   #[OA\Head(
     path: '/anmeldung/tempStorage/{id}',
@@ -21,7 +40,12 @@ class AnmeldungTempStorageController {
       new OA\Response(response: 500, description: 'Server error'),
     ],
   )]
-  public function exists() {
+  public function exists($id) {
+    if ($this->tempStorageService->exists($id)) {
+      return new Response('exists');
+    } else {
+      return new Response('Does not exist', 404);
+    }
   }
 
   #[OA\Put(
@@ -35,12 +59,14 @@ class AnmeldungTempStorageController {
       new OA\Parameter(name: 'id', description: 'Id of the group or helfer', in: 'path', required: TRUE, schema: new OA\Schema(type: 'string', example: 'Tatkraft-157')),
     ],
     responses: [
-      new OA\Response(response: 200, description: "OK - Something is in storage"),
-      new OA\Response(response: 404, description: 'Not found - Nothing is in storage or id is false'),
+      new OA\Response(response: 200, description: "OK - Value was stored"),
       new OA\Response(response: 500, description: 'Server error'),
     ]
   )]
-  public function setValue() {
+  public function setValue(Request $request, $id) {
+    $value = $request->getContent();
+    $this->tempStorageService->setValue($id, $value);
+    return new Response('Value was stored');
   }
 
   #[OA\Get(
@@ -65,7 +91,17 @@ class AnmeldungTempStorageController {
       new OA\Response(response: 500, description: 'Server error'),
     ]
   )]
-  public function getValue() {
+  public function getValue($id) {
+    try {
+      $value = $this->tempStorageService->getValue($id);
+
+      return new Response($value);
+    } catch (NotFoundException $e) {
+      return new JsonResponse([
+        'status' => 'error',
+        'message' => 'Storage not found'
+      ], 404);
+    }
   }
 
   #[OA\Delete(
@@ -95,7 +131,20 @@ class AnmeldungTempStorageController {
       new OA\Response(response: 500, description: 'Server error'),
     ]
   )]
-  public function deleteValue() {
+  public function deleteValue($id) {
+    try {
+      $this->tempStorageService->delete($id);
+
+      return new JsonResponse([
+        'status' => 'success',
+        'message' => 'storage cleared',
+      ]);
+    } catch (NotFoundException $e) {
+      return new JsonResponse([
+        'status' => 'error',
+        'message' => 'Storage not found',
+      ], 404);
+    }
   }
 
 }

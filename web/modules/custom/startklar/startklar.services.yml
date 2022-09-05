@@ -25,6 +25,12 @@ services:
     class: Drupal\startklar\Service\FileService
     arguments: ['@entity_type.manager', '@uuid']
 
+  startklar.temp_storage:
+    class: Drupal\startklar\Service\TempStorageService
+    arguments: [ '@entity_type.manager' ]
+
+
+
   send_in_blue:
     class: Drupal\startklar\Service\SendInBlueService
     arguments: ['@request_stack']
