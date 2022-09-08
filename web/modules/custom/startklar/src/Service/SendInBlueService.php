@@ -156,6 +156,10 @@ class SendInBlueService {
    * @throws \SendinBlue\Client\ApiException
    */
   protected function importMailsToList(array $mails, int $listId): void {
+    if (count($mails) == 0) {
+      return;
+    }
+
     $body = ['EMAIL'];
     $body = array_merge($body, $mails);
 
