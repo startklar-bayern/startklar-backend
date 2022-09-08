@@ -29,6 +29,7 @@
         "drupal/maillog": "^1.0@beta",
         "drupal/openapi_ui_swagger": "^1.0@RC",
         "drupal/pathauto": "^1.9",
+        "drupal/views_data_export": "^1.1",
         "drush/drush": "^11.1",
         "firebase/php-jwt": "^6.3",
         "mnsami/composer-custom-directory-installer": "^2.0",
@@ -95,6 +96,9 @@
             "drupal/core": "-p2"
         },
         "patches": {
+            "drupal/core": {
+                "Allow null joins in views relations node_access": "https://www.drupal.org/files/issues/2022-04-28/1349080-512.patch"
+            },
             "drupal/hook_event_dispatcher": {
                 "Remove Legacy generator": "https://www.drupal.org/files/issues/2022-02-28/3266861-3.patch"
             }

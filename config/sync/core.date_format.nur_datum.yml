@@ -1,0 +1,8 @@
+uuid: fc187d4c-b0dc-4dad-b23a-d267ff9f69b9
+langcode: de
+status: true
+dependencies: {  }
+id: nur_datum
+label: 'Nur Datum'
+locked: false
+pattern: d.m.Y

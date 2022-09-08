@@ -15,6 +15,7 @@ module:
   content_access: 0
   contextual: 0
   core_event_dispatcher: 0
+  csv_serialization: 0
   ctools: 0
   datetime: 0
   dblog: 0
@@ -42,6 +43,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  rest: 0
   serialization: 0
   shortcut: 0
   startklar: 0
@@ -52,6 +54,7 @@ module:
   toolbar: 0
   update: 0
   user: 0
+  views_data_export: 0
   views_ui: 0
   pathauto: 1
   views: 10
