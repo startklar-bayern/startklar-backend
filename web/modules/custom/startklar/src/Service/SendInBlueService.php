@@ -5,14 +5,14 @@ namespace Drupal\startklar\Service;
 use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Url;
 use GuzzleHttp\Client;
+use Psr\Log\LoggerInterface;
 use SendinBlue\Client\Api\ContactsApi;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
 use SendinBlue\Client\ApiException;
 use SendinBlue\Client\Configuration;
-use SendinBlue\Client\Model\AddContactToList;
-use SendinBlue\Client\Model\CreateContact;
 use SendinBlue\Client\Model\CreateDoiContact;
 use SendinBlue\Client\Model\RemoveContactFromList;
+use SendinBlue\Client\Model\RequestContactImport;
 use SendinBlue\Client\Model\SendSmtpEmail;
 use SendinBlue\Client\Model\SendSmtpEmailTo;
 
@@ -34,6 +34,8 @@ class SendInBlueService {
 
   protected bool $isDebugMode;
 
+  protected LoggerInterface $logger;
+
   public function __construct(RequestStack $requestStack) {
     $this->API_KEY = getenv('SEND_IN_BLUE_API_KEY');
     $this->NEWSLETTER_LIST_ID = intval(getenv('SEND_IN_BLUE_NEWSLETTER_LIST_ID'));
@@ -43,6 +45,8 @@ class SendInBlueService {
     $this->GRUPPENANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
     $this->isDebugMode = str_starts_with($requestStack->getMainRequest()->getHttpHost(), 'localhost');
+
+    $this->logger = \Drupal::logger('startklar_sendinblue');
   }
 
   protected function getApiClient() {
@@ -65,7 +69,7 @@ class SendInBlueService {
     $createDoiContact->setRedirectionUrl(Url::fromUri($this->FRONTEND_URL, ['query' => ['emailConfirmed' => TRUE]])->setAbsolute(TRUE)->toString());
 
     if ($this->isDebugMode) {
-      \Drupal::logger('startklar_sendinblue')->info('Send Double Opt In Mail. ' . print_r([
+      $this->logger->info('Send Double Opt In Mail. ' . print_r([
         'createDoiContact' => $createDoiContact,
       ], TRUE));
     } else {
@@ -102,7 +106,7 @@ class SendInBlueService {
     ];
 
     if ($this->isDebugMode) {
-      \Drupal::logger('startklar_sendinblue')->info('Send Gruppenanmeldung Email ' . print_r([
+      $this->logger->info('Send Gruppenanmeldung Email ' . print_r([
           '$sendSmtpEmail' => $sendSmtpEmail,
         ], TRUE));
     } else {
@@ -113,60 +117,83 @@ class SendInBlueService {
   /**
    * @throws \SendinBlue\Client\ApiException
    */
-  public function addTeilnehmer($mail) {
+  public function syncTeilnehmer(array $mails): void {
+    $existingMails = $this->getMailsInList($this->TEILNEHMER_LIST_ID);
+
+    $removedMails = array_values(array_diff($existingMails, $mails));
+    $this->removeMailsFromList($removedMails, $this->TEILNEHMER_LIST_ID);
+
+    $this->importMailsToList($mails, $this->TEILNEHMER_LIST_ID);
+  }
+
+  /**
+   * @throws \SendinBlue\Client\ApiException
+   */
+  protected function getMailsInList(string $listId, $offset = 0): array {
     $apiClient = $this->getApiClient();
 
-    $contact = new CreateContact();
-    $contact->setEmail($mail);
-    $contact->setListIds([$this->TEILNEHMER_LIST_ID]);
+    $mails = [];
 
     try {
-      if ($this->isDebugMode) {
-        \Drupal::logger('startklar_sendinblue')->info('Add teilnehmer to list. ' . print_r([
-            '$contact' => $contact,
-          ], TRUE));
-      } else {
-        $apiClient->createContact($contact);
-      }
+      $result = $apiClient->getContactsFromList($listId, NULL, 500);
     } catch (ApiException $e) {
-      $body = json_decode($e->getResponseBody());
+      $this->logger->error('Error while getting contacts in list: ' . $e->getMessage() . ' ' . $e->getResponseBody());
+      throw $e;
+    }
 
-      if ($body && $body->code == 'duplicate_parameter') {
-        // Contact already exists. Add it to list.
-        try {
-          $apiClient->addContactToList($this->TEILNEHMER_LIST_ID, new AddContactToList(['emails' => [$mail]]));
-        } catch (ApiException $e) {
-          $body = json_decode($e->getResponseBody());
-          if ($body && $body->code == 'invalid_parameter') {
-            // Contact is already in list. everything fine.
-          } else {
-            throw $e;
-          }
-        }
-      } else {
-        throw $e;
-      }
+    foreach ($result->getContacts() as $contact) {
+      $mails[] = $contact['email'];
+    }
+
+    if ($result->getCount() > $offset + 500) {
+      array_merge($mails, $this->getMailsInList($listId, $offset + 500));
+    }
+
+    return array_unique($mails);
+  }
+
+  /**
+   * @throws \SendinBlue\Client\ApiException
+   */
+  protected function importMailsToList(array $mails, int $listId): void {
+    $body = ['EMAIL'];
+    $body = array_merge($body, $mails);
+
+    $apiClient = $this->getApiClient();
+
+    $requestContactImport = new RequestContactImport();
+    $requestContactImport->setListIds([$listId]);
+    $requestContactImport->setUpdateExistingContacts(FALSE);
+    $requestContactImport->setFileBody(join("\n", $body));
+    $requestContactImport->setNotifyUrl(Url::fromRoute('startklar.sendinblue.import_callback')->setAbsolute()->toString());
+
+    try {
+      $apiClient->importContacts($requestContactImport);
+    } catch (ApiException $e) {
+      $this->logger->error('Error while importing contacts: ' . $e->getMessage() . ' ' . $e->getResponseBody());
+      throw $e;
     }
   }
 
-  public function removeTeilnehmer($mail) {
+  /**
+   * @throws \SendinBlue\Client\ApiException
+   */
+  protected function removeMailsFromList(array $mails, int $listId): void {
+    if (count($mails) == 0) {
+      return;
+    }
+
+    $mails = array_unique($mails);
+
     $apiClient = $this->getApiClient();
+    $removeContactsFromList = new RemoveContactFromList();
+    $removeContactsFromList->setEmails($mails);
 
     try {
-      $data = new RemoveContactFromList([
-        'emails' => [$mail],
-      ]);
-
-      if ($this->isDebugMode) {
-        \Drupal::logger('startklar_sendinblue')->info('Remove teilnehmer from list. ' . print_r([
-            '$data' => $data,
-          ], TRUE));
-      } else {
-        $apiClient->removeContactFromList($this->TEILNEHMER_LIST_ID, $data);
-      }
-
+      $apiClient->removeContactFromList($listId, $removeContactsFromList);
     } catch (ApiException $e) {
-      // If it cannot be removed, it was not in the list.
+      $this->logger->error('Error while removing contacs: ' . $e->getMessage() . ' ' . $e->getResponseBody());
+      throw $e;
     }
   }
 

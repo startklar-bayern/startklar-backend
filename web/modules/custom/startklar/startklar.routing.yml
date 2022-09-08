@@ -244,3 +244,11 @@ startklar.files.upload:
     no_cache: 'TRUE'
   requirements:
     _anmeldung_access_check: 'TRUE'
+
+startklar.sendinblue.import_callback:
+  path: '/startklar/sendinblue/import-callback'
+  defaults:
+    _controller: '\Drupal\startklar\Controller\SendInBlueController::importCallback'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'

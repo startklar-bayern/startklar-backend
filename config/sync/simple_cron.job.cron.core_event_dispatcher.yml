@@ -1,0 +1,14 @@
+uuid: ebc9a3bf-f1d3-4b75-bbf6-f9717b3c1560
+langcode: de
+status: true
+dependencies:
+  module:
+    - core_event_dispatcher
+id: cron.core_event_dispatcher
+crontab: '*/15 * * * *'
+plugin: cron
+type: core_event_dispatcher
+configuration: {  }
+provider: core_event_dispatcher
+single: false
+weight: 0

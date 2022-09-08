@@ -1,0 +1,15 @@
+uuid: 56f2a806-cc5b-418f-a79c-b21d59200aa2
+langcode: de
+status: true
+dependencies:
+  module:
+    - startklar
+id: startklar_sendinblue_sync
+crontab: '0 * * * *'
+plugin: startklar_sendinblue_sync
+type: default
+configuration:
+  time: '60'
+provider: startklar
+single: false
+weight: 0

@@ -12,3 +12,4 @@ dependencies:
   - drupal:image
   - drupal:options
   - drupal:serialization
+  - simple_cron:simple_cron
