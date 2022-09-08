@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnmeldungTempStorageController extends ControllerBase {
+
   protected TempStorageService $tempStorageService;
 
   public function __construct(TempStorageService $tempStorageService) {
@@ -43,7 +44,8 @@ class AnmeldungTempStorageController extends ControllerBase {
   public function exists($id) {
     if ($this->tempStorageService->exists($id)) {
       return new Response('exists');
-    } else {
+    }
+    else {
       return new Response('Does not exist', 404);
     }
   }
@@ -66,7 +68,11 @@ class AnmeldungTempStorageController extends ControllerBase {
   public function setValue(Request $request, $id) {
     $value = $request->getContent();
     $this->tempStorageService->setValue($id, $value);
-    return new Response('Value was stored');
+    return new JsonResponse(
+      [
+        'status' => 'success',
+        'message' => 'Value was stored',
+      ]);
   }
 
   #[OA\Get(
@@ -99,7 +105,7 @@ class AnmeldungTempStorageController extends ControllerBase {
     } catch (NotFoundException $e) {
       return new JsonResponse([
         'status' => 'error',
-        'message' => 'Storage not found'
+        'message' => 'Storage not found',
       ], 404);
     }
   }
