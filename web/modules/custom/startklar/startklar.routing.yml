@@ -252,3 +252,11 @@ startklar.sendinblue.import_callback:
   requirements:
     _access: 'TRUE'
     _format: 'json'
+
+startklar.admin_startklar:
+  path: '/admin/startklar'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'STARTKLAR'
+  requirements:
+    _user_is_logged_in: 'TRUE'

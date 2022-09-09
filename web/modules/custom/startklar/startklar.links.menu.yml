@@ -4,3 +4,17 @@ startklar.settings_form:
   parent: system.admin_config_system
   route_name: startklar.settings_form
   weight: 10
+
+startklar.admin_startklar:
+  route_name: startklar.admin_startklar
+  parent: system.admin
+  description: 'STARTKLAR'
+  title: STARTKLAR
+  weight: -8
+
+startklar.logout:
+  route_name: user.logout
+  parent: startklar.admin_startklar
+  title: 'Logout'
+  description: 'Vom STARTKLAR Backend-System abmelden'
+  weight: 100

@@ -6,9 +6,9 @@ name: 'Startklar Backend'
 mail: info@startklar.bayern
 slogan: ''
 page:
-  403: ''
+  403: /user/login
   404: ''
-  front: /user/login
+  front: /admin/startklar
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: de

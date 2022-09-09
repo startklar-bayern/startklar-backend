@@ -1102,8 +1102,12 @@ display:
       menu:
         type: normal
         title: Teilnehmer
+        description: 'Angemeldete Teilnehmer anzeigen und verwalten'
+        weight: 0
+        expanded: false
         menu_name: admin
-        parent: ''
+        parent: startklar.admin_startklar
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
