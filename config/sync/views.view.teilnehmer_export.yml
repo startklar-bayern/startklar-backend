@@ -2619,7 +2619,7 @@ display:
             use_serializer_encode_only: false
       display_extenders: {  }
       path: admin/startklar/teilnehmer/export
-      filename: ''
+      filename: 'startklar-teilnehmer_[date:html_date].csv'
       automatic_download: false
       store_in_public_file_directory: false
       custom_redirect_path: false
