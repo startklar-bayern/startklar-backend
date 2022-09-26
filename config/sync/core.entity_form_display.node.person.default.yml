@@ -8,8 +8,6 @@ dependencies:
     - field.field.node.person.field_aufsichtsperson
     - field.field.node.person.field_essen
     - field.field.node.person.field_essen_anmerkungen
-    - field.field.node.person.field_fuehrungszeugnis
-    - field.field.node.person.field_fuehrungszeugnis_geprueft
     - field.field.node.person.field_geburtsdatum
     - field.field.node.person.field_geschlecht
     - field.field.node.person.field_geschwisterkind
@@ -80,23 +78,6 @@ content:
     settings:
       rows: 5
       placeholder: ''
-    third_party_settings: {  }
-  field_fuehrungszeugnis:
-    type: entity_reference_autocomplete
-    weight: 137
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_fuehrungszeugnis_geprueft:
-    type: boolean_checkbox
-    weight: 121
-    region: content
-    settings:
-      display_label: true
     third_party_settings: {  }
   field_geburtsdatum:
     type: datetime_default

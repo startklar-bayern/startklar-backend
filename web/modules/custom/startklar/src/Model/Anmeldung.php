@@ -4,7 +4,6 @@ namespace Drupal\startklar\Model;
 
 use Drupal\startklar\Validation\AufsichtspersonConstraint;
 use Drupal\startklar\Validation\AufsichtspersonLimitConstraint;
-use Drupal\startklar\Validation\FuehrungszeugnisConstraint;
 use Drupal\startklar\Validation\PersonWithLegalAgeConstraint;
 use Drupal\startklar\Validation\SiblingConstraint;
 use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
@@ -22,7 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @SiblingConstraint()
  * @AufsichtspersonConstraint()
  * @AufsichtspersonLimitConstraint(max=10)
- * @FuehrungszeugnisConstraint()
  */
 class Anmeldung {
 

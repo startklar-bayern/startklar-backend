@@ -163,20 +163,6 @@ class PersonService {
       $this->anreiseService->update($anreise, $person->anreise);
     }
 
-    if (isset($person->fuehrungszeugnis)) {
-      if ($oldEntity = $node->get('field_fuehrungszeugnis')->entity) {
-        if ($oldEntity->label() !== $person->fuehrungszeugnis) {
-          // A new file was uploaded.
-          $node->set('field_fuehrungszeugnis_geprueft', FALSE);
-        }
-      }
-
-      $fuehrungszeugnis = $this->fileService->get($person->fuehrungszeugnis);
-      $node->set('field_fuehrungszeugnis', $fuehrungszeugnis);
-    } else {
-      $node->set('field_fuehrungszeugnis', NULL);
-    }
-
     // Set to null temporarily to ensure all people are created first
     $node->set('field_geschwisterkind', NULL);
     $node->set('field_aufsichtsperson', NULL);
@@ -222,10 +208,6 @@ class PersonService {
     }
 
     $person->anreise = $this->anreiseService->toDto($entity->field_anreise->entity, PersonAnreise::class);
-
-    if (!$entity->field_fuehrungszeugnis->isEmpty()) {
-      $person->fuehrungszeugnis = $entity->field_fuehrungszeugnis->entity->label();
-    }
 
     if (!$entity->field_termin_schutzkonzept->isEmpty()) {
       $person->termin_schutzkonzept = $entity->field_termin_schutzkonzept->target_id;
