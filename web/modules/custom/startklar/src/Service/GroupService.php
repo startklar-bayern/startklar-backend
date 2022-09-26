@@ -283,6 +283,7 @@ class GroupService {
     }
 
     $anmeldung->jugendschutzgesetz_akzeptiert = true;
+    $anmeldung->fuehrungszeugnis = true;
 
     return $anmeldung;
   }

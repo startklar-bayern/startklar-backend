@@ -67,4 +67,10 @@ class Anmeldung {
    */
   public bool $jugendschutzgesetz_akzeptiert;
 
+  #[OA\Property(description: "If the group leader has a valid Führungszeugnis on the event date and will enforce that all Aufsichtspersonen have one too. Has to be true", type: "boolean")]
+  /**
+   * @Assert\NotNull()
+   * @Assert\IsTrue()
+   */
+  public bool $fuehrungszeugnis;
 }
