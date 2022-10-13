@@ -22,7 +22,7 @@ class SiblingConstraintValidator extends PersonValidatorBase {
   }
 
   protected function validatePerson(SiblingConstraint $constraint, Anmeldung $anmeldung, Person $person, $path) {
-    if ($person->geschwisterkind) {
+    if (isset($person->geschwisterkind)) {
       $geschwisterkind = $this->getPersonByUuid($anmeldung, $person->geschwisterkind);
 
       if ($geschwisterkind->geschwisterkind) {
