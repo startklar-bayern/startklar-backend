@@ -29,7 +29,7 @@ class SiblingConstraintValidator extends PersonValidatorBase {
     if (isset($person->geschwisterkind)) {
       $geschwisterkind = $this->getPersonByUuid($anmeldung, $person->geschwisterkind);
 
-      if ($geschwisterkind->geschwisterkind) {
+      if (isset($geschwisterkind->geschwisterkind)) {
         $this->context->buildViolation($constraint->message)
           ->setParameter('{{ uuid }}', $person->id)
           ->setParameter('{{ uuid_sibling }}', $geschwisterkind->id)
