@@ -18,21 +18,23 @@ class AufsichtspersonConstraintValidator extends PersonValidatorBase {
     if (!$this->validateValueAndType(Anmeldung::class, AufsichtspersonConstraint::class, $value, $constraint)) {
       return;
     }
+    
+    if (isset($value->teilnehmer)) {
+      for ($i = 0; $i < count($value->teilnehmer); $i++) {
+        $person = $value->teilnehmer[$i];
 
-    for ($i = 0; $i < count($value->teilnehmer); $i++) {
-      $person = $value->teilnehmer[$i];
+        if ($person->aufsichtsperson) {
+          $aufsichtsperson = $this->getPersonByUuid($value, $person->aufsichtsperson);
 
-      if ($person->aufsichtsperson) {
-        $aufsichtsperson = $this->getPersonByUuid($value, $person->aufsichtsperson);
+          $geburtsdatum = new \DateTime($aufsichtsperson->geburtsdatum);
+          $eventEndDate = new \DateTime('2023-06-11');
+          $minLegalAgeBirthday = $eventEndDate->sub(\DateInterval::createFromDateString('18 years'));
 
-        $geburtsdatum = new \DateTime($aufsichtsperson->geburtsdatum);
-        $eventEndDate = new \DateTime('2023-06-11');
-        $minLegalAgeBirthday = $eventEndDate->sub(\DateInterval::createFromDateString('18 years'));
-
-        if ($geburtsdatum > $minLegalAgeBirthday) {
-          $this->context->buildViolation($constraint->message)
-            ->atPath('teilnehmer[' . $i . '].aufsichtsperson')
-            ->addViolation();
+          if ($geburtsdatum > $minLegalAgeBirthday) {
+            $this->context->buildViolation($constraint->message)
+              ->atPath('teilnehmer[' . $i . '].aufsichtsperson')
+              ->addViolation();
+          }
         }
       }
     }
