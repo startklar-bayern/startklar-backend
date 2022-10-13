@@ -20,12 +20,16 @@ class UuidReferenceExistsConstraintValidator extends PersonValidatorBase {
       return;
     }
 
-    $this->validatePerson($constraint, $value, $value->leitung, 'geschwisterkind', 'leitung');
-    $this->validatePerson($constraint, $value, $value->leitung, 'aufsichtsperson', 'leitung');
+    if (isset($value->leitung)) {
+      $this->validatePerson($constraint, $value, $value->leitung, 'geschwisterkind', 'leitung');
+      $this->validatePerson($constraint, $value, $value->leitung, 'aufsichtsperson', 'leitung');  
+    }
 
-    for ($i = 0; $i < count($value->teilnehmer); $i++) {
-      $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'geschwisterkind', 'teilnehmer[' . $i . ']');
-      $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'aufsichtsperson', 'teilnehmer[' . $i . ']');
+    if (isset($value->teilnehmer)) {
+      for ($i = 0; $i < count($value->teilnehmer); $i++) {
+        $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'geschwisterkind', 'teilnehmer[' . $i . ']');
+        $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'aufsichtsperson', 'teilnehmer[' . $i . ']');
+      }
     }
 
   }
