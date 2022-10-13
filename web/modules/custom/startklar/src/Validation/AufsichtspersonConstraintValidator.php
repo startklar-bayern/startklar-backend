@@ -23,7 +23,7 @@ class AufsichtspersonConstraintValidator extends PersonValidatorBase {
       for ($i = 0; $i < count($value->teilnehmer); $i++) {
         $person = $value->teilnehmer[$i];
 
-        if ($person->aufsichtsperson) {
+        if (isset($person->aufsichtsperson)) {
           $aufsichtsperson = $this->getPersonByUuid($value, $person->aufsichtsperson);
 
           $geburtsdatum = new \DateTime($aufsichtsperson->geburtsdatum);
