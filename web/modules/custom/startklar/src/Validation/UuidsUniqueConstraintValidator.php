@@ -21,15 +21,17 @@ class UuidsUniqueConstraintValidator extends PersonValidatorBase {
 
     $uuids = [];
 
-    if(isset($value->leitung)) {
+    if (isset($value->leitung)) {
       $uuids[$value->leitung->id] = 1;
     }
 
-    foreach ($value->teilnehmer as $person) {
-      if (!array_key_exists($person->id, $uuids)) {
-        $uuids[$person->id] = 1;
-      } else {
-        $uuids[$person->id]++;
+    if (isset($value->teilnehmer)) {
+      foreach ($value->teilnehmer as $person) {
+        if (!array_key_exists($person->id, $uuids)) {
+          $uuids[$person->id] = 1;
+        } else {
+          $uuids[$person->id]++;
+        }
       }
     }
 
