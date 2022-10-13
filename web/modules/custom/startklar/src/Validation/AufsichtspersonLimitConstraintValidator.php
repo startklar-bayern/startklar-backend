@@ -23,7 +23,7 @@ class AufsichtspersonLimitConstraintValidator extends PersonValidatorBase {
 
     if (isset($value->teilnehmer)) {
       foreach ($value->teilnehmer as $person) {
-        if ($person->aufsichtsperson) {
+        if (isset($person->aufsichtsperson)) {
           if (!array_key_exists($person->aufsichtsperson, $aufsichtspersonen)) {
             $aufsichtspersonen[$person->aufsichtsperson] = 1;
           } else {
