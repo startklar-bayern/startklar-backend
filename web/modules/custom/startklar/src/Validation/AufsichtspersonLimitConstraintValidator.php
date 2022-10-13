@@ -21,14 +21,16 @@ class AufsichtspersonLimitConstraintValidator extends PersonValidatorBase {
 
     $aufsichtspersonen = [];
 
-    foreach ($value->teilnehmer as $person) {
-      if ($person->aufsichtsperson) {
-        if (!array_key_exists($person->aufsichtsperson, $aufsichtspersonen)) {
-          $aufsichtspersonen[$person->aufsichtsperson] = 1;
-        } else {
-          $aufsichtspersonen[$person->aufsichtsperson]++;
+    if (isset($value->teilnehmer)) {
+      foreach ($value->teilnehmer as $person) {
+        if ($person->aufsichtsperson) {
+          if (!array_key_exists($person->aufsichtsperson, $aufsichtspersonen)) {
+            $aufsichtspersonen[$person->aufsichtsperson] = 1;
+          } else {
+            $aufsichtspersonen[$person->aufsichtsperson]++;
+          }
         }
-      }
+      }  
     }
 
     $aufsichtspersonen = array_filter($aufsichtspersonen, function($value) use ($constraint) {
