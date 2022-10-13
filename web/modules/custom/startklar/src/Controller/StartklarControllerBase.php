@@ -40,6 +40,7 @@ abstract class StartklarControllerBase extends ControllerBase {
     try {
       return $this->serializer->deserialize($request->getContent(), $type, 'json');
     } catch (\Exception $exception) {
+      \Drupal::logger('startklar_anmeldung')->debug('Exception while parsing body: ' . $exception->getMessage());
       return new JsonResponse([
         'status' => 'error',
         'errors' => [
