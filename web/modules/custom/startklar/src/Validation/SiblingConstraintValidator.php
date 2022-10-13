@@ -14,10 +14,14 @@ class SiblingConstraintValidator extends PersonValidatorBase {
       return;
     }
 
-    $this->validatePerson($constraint, $value, $value->leitung, 'leitung');
+    if (isset($value->leitung)) {
+      $this->validatePerson($constraint, $value, $value->leitung, 'leitung');
+    }
 
-    for ($i = 0; $i < count($value->teilnehmer); $i++) {
-      $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'teilnehmer[' . $i . ']');
+    if (isset($value->teilnehmer)) {
+      for ($i = 0; $i < count($value->teilnehmer); $i++) {
+        $this->validatePerson($constraint, $value, $value->teilnehmer[$i], 'teilnehmer[' . $i . ']');
+      }
     }
   }
 
