@@ -31,7 +31,7 @@ class UuidReferenceExistsConstraintValidator extends PersonValidatorBase {
   }
 
   protected function validatePerson(UuidReferenceExistsConstraint $constraint, Anmeldung $anmeldung, Person $person, $fieldName, $path) {
-    if ($person->{$fieldName}) {
+    if (isset($person->{$fieldName})) {
       $referencedPerson = $this->getPersonByUuid($anmeldung, $person->{$fieldName});
 
       if (!$referencedPerson) {
