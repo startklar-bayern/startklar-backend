@@ -117,9 +117,7 @@ class AnmeldungController extends StartklarControllerBase {
 
     return new JsonResponse([
       'status' => 'success',
-      'message' => 'Anmeldung was created. The JWT and groupId is just here for testing, will be removed once on prod. The JWT will be sent to the user by email.',
-      'jwt' => $jwt, // TODO: remove
-      'groupId' => $node->label(), // TODO: remove
+      'message' => 'Anmeldung was created.',
     ]);
   }
 
