@@ -118,6 +118,8 @@ startklar.anmeldung.termineSchutzkonzept.index:
   defaults:
     _title: 'Termine Schutzkonzept'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::getTermineSchutzkonzept'
+  options:
+    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
     _format: 'json'
@@ -128,6 +130,8 @@ startklar.anmeldung.dvs.index:
   defaults:
     _title: 'DVs'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::getDVs'
+  options:
+    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
     _format: 'json'
@@ -138,6 +142,8 @@ startklar.anmeldung.tshirt_groessen.index:
   defaults:
     _title: 'DVs'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::getTshirtGroessen'
+  options:
+    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
     _format: 'json'
@@ -249,6 +255,8 @@ startklar.sendinblue.import_callback:
   path: '/startklar/sendinblue/import-callback'
   defaults:
     _controller: '\Drupal\startklar\Controller\SendInBlueController::importCallback'
+  options:
+    no_cache: 'TRUE'
   requirements:
     _access: 'TRUE'
     _format: 'json'

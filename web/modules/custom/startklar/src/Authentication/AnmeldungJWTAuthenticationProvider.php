@@ -41,23 +41,27 @@ class AnmeldungJWTAuthenticationProvider implements AuthenticationProviderInterf
         'exception' => $e
       ]);
 
-      throw new UnauthorizedHttpException("JWT", "Invalid JWT", $e);
+      return NULL;
     }
 
     if ($token->iss !== $request->getHttpHost()) {
-      throw new UnauthorizedHttpException("JWT", "JWT was issued by another host");
+      \Drupal::logger('startklar_auth')->error("Exception while decoding JWT: JWT was issued by another host");
+      return NULL;
     }
 
     if (!property_exists($token, 'sub')) {
-      throw new UnauthorizedHttpException("JWT", "JWT is missing 'sub'");
+      \Drupal::logger('startklar_auth')->error("Exception while decoding JWT: JWT is missing 'sub'");
+      return NULL;
     }
 
     if (!property_exists($token, 'type')) {
-      throw new UnauthorizedHttpException("JWT", "JWT is missing 'type'");
+      \Drupal::logger('startklar_auth')->error("Exception while decoding JWT: JWT is missing 'type'");
+      return NULL;
     }
 
     if (!in_array($token->type, [AnmeldungType::GROUP->value, AnmeldungType::HELPER->value])) {
-      throw new UnauthorizedHttpException("JWT", "JWT has invalid 'type'");
+      \Drupal::logger('startklar_auth')->error("Exception while decoding JWT: JWT has invalid 'type'");
+      return NULL;
     }
 
     return new AnmeldungSession([
