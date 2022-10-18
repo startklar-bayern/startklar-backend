@@ -1007,7 +1007,18 @@ display:
           entity_type: node
           plugin_id: entity_reverse
           required: false
-      header: {  }
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<a class="button" target="_blank" href="/admin/startklar/teilnehmer/export">Daten herunterladen</a>'
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:
