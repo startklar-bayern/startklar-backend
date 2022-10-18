@@ -103,7 +103,7 @@
                 "Allow null joins in views relations node_access": "https://www.drupal.org/files/issues/2022-04-28/1349080-512.patch"
             },
             "drupal/hook_event_dispatcher": {
-                "Remove Legacy generator": "https://www.drupal.org/files/issues/2022-02-28/3266861-3.patch"
+                "Remove Legacy generator": "https://www.drupal.org/files/issues/2022-10-11/3266861-6.patch"
             }
         }
     }
