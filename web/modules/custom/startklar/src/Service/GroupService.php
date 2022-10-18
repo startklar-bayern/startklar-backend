@@ -93,18 +93,20 @@ class GroupService {
 
     $node = $this->createNode($id, $email);
 
-    // TODO: Send mail
-
     return $node;
   }
 
   public function update(NodeInterface $group, Anmeldung $anmeldung) {
+    $publishedBefore = $group->isPublished();
+    
     $this->setGroupValues($group, $anmeldung);
     $group->setPublished();
     $group->save();
 
-    // TODO: If this is the first update, send notification mail
-
+    // If this is the first update, send notification mail
+    if (!$publishedBefore) {
+      mail("max.bachhuber@bahuma.io", "Neue Anmeldung zu STARTKLAR", "https://backend.starklar.bayern/node/" . $group->id());
+    }
   }
 
   /**
