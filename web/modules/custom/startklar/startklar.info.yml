@@ -2,8 +2,7 @@ name: Startklar
 type: module
 description: API endpoints for the Startklar Website
 package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 dependencies:
   - hook_event_dispatcher:core_event_dispatcher
   - drupal:node
