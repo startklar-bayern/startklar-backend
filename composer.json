@@ -26,6 +26,7 @@
         "drupal/core-recommended": "^9.3",
         "drupal/devel": "^5.1",
         "drupal/entity_sort": "^1.0@beta",
+        "drupal/field_permissions": "^1.2",
         "drupal/hook_event_dispatcher": "^3.2",
         "drupal/maillog": "^1.0@beta",
         "drupal/openapi_ui_swagger": "^1.0@RC",
