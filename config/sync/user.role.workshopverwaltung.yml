@@ -1,0 +1,31 @@
+uuid: e2b20cb9-4d4c-4e62-bd45-6ac19bc36c7e
+langcode: de
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.workshop
+  module:
+    - contextual
+    - filter
+    - node
+    - startklar
+    - system
+    - view_unpublished
+id: workshopverwaltung
+label: Workshopverwaltung
+weight: 5
+is_admin: null
+permissions:
+  - 'access content'
+  - 'access contextual links'
+  - 'access startklar workshops'
+  - 'create workshop content'
+  - 'delete any workshop content'
+  - 'delete own workshop content'
+  - 'delete workshop revisions'
+  - 'edit any workshop content'
+  - 'edit own workshop content'
+  - 'use text format full_html'
+  - 'view any unpublished workshop content'
+  - 'view the administration theme'

@@ -1,0 +1,18 @@
+uuid: 118c41ff-dcb4-409b-953b-7fd5214345d3
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_auf_social_media_geteilt
+field_name: field_auf_social_media_geteilt
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

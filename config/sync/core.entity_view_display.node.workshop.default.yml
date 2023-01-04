@@ -1,0 +1,117 @@
+uuid: 60ed0778-d7c7-4ae8-a24e-4d3b3e07f702
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.workshop.body
+    - field.field.node.workshop.field_auf_social_media_geteilt
+    - field.field.node.workshop.field_freigegeben_von_ag_inhalt
+    - field.field.node.workshop.field_in_newsletter_geteilt
+    - field.field.node.workshop.field_social_media_bild
+    - field.field.node.workshop.field_workshop_bilder
+    - field.field.node.workshop.field_workshop_ort
+    - field.field.node.workshop.field_workshop_vorschaubild
+    - field.field.node.workshop.field_zeit
+    - node.type.workshop
+  module:
+    - image
+    - options
+    - text
+    - user
+id: node.workshop.default
+targetEntityType: node
+bundle: workshop
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_auf_social_media_geteilt:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_freigegeben_von_ag_inhalt:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_in_newsletter_geteilt:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_social_media_bild:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_workshop_bilder:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_workshop_ort:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_workshop_vorschaubild:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_zeit:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

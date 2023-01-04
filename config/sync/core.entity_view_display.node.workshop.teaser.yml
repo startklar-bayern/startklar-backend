@@ -1,0 +1,47 @@
+uuid: 860a1050-bccb-4ec9-b98c-b00e2b44a8d2
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.workshop.body
+    - field.field.node.workshop.field_auf_social_media_geteilt
+    - field.field.node.workshop.field_freigegeben_von_ag_inhalt
+    - field.field.node.workshop.field_in_newsletter_geteilt
+    - field.field.node.workshop.field_social_media_bild
+    - field.field.node.workshop.field_workshop_bilder
+    - field.field.node.workshop.field_workshop_ort
+    - field.field.node.workshop.field_workshop_vorschaubild
+    - field.field.node.workshop.field_zeit
+    - node.type.workshop
+  module:
+    - text
+    - user
+id: node.workshop.teaser
+targetEntityType: node
+bundle: workshop
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_auf_social_media_geteilt: true
+  field_freigegeben_von_ag_inhalt: true
+  field_in_newsletter_geteilt: true
+  field_social_media_bild: true
+  field_workshop_bilder: true
+  field_workshop_ort: true
+  field_workshop_vorschaubild: true
+  field_zeit: true
+  langcode: true

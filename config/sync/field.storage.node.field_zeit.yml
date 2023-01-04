@@ -1,0 +1,33 @@
+uuid: 1194dc27-b372-4d63-bdd1-579de3baec46
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_zeit
+field_name: field_zeit
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: friday_morning
+      label: 'Freitag Vormittag'
+    -
+      value: friday_afternoon
+      label: 'Freitag Nachmittag'
+    -
+      value: saturday_morning
+      label: 'Samstag Vormittag'
+    -
+      value: saturday_afternoon
+      label: 'Samstag Nachmittag'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

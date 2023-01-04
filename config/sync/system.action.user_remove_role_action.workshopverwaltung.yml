@@ -1,0 +1,14 @@
+uuid: 6927ea3f-41ff-40dd-94d6-32895442ed87
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.workshopverwaltung
+  module:
+    - user
+id: user_remove_role_action.workshopverwaltung
+label: 'Den ausgewählten Benutzern die Rolle Workshopverwaltung entziehen'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: workshopverwaltung

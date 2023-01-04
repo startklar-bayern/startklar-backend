@@ -1,0 +1,14 @@
+uuid: fde577c2-d16f-4dad-af03-1a45ec83dd69
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.workshopverwaltung
+  module:
+    - user
+id: user_add_role_action.workshopverwaltung
+label: 'Den ausgewählten Benutzern die Rolle Workshopverwaltung zuweisen'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: workshopverwaltung

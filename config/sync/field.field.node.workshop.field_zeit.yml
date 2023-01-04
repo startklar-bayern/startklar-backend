@@ -1,0 +1,21 @@
+uuid: 732e4a18-cb6f-45fa-9b50-78fccfa19c9d
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_zeit
+    - node.type.workshop
+  module:
+    - options
+id: node.workshop.field_zeit
+field_name: field_zeit
+entity_type: node
+bundle: workshop
+label: Zeit
+description: 'Wann wird dieser Workshop angeboten?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -11,3 +11,6 @@ access startklar teilnehmer:
 
 access startklar helfer:
   title: 'Access STARTKLAR Helfer'
+
+access startklar workshops:
+  title: 'Access STARTKLAR Workshops'

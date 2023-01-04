@@ -1,0 +1,23 @@
+uuid: 32c59a4e-e7c2-4764-8266-afa9ebcf5cc6
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_auf_social_media_geteilt
+    - node.type.workshop
+id: node.workshop.field_auf_social_media_geteilt
+field_name: field_auf_social_media_geteilt
+entity_type: node
+bundle: workshop
+label: 'Wurde auf Social Media geteilt'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

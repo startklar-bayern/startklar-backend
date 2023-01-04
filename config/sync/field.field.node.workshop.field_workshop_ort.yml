@@ -1,0 +1,19 @@
+uuid: b074118b-aef5-4383-866c-fe32cdd83c15
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_workshop_ort
+    - node.type.workshop
+id: node.workshop.field_workshop_ort
+field_name: field_workshop_ort
+entity_type: node
+bundle: workshop
+label: Ort
+description: 'Wo findet der Workshop statt?'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

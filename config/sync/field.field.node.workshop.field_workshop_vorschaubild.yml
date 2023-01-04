@@ -1,0 +1,38 @@
+uuid: fc719cf1-490a-4c61-982a-4070bb4617fc
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_workshop_vorschaubild
+    - node.type.workshop
+  module:
+    - image
+id: node.workshop.field_workshop_vorschaubild
+field_name: field_workshop_vorschaubild
+entity_type: node
+bundle: workshop
+label: Vorschaubild
+description: 'Bild das auf der Übersichtsseite dargestellt wird'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: workshop-preview
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

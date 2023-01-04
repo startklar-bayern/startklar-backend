@@ -1,0 +1,23 @@
+uuid: 1f635295-694e-405e-92c7-89afaf5de589
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_freigegeben_von_ag_inhalt
+    - node.type.workshop
+id: node.workshop.field_freigegeben_von_ag_inhalt
+field_name: field_freigegeben_von_ag_inhalt
+entity_type: node
+bundle: workshop
+label: 'Freigegeben von AG Inhalt'
+description: 'Hat die AG Inhalt ihr okay gegeben, dass dieser Workshop bereit zur Veröffentlichung ist?'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean
