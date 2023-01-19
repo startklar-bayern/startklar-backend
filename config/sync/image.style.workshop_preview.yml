@@ -1,0 +1,15 @@
+uuid: 3f3144e5-5f1f-478d-bc94-9b6692c2b0ad
+langcode: de
+status: true
+dependencies: {  }
+name: workshop_preview
+label: workshop_preview
+effects:
+  0961ded8-9d37-4d98-8933-c2640816048e:
+    uuid: 0961ded8-9d37-4d98-8933-c2640816048e
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 408
+      height: 345
+      anchor: center-center

@@ -7,6 +7,7 @@ dependencies:
     - field.storage.node.field_auf_social_media_geteilt
     - field.storage.node.field_freigegeben_von_ag_inhalt
     - field.storage.node.field_in_newsletter_geteilt
+    - field.storage.node.field_social_media_bild
     - field.storage.node.field_workshop_bilder
     - field.storage.node.field_zeit
     - node.type.workshop
@@ -110,7 +111,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_zeit__value == "friday_morning" %}✅{% endif %}'
+            text: '{% if field_zeit__value == "friday_morning" %}🟣{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -172,7 +173,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_zeit_1__value == "friday_afternoon" %}✅{% endif %}'
+            text: '{% if field_zeit_1__value == "friday_afternoon" %}🟣{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -234,7 +235,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_zeit_2__value == "saturday_morning" %}✅{% endif %}'
+            text: '{% if field_zeit_2__value == "saturday_morning" %}🟣{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -296,7 +297,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if field_zeit_3__value == "saturday_afternoon" %}✅{% endif %}'
+            text: '{% if field_zeit_3__value == "saturday_afternoon" %}🟣{% endif %}'
             make_link: false
             path: ''
             absolute: false
@@ -527,6 +528,72 @@ display:
           type: text_default
           settings: {  }
           group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_social_media_bild:
+          id: field_social_media_bild
+          table: node__field_social_media_bild
+          field: field_social_media_bild
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Social-Media Bild vorhanden'
+          exclude: false
+          alter:
+            alter_text: true
+            text: ✅
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ❌
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_link: ''
+            image_style: ''
+            image_loading:
+              attribute: lazy
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1032,6 +1099,7 @@ display:
         - 'config:field.storage.node.field_auf_social_media_geteilt'
         - 'config:field.storage.node.field_freigegeben_von_ag_inhalt'
         - 'config:field.storage.node.field_in_newsletter_geteilt'
+        - 'config:field.storage.node.field_social_media_bild'
         - 'config:field.storage.node.field_workshop_bilder'
         - 'config:field.storage.node.field_zeit'
   page_1:
@@ -1064,5 +1132,6 @@ display:
         - 'config:field.storage.node.field_auf_social_media_geteilt'
         - 'config:field.storage.node.field_freigegeben_von_ag_inhalt'
         - 'config:field.storage.node.field_in_newsletter_geteilt'
+        - 'config:field.storage.node.field_social_media_bild'
         - 'config:field.storage.node.field_workshop_bilder'
         - 'config:field.storage.node.field_zeit'

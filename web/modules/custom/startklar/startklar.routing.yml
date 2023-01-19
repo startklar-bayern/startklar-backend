@@ -112,6 +112,16 @@ startklar.ag.list:
     _access: 'TRUE'
     _format: 'json'
 
+startklar.workshop.list:
+  path: '/api/workshops'
+  methods: 'GET'
+  defaults:
+    _title: 'Workshops'
+    _controller: '\Drupal\startklar\Controller\WorkshopController::index'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'
+
 startklar.anmeldung.termineSchutzkonzept.index:
   path: '/api/anmeldung/termine-schutzkonzept'
   methods: 'GET'

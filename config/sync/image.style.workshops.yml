@@ -1,0 +1,15 @@
+uuid: 230d0712-36a3-48d1-90de-3688ae5cf443
+langcode: de
+status: true
+dependencies: {  }
+name: workshops
+label: workshops
+effects:
+  9841793f-8fe8-4ba1-9fdc-6d106807c34a:
+    uuid: 9841793f-8fe8-4ba1-9fdc-6d106807c34a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 408
+      height: 345
+      anchor: center-center
