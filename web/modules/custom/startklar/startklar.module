@@ -138,3 +138,27 @@ function _startklar_get_group_by_anreise(\Drupal\node\NodeInterface $anreise) {
 
   return false;
 }
+
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function startklar_entity_bundle_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() === 'node' && $bundle === 'workshop') {
+    $fieldNames = [
+      'field_zeit',
+      'field_workshop_vorschaubild',
+      'body',
+    ];
+
+    foreach ($fieldNames as $fieldName) {
+      if (isset($fields[$fieldName])) {
+        $fields[$fieldName]->addConstraint('NotEmptyWhenPublished', []);
+      }
+    }
+
+    if (isset($fields['body'])) {
+      $fields['body']->addConstraint('SummaryRequiredWhenPublished', []);
+    }
+  }
+}
