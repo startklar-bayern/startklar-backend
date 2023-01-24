@@ -37,9 +37,9 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: false
+    status: true
     weight: -10
     settings:
-      allowed_html: ''
+      allowed_html: '<br> <p> <h2> <h3> <h4> <h5> <h6> <a class target href> <strong> <em> <pre> <code class="language-*"> <s> <sub> <sup> <blockquote> <ul> <ol reversed start> <li> <hr> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption> <img src alt height width data-entity-uuid data-entity-type data-caption data-align>'
       filter_html_help: true
       filter_html_nofollow: false

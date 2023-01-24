@@ -41,7 +41,8 @@ settings:
         - heading5
         - heading6
     ckeditor5_sourceEditing:
-      allowed_tags: {  }
+      allowed_tags:
+        - '<a class target>'
     ckeditor5_list:
       reversed: true
       startIndex: true
