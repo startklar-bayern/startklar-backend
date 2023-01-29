@@ -1,0 +1,29 @@
+uuid: 1efbc244-a2ec-4987-bd25-badc606a36b5
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person
+    - node.type.helfer
+    - node.type.person
+id: node.helfer.field_person
+field_name: field_person
+entity_type: node
+bundle: helfer
+label: Person
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

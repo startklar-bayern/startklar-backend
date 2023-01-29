@@ -150,8 +150,20 @@ startklar.anmeldung.tshirt_groessen.index:
   path: '/api/anmeldung/tshirt-groessen'
   methods: 'GET'
   defaults:
-    _title: 'DVs'
+    _title: 'T-Shirt Größen'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::getTshirtGroessen'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'
+
+startklar.anmeldung.helfer_jobs.index:
+  path: '/api/anmeldung/helfer-jobs'
+  methods: 'GET'
+  defaults:
+    _title: 'Helfer Jobs'
+    _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::getHelferJobs'
   options:
     no_cache: 'TRUE'
   requirements:
@@ -189,6 +201,44 @@ startklar.anmeldung.group.get:
   defaults:
     _title: 'Get Anmeldung'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::get'
+  options:
+    _auth: [ 'anmeldung_jwt' ]
+    no_cache: 'TRUE'
+  requirements:
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
+
+startklar.anmeldung.helfer.create:
+  path: '/api/anmeldung/helfer'
+  methods: 'POST'
+  defaults:
+    _title: 'Create Helfer Anmeldung'
+    _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::new'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+    _format: 'json'
+
+startklar.anmeldung.helfer.update:
+  path: '/api/anmeldung/helfer/{id}'
+  methods: 'PUT'
+  defaults:
+    _title: 'Update Anmeldung'
+    _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::update'
+  options:
+    _auth: [ 'anmeldung_jwt' ]
+    no_cache: 'TRUE'
+  requirements:
+    _anmeldung_access_check: 'TRUE'
+    _format: 'json'
+
+startklar.anmeldung.helfer.get:
+  path: '/api/anmeldung/helfer/{id}'
+  methods: 'GET'
+  defaults:
+    _title: 'Get Helfer Anmeldung'
+    _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::get'
   options:
     _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'

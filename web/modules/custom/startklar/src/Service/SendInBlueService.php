@@ -27,8 +27,11 @@ class SendInBlueService {
   protected string $FRONTEND_URL;
 
   protected string $FRONTEND_URL_ANMELDUNG;
+  protected string $FRONTEND_URL_HELFERANMELDUNG;
 
   protected int $GRUPPENANMELDUNG_TEMPLATE_ID;
+
+  protected int $HELFERANMELDUNG_TEMPLATE_ID;
 
   protected int $TEILNEHMER_LIST_ID;
 
@@ -42,9 +45,11 @@ class SendInBlueService {
     $this->DOI_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_DOUBLE_OPT_IN_TEMPLATE_ID'));
     $this->FRONTEND_URL = getenv('FRONTEND_URL');
     $this->FRONTEND_URL_ANMELDUNG = getenv('FRONTEND_URL_ANMELDUNG');
+    $this->FRONTEND_URL_HELFERANMELDUNG = getenv('FRONTEND_URL_HELFERANMELDUNG');
     $this->GRUPPENANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID'));
+    $this->HELFERANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_HELFERANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
-    $this->isDebugMode = str_starts_with($requestStack->getMainRequest()->getHttpHost(), 'localhost');
+    $this->isDebugMode = getenv('SEND_IN_BLUE_DEBUG') == "enabled";
 
     $this->logger = \Drupal::logger('startklar_sendinblue');
   }
@@ -107,6 +112,31 @@ class SendInBlueService {
 
     if ($this->isDebugMode) {
       $this->logger->info('Send Gruppenanmeldung Email ' . print_r([
+          '$sendSmtpEmail' => $sendSmtpEmail,
+        ], TRUE));
+    } else {
+      $apiInstance->sendTransacEmail($sendSmtpEmail);
+    }
+  }
+
+  public function sendHelferanmeldungEmail(string $recipient, string $helferId, string $jwt) {
+    $config = Configuration::getDefaultConfiguration()
+      ->setApiKey('api-key', $this->API_KEY);
+
+    $apiInstance = new TransactionalEmailsApi(null, $config);
+
+    $sendSmtpEmail = new SendSmtpEmail();
+    $sendSmtpEmail->setTo([new SendSmtpEmailTo(['email' => $recipient])]);
+    $sendSmtpEmail->setTemplateId($this->HELFERANMELDUNG_TEMPLATE_ID);
+
+    $anmeldungUrl = str_replace('{{helferId}}', $helferId, $this->FRONTEND_URL_HELFERANMELDUNG);
+
+    $sendSmtpEmail['params'] = [
+      'STARTKLAR_LINK' => Url::fromUri($anmeldungUrl, ['query' => ['token' => $jwt]])->setAbsolute(TRUE)->toString(),
+    ];
+
+    if ($this->isDebugMode) {
+      $this->logger->info('Send Helferanmeldung Email ' . print_r([
           '$sendSmtpEmail' => $sendSmtpEmail,
         ], TRUE));
     } else {

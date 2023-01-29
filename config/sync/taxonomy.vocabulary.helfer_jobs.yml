@@ -1,0 +1,8 @@
+uuid: 2338e5ef-4e9a-4790-8f7e-61970b353274
+langcode: de
+status: true
+dependencies: {  }
+name: Helfer-Jobs
+vid: helfer_jobs
+description: ''
+weight: 0

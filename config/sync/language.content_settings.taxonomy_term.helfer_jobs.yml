@@ -1,0 +1,11 @@
+uuid: 81097cf9-1bba-4248-bc3c-dbd93b2da3ae
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.helfer_jobs
+id: taxonomy_term.helfer_jobs
+target_entity_type_id: taxonomy_term
+target_bundle: helfer_jobs
+default_langcode: site_default
+language_alterable: false

@@ -11,4 +11,6 @@ class TaxonomyReferenceConstraint extends Constraint {
   public string $message = "No entity with id {{ id }} found";
 
   public string $vocuabluary;
+
+  public bool $array = FALSE;
 }

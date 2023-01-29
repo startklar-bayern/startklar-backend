@@ -12,5 +12,4 @@ is_admin: null
 permissions:
   - 'access content'
   - 'access startklar groups'
-  - 'access startklar helfer'
   - 'access startklar teilnehmer'

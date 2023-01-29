@@ -1,0 +1,14 @@
+uuid: dbd59601-24d1-415d-b42d-45b8aeab1745
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.fuehrungszeugnis_pruefen
+  module:
+    - user
+id: user_remove_role_action.fuehrungszeugnis_pruefen
+label: 'Den ausgewählten Benutzern die Rolle Führungszeugnis prüfen entziehen'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: fuehrungszeugnis_pruefen

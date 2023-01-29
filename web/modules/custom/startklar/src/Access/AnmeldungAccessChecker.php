@@ -16,8 +16,6 @@ use Drupal\startklar\Session\AnmeldungSession;
  */
 class AnmeldungAccessChecker implements AccessInterface {
 
-
-
   public function access(AccountInterface $user, string $id) {
     $account = $user->getAccount();
 

@@ -1,0 +1,17 @@
+uuid: 5053d772-5b33-412a-954f-80f27408954d
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Helfer
+type: helfer
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

@@ -20,6 +20,10 @@ class PersonWithLegalAgeConstraintValidator extends StartklarConstraintValidator
       return;
     }
 
+    if (!isset($value->geburtsdatum)) {
+      return;
+    }
+
     $geburtsdatum = new \DateTime($value->geburtsdatum);
     $eventEndDate = new \DateTime('2023-06-11');
     $minLegalAgeBirthday = $eventEndDate->sub(\DateInterval::createFromDateString('18 years'));

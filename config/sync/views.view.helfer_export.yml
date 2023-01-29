@@ -1,4 +1,4 @@
-uuid: 8e9280a2-524c-40ec-850c-41657f0a9291
+uuid: a01372b1-89aa-4ba7-8c93-c50b0abea091
 langcode: de
 status: true
 dependencies:
@@ -7,26 +7,21 @@ dependencies:
     - field.storage.node.field_ankunft
     - field.storage.node.field_anmerkungen
     - field.storage.node.field_anreise
-    - field.storage.node.field_aufsichtsperson
-    - field.storage.node.field_dv
     - field.storage.node.field_essen
     - field.storage.node.field_essen_anmerkungen
     - field.storage.node.field_geburtsdatum
     - field.storage.node.field_geschlecht
-    - field.storage.node.field_geschwisterkind
+    - field.storage.node.field_jobs
     - field.storage.node.field_mail
-    - field.storage.node.field_mail_eltern
-    - field.storage.node.field_mit_gruppe
     - field.storage.node.field_nachname
-    - field.storage.node.field_name
     - field.storage.node.field_ort
     - field.storage.node.field_plz
     - field.storage.node.field_strasse
     - field.storage.node.field_telefon
-    - field.storage.node.field_telefon_eltern
     - field.storage.node.field_termin_schutzkonzept
     - field.storage.node.field_tshirt_groesse
     - field.storage.node.field_typ
+    - field.storage.node.field_unterbringung
     - field.storage.node.field_vorname
     - field.storage.node.field_ziel
     - node.type.person
@@ -39,8 +34,8 @@ dependencies:
     - serialization
     - user
     - views_data_export
-id: teilnehmer_export
-label: 'Teilnehmer Export'
+id: helfer_export
+label: 'Helfer Export'
 module: views
 description: ''
 tag: ''
@@ -55,15 +50,15 @@ display:
     display_options:
       title: test
       fields:
-        title:
-          id: title
+        nid:
+          id: nid
           table: node_field_data
-          field: title
-          relationship: none
+          field: nid
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: title
+          entity_field: nid
           plugin_id: field
           label: ID
           exclude: false
@@ -85,71 +80,6 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        title_1:
-          id: title_1
-          table: node_field_data
-          field: title
-          relationship: reverse__node__field_teilnehmer
-          group_type: group
-          admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-          label: Gruppen-ID
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
             word_boundary: true
             ellipsis: true
             more_link: false
@@ -172,136 +102,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: number_integer
           settings:
-            link_to_entity: false
+            thousand_separator: ''
+            prefix_suffix: true
           group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_name:
-          id: field_name
-          table: node__field_name
-          field: field_name
-          relationship: reverse__node__field_teilnehmer
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Gruppen-Name
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_dv:
-          id: field_dv
-          table: node__field_dv
-          field: field_dv
-          relationship: reverse__node__field_teilnehmer
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: DV
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -383,6 +188,132 @@ display:
           admin_label: ''
           plugin_id: field
           label: Vorname
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_jobs:
+          id: field_jobs
+          table: node__field_jobs
+          field: field_jobs
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Jobs
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_unterbringung:
+          id: field_unterbringung
+          table: node__field_unterbringung
+          field: field_unterbringung
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Unterbringung
           exclude: false
           alter:
             alter_text: false
@@ -877,131 +808,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_mail_eltern:
-          id: field_mail_eltern
-          table: node__field_mail_eltern
-          field: field_mail_eltern
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'E-Mail Eltern'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: basic_string
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_telefon_eltern:
-          id: field_telefon_eltern
-          table: node__field_telefon_eltern
-          field: field_telefon_eltern
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Telefon Eltern'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_essen:
           id: field_essen
           table: node__field_essen
@@ -1189,384 +995,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_aufsichtsperson:
-          id: field_aufsichtsperson
-          table: node__field_aufsichtsperson
-          field: field_aufsichtsperson
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Aufsichtsperson-ID
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_nachname_1:
-          id: field_nachname_1
-          table: node__field_nachname
-          field: field_nachname
-          relationship: field_aufsichtsperson
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Nachname
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_vorname_1:
-          id: field_vorname_1
-          table: node__field_vorname
-          field: field_vorname
-          relationship: field_aufsichtsperson
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Aufsichtsperson
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{{ field_nachname_1 }} {{ field_vorname_1 }}'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_geschwisterkind:
-          id: field_geschwisterkind
-          table: node__field_geschwisterkind
-          field: field_geschwisterkind
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Geschwisterkind-ID
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_nachname_2:
-          id: field_nachname_2
-          table: node__field_nachname
-          field: field_nachname
-          relationship: field_geschwisterkind
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Nachname
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_vorname_2:
-          id: field_vorname_2
-          table: node__field_vorname
-          field: field_vorname
-          relationship: field_geschwisterkind
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Geschwisterkind
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{{ field_nachname_2 }} {{ field_vorname_2 }}'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
         field_anreise:
           id: field_anreise
           table: node__field_anreise
@@ -1745,71 +1173,6 @@ display:
           click_sort_column: value
           type: basic_string
           settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_mit_gruppe:
-          id: field_mit_gruppe
-          table: node__field_mit_gruppe
-          field: field_mit_gruppe
-          relationship: field_anreise
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: 'Anreise mit Gruppe'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: yes-no
-            format_custom_false: ''
-            format_custom_true: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2089,7 +1452,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access startklar teilnehmer'
+          perm: 'access startklar helfer'
       cache:
         type: tag
         options: {  }
@@ -2465,7 +1828,7 @@ display:
           admin_label: Gruppe
           entity_type: node
           plugin_id: entity_reverse
-          required: true
+          required: false
         field_aufsichtsperson:
           id: field_aufsichtsperson
           table: node__field_aufsichtsperson
@@ -2493,6 +1856,16 @@ display:
           admin_label: Anreise
           plugin_id: standard
           required: false
+        reverse__node__field_person:
+          id: reverse__node__field_person
+          table: node_field_data
+          field: reverse__node__field_person
+          relationship: none
+          group_type: group
+          admin_label: Helfer
+          entity_type: node
+          plugin_id: entity_reverse
+          required: true
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -2508,26 +1881,21 @@ display:
         - 'config:field.storage.node.field_ankunft'
         - 'config:field.storage.node.field_anmerkungen'
         - 'config:field.storage.node.field_anreise'
-        - 'config:field.storage.node.field_aufsichtsperson'
-        - 'config:field.storage.node.field_dv'
         - 'config:field.storage.node.field_essen'
         - 'config:field.storage.node.field_essen_anmerkungen'
         - 'config:field.storage.node.field_geburtsdatum'
         - 'config:field.storage.node.field_geschlecht'
-        - 'config:field.storage.node.field_geschwisterkind'
+        - 'config:field.storage.node.field_jobs'
         - 'config:field.storage.node.field_mail'
-        - 'config:field.storage.node.field_mail_eltern'
-        - 'config:field.storage.node.field_mit_gruppe'
         - 'config:field.storage.node.field_nachname'
-        - 'config:field.storage.node.field_name'
         - 'config:field.storage.node.field_ort'
         - 'config:field.storage.node.field_plz'
         - 'config:field.storage.node.field_strasse'
         - 'config:field.storage.node.field_telefon'
-        - 'config:field.storage.node.field_telefon_eltern'
         - 'config:field.storage.node.field_termin_schutzkonzept'
         - 'config:field.storage.node.field_tshirt_groesse'
         - 'config:field.storage.node.field_typ'
+        - 'config:field.storage.node.field_unterbringung'
         - 'config:field.storage.node.field_vorname'
         - 'config:field.storage.node.field_ziel'
   data_export_1:
@@ -2551,8 +1919,8 @@ display:
             utf8_bom: '1'
             use_serializer_encode_only: false
       display_extenders: {  }
-      path: admin/startklar/teilnehmer/export
-      filename: 'startklar-teilnehmer_[date:html_date].csv'
+      path: admin/startklar/helfer/export
+      filename: 'startklar-helfer_[date:html_date].csv'
       automatic_download: false
       store_in_public_file_directory: false
       custom_redirect_path: false
@@ -2571,25 +1939,20 @@ display:
         - 'config:field.storage.node.field_ankunft'
         - 'config:field.storage.node.field_anmerkungen'
         - 'config:field.storage.node.field_anreise'
-        - 'config:field.storage.node.field_aufsichtsperson'
-        - 'config:field.storage.node.field_dv'
         - 'config:field.storage.node.field_essen'
         - 'config:field.storage.node.field_essen_anmerkungen'
         - 'config:field.storage.node.field_geburtsdatum'
         - 'config:field.storage.node.field_geschlecht'
-        - 'config:field.storage.node.field_geschwisterkind'
+        - 'config:field.storage.node.field_jobs'
         - 'config:field.storage.node.field_mail'
-        - 'config:field.storage.node.field_mail_eltern'
-        - 'config:field.storage.node.field_mit_gruppe'
         - 'config:field.storage.node.field_nachname'
-        - 'config:field.storage.node.field_name'
         - 'config:field.storage.node.field_ort'
         - 'config:field.storage.node.field_plz'
         - 'config:field.storage.node.field_strasse'
         - 'config:field.storage.node.field_telefon'
-        - 'config:field.storage.node.field_telefon_eltern'
         - 'config:field.storage.node.field_termin_schutzkonzept'
         - 'config:field.storage.node.field_tshirt_groesse'
         - 'config:field.storage.node.field_typ'
+        - 'config:field.storage.node.field_unterbringung'
         - 'config:field.storage.node.field_vorname'
         - 'config:field.storage.node.field_ziel'

@@ -1,0 +1,33 @@
+uuid: f1a0fcb1-dd2f-46a1-aa76-6c77a7ae2807
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.helfer_jobs
+  module:
+    - text
+id: taxonomy_term.helfer_jobs.default
+targetEntityType: taxonomy_term
+bundle: helfer_jobs
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  path: true
+  status: true

@@ -98,14 +98,14 @@ class GroupService {
 
   public function update(NodeInterface $group, Anmeldung $anmeldung) {
     $publishedBefore = $group->isPublished();
-    
+
     $this->setGroupValues($group, $anmeldung);
     $group->setPublished();
     $group->save();
 
     // If this is the first update, send notification mail
     if (!$publishedBefore) {
-      mail("max.bachhuber@bahuma.io", "Neue Anmeldung zu STARTKLAR", "https://backend.starklar.bayern/node/" . $group->id());
+      mail("max.bachhuber@bahuma.io", "Neue Anmeldung zu STARTKLAR", "https://backend.startklar.bayern/node/" . $group->id());
     }
   }
 

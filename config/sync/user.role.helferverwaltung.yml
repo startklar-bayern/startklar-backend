@@ -1,0 +1,14 @@
+uuid: 38a6a5a9-cc3e-4eef-befa-b2a046594ff7
+langcode: de
+status: true
+dependencies:
+  module:
+    - startklar
+    - system
+id: helferverwaltung
+label: Helferverwaltung
+weight: 7
+is_admin: null
+permissions:
+  - 'access content'
+  - 'access startklar helfer'

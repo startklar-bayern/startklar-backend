@@ -1,19 +1,23 @@
-uuid: f51779b9-fb9f-4e25-8352-924830a192dc
+uuid: 62dc1481-5358-4b81-a1e9-41625ddb871c
 langcode: de
 status: true
 dependencies:
   config:
-    - field.storage.node.field_dv
+    - field.storage.node.field_fuehrungszeugnis_ok
+    - field.storage.node.field_jobs
+    - field.storage.node.field_mail
     - field.storage.node.field_nachname
-    - field.storage.node.field_name
+    - field.storage.node.field_unterbringung
     - field.storage.node.field_vorname
     - node.type.person
     - system.menu.admin
+    - taxonomy.vocabulary.helfer_jobs
   module:
     - node
+    - taxonomy
     - user
-id: teilnehmer
-label: Teilnehmer
+id: helfer
+label: Helfer
 module: views
 description: ''
 tag: ''
@@ -26,19 +30,19 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Teilnehmer
+      title: Helfer
       fields:
-        title:
-          id: title
+        nid:
+          id: nid
           table: node_field_data
-          field: title
-          relationship: reverse__node__field_teilnehmer
+          field: nid
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
           entity_type: node
-          entity_field: title
+          entity_field: nid
           plugin_id: field
-          label: Gruppen-ID
+          label: ID
           exclude: false
           alter:
             alter_text: false
@@ -80,136 +84,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: number_integer
           settings:
-            link_to_entity: false
+            thousand_separator: ''
+            prefix_suffix: true
           group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_name:
-          id: field_name
-          table: node__field_name
-          field: field_name
-          relationship: reverse__node__field_teilnehmer
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: Gruppen-Name
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_dv:
-          id: field_dv
-          table: node__field_dv
-          field: field_dv
-          relationship: reverse__node__field_teilnehmer
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: DV
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -335,6 +214,259 @@ display:
           type: string
           settings:
             link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_mail:
+          id: field_mail
+          table: node__field_mail
+          field: field_mail
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: E-Mail
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_jobs:
+          id: field_jobs
+          table: node__field_jobs
+          field: field_jobs
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Jobs
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ul
+          separator: ', '
+          field_api_classes: false
+        field_unterbringung:
+          id: field_unterbringung
+          table: node__field_unterbringung
+          field: field_unterbringung
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Unterbringung
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_fuehrungszeugnis_ok:
+          id: field_fuehrungszeugnis_ok
+          table: node__field_fuehrungszeugnis_ok
+          field: field_fuehrungszeugnis_ok
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Führungszeugnis
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: unicode-yes-no
+            format_custom_false: ''
+            format_custom_true: ''
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -595,7 +727,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access startklar teilnehmer'
+          perm: 'access startklar helfer'
       cache:
         type: tag
         options: {  }
@@ -752,29 +884,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: reverse__node__field_teilnehmer
+        field_jobs_target_id:
+          id: field_jobs_target_id
+          table: node__field_jobs
+          field: field_jobs_target_id
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-          operator: contains
-          value: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: title_op
-            label: Gruppen-ID
+            operator_id: field_jobs_target_id_op
+            label: Job
             description: ''
             use_operator: false
-            operator: title_op
+            operator: field_jobs_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: title
+            identifier: field_jobs_target_id
             required: false
             remember: false
             multiple: false
@@ -783,7 +913,11 @@ display:
               anonymous: '0'
               content_editor: '0'
               administrator: '0'
-            placeholder: ''
+              teilnehmerverwaltung: '0'
+              workshopverwaltung: '0'
+              fuehrungszeugnis_pruefen: '0'
+              helferverwaltung: '0'
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -796,27 +930,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        field_name_value:
-          id: field_name_value
-          table: node__field_name
-          field: field_name_value
-          relationship: reverse__node__field_teilnehmer
+          reduce_duplicates: false
+          vid: helfer_jobs
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+        field_fuehrungszeugnis_ok_value:
+          id: field_fuehrungszeugnis_ok_value
+          table: node__field_fuehrungszeugnis_ok
+          field: field_fuehrungszeugnis_ok_value
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
-          plugin_id: string
-          operator: contains
-          value: ''
+          plugin_id: boolean
+          operator: '='
+          value: All
           group: 1
           exposed: true
           expose:
-            operator_id: field_name_value_op
-            label: Gruppen-Name
+            operator_id: ''
+            label: Führungszeugnis
             description: ''
             use_operator: false
-            operator: field_name_value_op
+            operator: field_fuehrungszeugnis_ok_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_name_value
+            identifier: field_fuehrungszeugnis_ok_value
             required: false
             remember: false
             multiple: false
@@ -825,7 +965,10 @@ display:
               anonymous: '0'
               content_editor: '0'
               administrator: '0'
-            placeholder: ''
+              teilnehmerverwaltung: '0'
+              workshopverwaltung: '0'
+              fuehrungszeugnis_pruefen: '0'
+              helferverwaltung: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -849,40 +992,20 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            title: title
-            field_name: field_name
-            field_dv: field_dv
-            field_vorname: field_vorname
+            nid: nid
             field_nachname: field_nachname
-            field_fuehrungszeugnis_geprueft: field_fuehrungszeugnis_geprueft
+            field_vorname: field_vorname
+            field_mail: field_mail
+            field_jobs: field_jobs
+            field_unterbringung: field_unterbringung
+            field_fuehrungszeugnis_ok: field_fuehrungszeugnis_ok
             view_node: view_node
             edit_node: edit_node
             delete_node: delete_node
             dropbutton: dropbutton
-          default: title
+          default: field_nachname
           info:
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_dv:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vorname:
+            nid:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -896,7 +1019,33 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_fuehrungszeugnis_geprueft:
+            field_vorname:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_mail:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_jobs:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_unterbringung:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_fuehrungszeugnis_ok:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -948,13 +1097,13 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        reverse__node__field_teilnehmer:
-          id: reverse__node__field_teilnehmer
+        reverse__node__field_person:
+          id: reverse__node__field_person
           table: node_field_data
-          field: reverse__node__field_teilnehmer
+          field: reverse__node__field_person
           relationship: none
           group_type: group
-          admin_label: Gruppe
+          admin_label: Helfer
           entity_type: node
           plugin_id: entity_reverse
           required: true
@@ -968,7 +1117,7 @@ display:
           admin_label: ''
           plugin_id: text_custom
           empty: false
-          content: '<a class="button" target="_blank" href="/admin/startklar/teilnehmer/export">Daten herunterladen</a>'
+          content: '<a class="button" target="_blank" href="/admin/startklar/helfer/export">Daten herunterladen</a>'
           tokenize: false
       footer: {  }
       display_extenders: {  }
@@ -979,12 +1128,15 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_dv'
+        - 'config:field.storage.node.field_fuehrungszeugnis_ok'
+        - 'config:field.storage.node.field_jobs'
+        - 'config:field.storage.node.field_mail'
         - 'config:field.storage.node.field_nachname'
-        - 'config:field.storage.node.field_name'
+        - 'config:field.storage.node.field_unterbringung'
         - 'config:field.storage.node.field_vorname'
   page_1:
     id: page_1
@@ -993,12 +1145,12 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/startklar/teilnehmer
+      path: admin/startklar/helfer
       menu:
         type: normal
-        title: Teilnehmer
-        description: 'Angemeldete Teilnehmer anzeigen und verwalten'
-        weight: 0
+        title: Helfer
+        description: 'Angemeldete Helfer anzeigen und verwalten'
+        weight: 3
         expanded: false
         menu_name: admin
         parent: startklar.admin_startklar
@@ -1010,10 +1162,13 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_dv'
+        - 'config:field.storage.node.field_fuehrungszeugnis_ok'
+        - 'config:field.storage.node.field_jobs'
+        - 'config:field.storage.node.field_mail'
         - 'config:field.storage.node.field_nachname'
-        - 'config:field.storage.node.field_name'
+        - 'config:field.storage.node.field_unterbringung'
         - 'config:field.storage.node.field_vorname'

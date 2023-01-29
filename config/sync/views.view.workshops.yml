@@ -1114,7 +1114,7 @@ display:
         type: normal
         title: Workshops
         description: 'Zentrale Stelle um alle Inhalte für die Workshops zu sammeln und zu verwalten'
-        weight: 0
+        weight: 4
         expanded: false
         menu_name: admin
         parent: startklar.admin_startklar

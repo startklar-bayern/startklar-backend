@@ -1,0 +1,11 @@
+uuid: 26217337-806c-49d1-86b0-a8f6ea1915d2
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.helfer
+id: node.helfer
+target_entity_type_id: node
+target_bundle: helfer
+default_langcode: site_default
+language_alterable: false

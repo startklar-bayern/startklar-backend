@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 )]
 class CreateAnmeldungBody {
 
-  #[OA\Property(description: "Mail address of the person who administers the group", type: "string", format: "email")]
+  #[OA\Property(description: "Mail address of the person who administers the group or helfer", type: "string", format: "email")]
   /**
    * @Assert\NotBlank()
    * @Assert\Email()

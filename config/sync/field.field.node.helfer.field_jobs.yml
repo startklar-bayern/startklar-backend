@@ -1,0 +1,29 @@
+uuid: 406f0dbb-fc47-4d03-894b-37ee30ee7de6
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_jobs
+    - node.type.helfer
+    - taxonomy.vocabulary.helfer_jobs
+id: node.helfer.field_jobs
+field_name: field_jobs
+entity_type: node
+bundle: helfer
+label: Jobs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      helfer_jobs: helfer_jobs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

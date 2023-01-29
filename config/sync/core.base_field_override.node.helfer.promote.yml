@@ -1,0 +1,22 @@
+uuid: 8431df4e-fb56-4b12-8c22-6499e2e02373
+langcode: de
+status: true
+dependencies:
+  config:
+    - node.type.helfer
+id: node.helfer.promote
+field_name: promote
+entity_type: node
+bundle: helfer
+label: 'Auf der Startseite anzeigen'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean

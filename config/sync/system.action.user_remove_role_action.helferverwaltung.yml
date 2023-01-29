@@ -1,0 +1,14 @@
+uuid: a9fc9164-8710-4960-a63e-0a9cae668279
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.helferverwaltung
+  module:
+    - user
+id: user_remove_role_action.helferverwaltung
+label: 'Den ausgewählten Benutzern die Rolle Helferverwaltung entziehen'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: helferverwaltung

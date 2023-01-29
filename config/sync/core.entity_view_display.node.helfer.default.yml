@@ -1,0 +1,66 @@
+uuid: 25912dac-e1ea-4ff5-acd3-a86dd124ab22
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.helfer.field_fuehrungszeugnis_ok
+    - field.field.node.helfer.field_jobs
+    - field.field.node.helfer.field_mail
+    - field.field.node.helfer.field_person
+    - field.field.node.helfer.field_unterbringung
+    - node.type.helfer
+  module:
+    - user
+id: node.helfer.default
+targetEntityType: node
+bundle: helfer
+mode: default
+content:
+  field_fuehrungszeugnis_ok:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_jobs:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_mail:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_person:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_unterbringung:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

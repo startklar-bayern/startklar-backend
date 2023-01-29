@@ -14,20 +14,34 @@ class TaxonomyReferenceConstraintValidator extends StartklarConstraintValidatorB
       throw new UnexpectedTypeException($constraint, TaxonomyReferenceConstraint::class);
     }
 
-    if (null === $value || '' === $value) {
-      return;
-    }
-
-    if (!is_int($value)) {
-      throw new UnexpectedValueException($value, "integer");
-    }
-
     if (empty($constraint->vocuabluary)) {
       throw new \Exception("Property 'vocabulary' is not set");
     }
 
     /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
     $termStorage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+
+    if ($constraint->array) {
+      if (!is_array($value)) {
+        throw new UnexpectedValueException($value, "array");
+      }
+
+      foreach ($value as $val) {
+        $this->validateItem($termStorage, $val, $constraint);
+      }
+    } else {
+      if (!is_int($value)) {
+        throw new UnexpectedValueException($value, "integer");
+      }
+
+      $this->validateItem($termStorage, $value, $constraint);
+    }
+  }
+
+  protected  function validateItem($termStorage, $value, Constraint $constraint) {
+    if (null === $value || '' === $value) {
+      return;
+    }
 
     /** @var \Drupal\taxonomy\TermInterface $term */
     $term = $termStorage->load($value);

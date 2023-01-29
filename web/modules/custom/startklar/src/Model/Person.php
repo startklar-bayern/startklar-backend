@@ -155,13 +155,17 @@ class Person implements GroupSequenceProviderInterface {
    */
   public PersonAnreise $anreise;
 
-  #[OA\Property(description: "ID of the Schutzkonzept meeting event. Can be gathered from another endpoint.", type: "int")]
+  #[OA\Property(description: "ID of the Schutzkonzept meeting event. Can be gathered from another endpoint.", type: "int64")]
   /**
    * @TaxonomyReferenceConstraint(vocuabluary="termine_schutzkonzept")
    */
   public ?int $termin_schutzkonzept;
 
   public function getGroupSequence() {
+    if (!isset($this->geburtsdatum)) {
+      return [];
+    }
+
     $geburtsdatum = new \DateTime($this->geburtsdatum);
     $eventEndDate = new \DateTime('2023-06-11');
     $minLegalAgeBirthday = $eventEndDate->sub(\DateInterval::createFromDateString('18 years'));
