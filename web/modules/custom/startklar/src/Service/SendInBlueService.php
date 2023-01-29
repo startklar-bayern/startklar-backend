@@ -34,6 +34,7 @@ class SendInBlueService {
   protected int $HELFERANMELDUNG_TEMPLATE_ID;
 
   protected int $TEILNEHMER_LIST_ID;
+  protected int $HELFER_LIST_ID;
 
   protected bool $isDebugMode;
 
@@ -49,6 +50,7 @@ class SendInBlueService {
     $this->GRUPPENANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_GRUPPENANMELDUNG_TEMPLATE_ID'));
     $this->HELFERANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_HELFERANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
+    $this->HELFER_LIST_ID = intval(getenv('SEND_IN_BLUE_HELFER_LIST_ID'));
     $this->isDebugMode = getenv('SEND_IN_BLUE_DEBUG') == "enabled";
 
     $this->logger = \Drupal::logger('startklar_sendinblue');
@@ -154,6 +156,15 @@ class SendInBlueService {
     $this->removeMailsFromList($removedMails, $this->TEILNEHMER_LIST_ID);
 
     $this->importMailsToList($mails, $this->TEILNEHMER_LIST_ID);
+  }
+
+  public function syncHelfer(array $mails): void {
+    $existingMails = $this->getMailsInList($this->HELFER_LIST_ID);
+
+    $removedMails = array_values(array_diff($existingMails, $mails));
+    $this->removeMailsFromList($removedMails, $this->HELFER_LIST_ID);
+
+    $this->importMailsToList($mails, $this->HELFER_LIST_ID);
   }
 
   /**
