@@ -237,7 +237,7 @@ class SendInBlueService {
     try {
       $apiClient->removeContactFromList($listId, $removeContactsFromList);
     } catch (ApiException $e) {
-      $this->logger->error('Error while removing contacs: ' . $e->getMessage() . ' ' . $e->getResponseBody());
+      $this->logger->error('Error while removing contacts: ' . $e->getMessage() . ' ' . $e->getResponseBody());
       throw $e;
     }
   }

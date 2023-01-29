@@ -80,6 +80,10 @@ class SyncPeopleToSendInBlueCronJob extends SimpleCronPluginBase {
   protected function getMailsFromPersons(array $persons) {
     $mails = [];
 
+    if (empty($persons)) {
+      return $mails;
+    }
+
     foreach ($persons as $person) {
       $mails[] = $person->get('field_mail')->value;
     }

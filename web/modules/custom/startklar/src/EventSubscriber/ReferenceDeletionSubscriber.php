@@ -56,6 +56,13 @@ class ReferenceDeletionSubscriber implements EventSubscriberInterface {
           }
         }
       }
+
+      // Delete person nodes when a helfer anmeldung is deleted
+      if ($entity->hasField('field_person')) {
+        if ($entity->field_person->entity) {
+          $fieldItem->entity->delete();
+        }
+      }
     }
   }
 
