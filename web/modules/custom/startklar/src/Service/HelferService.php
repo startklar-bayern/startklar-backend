@@ -156,7 +156,7 @@ class HelferService {
 
     $jobs = [];
     foreach ($helferNode->get('field_jobs') as $fieldItem) {
-      $jobs[] = $fieldItem->value;
+      $jobs[] = $fieldItem->target_id;
     }
 
     $helfer->jobs = $jobs;
@@ -165,7 +165,7 @@ class HelferService {
     $helfer->person = $person;
 
     if (!empty($helferNode->get('field_unterbringung'))) {
-      $helfer->unterbringung = $helferNode->get('field_unterbringung')->safe_value;
+      $helfer->unterbringung = $helferNode->get('field_unterbringung')->value;
     }
 
     return $helfer;
