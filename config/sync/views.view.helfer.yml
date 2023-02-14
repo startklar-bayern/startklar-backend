@@ -1150,7 +1150,7 @@ display:
         type: normal
         title: Helfer
         description: 'Angemeldete Helfer anzeigen und verwalten'
-        weight: 3
+        weight: 2
         expanded: false
         menu_name: admin
         parent: startklar.admin_startklar

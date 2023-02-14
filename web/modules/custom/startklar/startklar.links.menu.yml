@@ -12,6 +12,13 @@ startklar.admin_startklar:
   title: STARTKLAR
   weight: -8
 
+startklar.admin_startklar.workshops:
+  route_name: view.workshops.page_1
+  parent: startklar.admin_startklar
+  description: 'Zentraler Ort um alle Workshops zu sammeln und zu verwalten'
+  title: Workshops
+  weight: 3
+
 startklar.logout:
   route_name: user.logout
   parent: startklar.admin_startklar
