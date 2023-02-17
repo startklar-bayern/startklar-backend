@@ -87,7 +87,8 @@ class HelferService {
 
     // If this is the first update, send notification mail
     if (!$publishedBefore) {
-      mail("max.bachhuber@bahuma.io", "Neue Helfer-Anmeldung zu STARTKLAR", "https://backend.startklar.bayern/node/" . $helfer->id());
+      mail("max.bachhuber@bahuma.io", "Neue Helfer-Anmeldung zu STARTKLAR", "https://backend.startklar.bayern/node/" . $helfer->id() . '/edit');
+      mail("melanie.krapp@kolpingjugend-bayern.de", "Neue Helfer-Anmeldung zu STARTKLAR", "https://backend.startklar.bayern/node/" . $helfer->id() . '/edit');
     }
   }
 
