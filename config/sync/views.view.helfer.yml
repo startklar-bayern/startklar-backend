@@ -3,6 +3,7 @@ langcode: de
 status: true
 dependencies:
   config:
+    - field.storage.node.field_fuehrungszeugnis_angefragt
     - field.storage.node.field_fuehrungszeugnis_ok
     - field.storage.node.field_jobs
     - field.storage.node.field_mail
@@ -412,6 +413,71 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_fuehrungszeugnis_angefragt:
+          id: field_fuehrungszeugnis_angefragt
+          table: node__field_fuehrungszeugnis_angefragt
+          field: field_fuehrungszeugnis_angefragt
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: 'Führungszeugnis angefordert'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: unicode-yes-no
+            format_custom_false: ''
+            format_custom_true: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_fuehrungszeugnis_ok:
           id: field_fuehrungszeugnis_ok
           table: node__field_fuehrungszeugnis_ok
@@ -420,7 +486,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: Führungszeugnis
+          label: 'Führungszeugnis ok'
           exclude: false
           alter:
             alter_text: false
@@ -936,6 +1002,51 @@ display:
           hierarchy: false
           limit: true
           error_message: true
+        field_fuehrungszeugnis_angefragt_value:
+          id: field_fuehrungszeugnis_angefragt_value
+          table: node__field_fuehrungszeugnis_angefragt
+          field: field_fuehrungszeugnis_angefragt_value
+          relationship: reverse__node__field_person
+          group_type: group
+          admin_label: ''
+          plugin_id: boolean
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: 'Führungszeugnis angefordert'
+            description: ''
+            use_operator: false
+            operator: field_fuehrungszeugnis_angefragt_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_fuehrungszeugnis_angefragt_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+              teilnehmerverwaltung: '0'
+              workshopverwaltung: '0'
+              fuehrungszeugnis_pruefen: '0'
+              helferverwaltung: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         field_fuehrungszeugnis_ok_value:
           id: field_fuehrungszeugnis_ok_value
           table: node__field_fuehrungszeugnis_ok
@@ -950,7 +1061,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: Führungszeugnis
+            label: 'Führungszeugnis ok'
             description: ''
             use_operator: false
             operator: field_fuehrungszeugnis_ok_value_op
@@ -1132,6 +1243,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_fuehrungszeugnis_angefragt'
         - 'config:field.storage.node.field_fuehrungszeugnis_ok'
         - 'config:field.storage.node.field_jobs'
         - 'config:field.storage.node.field_mail'
@@ -1166,6 +1278,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_fuehrungszeugnis_angefragt'
         - 'config:field.storage.node.field_fuehrungszeugnis_ok'
         - 'config:field.storage.node.field_jobs'
         - 'config:field.storage.node.field_mail'

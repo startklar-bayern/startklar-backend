@@ -3,6 +3,7 @@ langcode: de
 status: true
 dependencies:
   config:
+    - field.field.node.helfer.field_fuehrungszeugnis_angefragt
     - field.field.node.helfer.field_fuehrungszeugnis_ok
     - field.field.node.helfer.field_jobs
     - field.field.node.helfer.field_mail
@@ -16,6 +17,16 @@ targetEntityType: node
 bundle: helfer
 mode: default
 content:
+  field_fuehrungszeugnis_angefragt:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 106
+    region: content
   field_fuehrungszeugnis_ok:
     type: boolean
     label: above

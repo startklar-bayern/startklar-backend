@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.helfer.field_fuehrungszeugnis_angefragt
     - field.field.node.helfer.field_fuehrungszeugnis_ok
     - field.field.node.helfer.field_jobs
     - field.field.node.helfer.field_mail
@@ -23,6 +24,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_fuehrungszeugnis_angefragt: true
   field_fuehrungszeugnis_ok: true
   field_jobs: true
   field_mail: true

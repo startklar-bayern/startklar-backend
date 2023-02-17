@@ -14,9 +14,14 @@ weight: 6
 is_admin: null
 permissions:
   - 'access content'
+  - 'create field_fuehrungszeugnis_angefragt'
   - 'create field_fuehrungszeugnis_ok'
   - 'edit any helfer content'
+  - 'edit field_fuehrungszeugnis_angefragt'
   - 'edit field_fuehrungszeugnis_ok'
+  - 'edit own field_fuehrungszeugnis_angefragt'
   - 'edit own field_fuehrungszeugnis_ok'
+  - 'view field_fuehrungszeugnis_angefragt'
   - 'view field_fuehrungszeugnis_ok'
+  - 'view own field_fuehrungszeugnis_angefragt'
   - 'view own field_fuehrungszeugnis_ok'

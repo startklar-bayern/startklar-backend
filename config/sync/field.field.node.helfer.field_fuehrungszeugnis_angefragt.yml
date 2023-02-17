@@ -1,0 +1,23 @@
+uuid: 7de56fd0-4e2a-4005-af8b-cbeaf8047ea6
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fuehrungszeugnis_angefragt
+    - node.type.helfer
+id: node.helfer.field_fuehrungszeugnis_angefragt
+field_name: field_fuehrungszeugnis_angefragt
+entity_type: node
+bundle: helfer
+label: 'Führungszeugnis wurde angefordert'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: An
+  off_label: Aus
+field_type: boolean
