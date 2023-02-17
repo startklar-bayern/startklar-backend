@@ -9,6 +9,7 @@ use Drupal\startklar\Validation\SiblingConstraint;
 use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
 use Drupal\startklar\Validation\UuidReferenceExistsConstraint;
 use Drupal\startklar\Validation\UuidsUniqueConstraint;
+use Drupal\startklar\Validation\SchutzkonzeptRequiredConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[OA\Schema(
@@ -20,6 +21,7 @@ class HelferAnmeldung {
    * @Assert\NotBlank()
    * @Assert\Valid()
    * @PersonWithLegalAgeConstraint()
+   * @SchutzkonzeptRequiredConstraint()
    */
   public Person $person;
 

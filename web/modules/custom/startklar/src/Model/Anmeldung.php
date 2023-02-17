@@ -9,6 +9,7 @@ use Drupal\startklar\Validation\SiblingConstraint;
 use Drupal\startklar\Validation\TaxonomyReferenceConstraint;
 use Drupal\startklar\Validation\UuidReferenceExistsConstraint;
 use Drupal\startklar\Validation\UuidsUniqueConstraint;
+use Drupal\startklar\Validation\SchutzkonzeptRequiredConstraint;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -49,6 +50,7 @@ class Anmeldung {
    * @Assert\NotBlank()
    * @Assert\Valid()
    * @PersonWithLegalAgeConstraint()
+   * @SchutzkonzeptRequiredConstraint()
    */
   public Person $leitung;
 

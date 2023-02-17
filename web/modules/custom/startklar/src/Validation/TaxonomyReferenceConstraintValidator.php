@@ -10,6 +10,10 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 class TaxonomyReferenceConstraintValidator extends StartklarConstraintValidatorBase {
 
   public function validate($value, Constraint $constraint) {
+    if (empty($value)) {
+      return;
+    }
+
     if (!$constraint instanceof TaxonomyReferenceConstraint) {
       throw new UnexpectedTypeException($constraint, TaxonomyReferenceConstraint::class);
     }
