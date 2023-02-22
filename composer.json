@@ -25,6 +25,7 @@
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
         "drupal/devel": "^5.1",
+        "drupal/ds": "^5.0@alpha",
         "drupal/entity_sort": "^1.0@beta",
         "drupal/field_permissions": "^1.2",
         "drupal/hook_event_dispatcher": "^3.2",

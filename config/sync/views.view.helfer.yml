@@ -547,7 +547,7 @@ display:
           id: view_node
           table: node
           field: view_node
-          relationship: none
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
           entity_type: node
@@ -600,7 +600,7 @@ display:
           id: edit_node
           table: node
           field: edit_node
-          relationship: none
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
           entity_type: node
@@ -653,7 +653,7 @@ display:
           id: delete_node
           table: node
           field: delete_node
-          relationship: none
+          relationship: reverse__node__field_person
           group_type: group
           admin_label: ''
           entity_type: node
@@ -808,7 +808,7 @@ display:
           plugin_id: text
           empty: true
           content:
-            value: 'Es haben sich bisher noch keine Teilnehmer angemeldet, die du sehen darfst und die den gesetzten Filtern entsprechen.'
+            value: 'Es haben sich bisher noch keine Helfer angemeldet, die du sehen darfst und die den gesetzten Filtern entsprechen.'
             format: basic_html
           tokenize: false
       sorts:

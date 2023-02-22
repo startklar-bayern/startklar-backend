@@ -11,8 +11,33 @@ dependencies:
     - node.type.anreise
   module:
     - datetime
+    - ds
     - options
     - user
+third_party_settings:
+  ds:
+    layout:
+      id: ds_1col
+      settings:
+        disable_css: false
+        entity_classes: all_classes
+        classes:
+          layout_class: {  }
+        wrappers:
+          content: div
+        outer_wrapper: div
+        attributes: 'style|border:solid 1px;margin-left: 2em;padding:1em;'
+        link_attribute: ''
+        link_custom: ''
+        label: ''
+    regions:
+      content:
+        - links
+        - field_mit_gruppe
+        - field_typ
+        - field_ziel
+        - field_ankunft
+        - field_abfahrt
 id: node.anreise.default
 targetEntityType: node
 bundle: anreise
@@ -20,50 +45,50 @@ mode: default
 content:
   field_abfahrt:
     type: datetime_default
-    label: above
+    label: inline
     settings:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 104
+    weight: 5
     region: content
   field_ankunft:
     type: datetime_default
-    label: above
+    label: inline
     settings:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 103
+    weight: 4
     region: content
   field_mit_gruppe:
     type: boolean
-    label: above
+    label: inline
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 105
+    weight: 1
     region: content
   field_typ:
     type: list_default
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 101
+    weight: 2
     region: content
   field_ziel:
     type: list_default
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   langcode: true

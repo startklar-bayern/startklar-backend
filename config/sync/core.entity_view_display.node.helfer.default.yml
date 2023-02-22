@@ -19,46 +19,47 @@ mode: default
 content:
   field_fuehrungszeugnis_angefragt:
     type: boolean
-    label: above
+    label: inline
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 106
+    weight: 5
     region: content
   field_fuehrungszeugnis_ok:
     type: boolean
-    label: above
+    label: inline
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 104
+    weight: 6
     region: content
   field_jobs:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
-    weight: 102
+    weight: 3
     region: content
   field_mail:
     type: basic_string
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 105
+    weight: 1
     region: content
   field_person:
-    type: entity_reference_label
-    label: above
+    type: entity_reference_entity_view
+    label: hidden
     settings:
+      view_mode: default
       link: true
     third_party_settings: {  }
-    weight: 101
+    weight: 2
     region: content
   field_unterbringung:
     type: string
@@ -66,12 +67,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 103
+    weight: 4
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   langcode: true
