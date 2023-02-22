@@ -52,7 +52,7 @@ function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
 
       if ($person) {
         $group = _startklar_get_group_by_person($person);
-        $helfer = _startklar_get_helfer_by_person($node);
+        $helfer = _startklar_get_helfer_by_person($person);
       }
     }
 
