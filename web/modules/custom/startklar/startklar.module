@@ -29,12 +29,18 @@ function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
 
   if ($node->bundle() == 'person') {
     $group = _startklar_get_group_by_person($node);
+    $helfer = _startklar_get_helfer_by_person($node);
 
-    if (!$group) {
+    if (!$group && !$helfer) {
       \Drupal::logger('startklar')
-        ->error('Cannot load group for person ' . $node->id() . ' to generate access records');
+        ->error('Cannot load group or helfer for person ' . $node->id() . ' to generate access records');
     } else {
-      _startklar_add_grants_by_group($group, $node, $grants);
+      if ($group) {
+        _startklar_add_grants_by_group($group, $node, $grants);
+      }
+      if ($helfer) {
+        _startklar_add_grants_for_helfer($node, $grants);
+      }
     }
   }
 
@@ -74,6 +80,10 @@ function startklar_node_grants(\Drupal\Core\Session\AccountInterface $account, $
     $grants['startklar_dv'][] = $fieldItem->target_id;
   }
 
+  if (in_array('helferverwaltung', $account->getRoles())) {
+    $grants['startklar_helfer'][] = 0;
+  }
+
   return $grants;
 }
 
@@ -91,12 +101,40 @@ function _startklar_add_grants_by_group(\Drupal\node\NodeInterface $group, \Drup
   }
 }
 
+function _startklar_add_grants_for_helfer(\Drupal\node\NodeInterface $node, &$grants) {
+    $grants[] = [
+      'realm' => 'startklar_helfer',
+      'gid' => 0,
+      'grant_view' => $node->isPublished(),
+      'grant_update' => 0,
+      'grant_delete' => 0,
+    ];
+}
+
 function _startklar_get_group_by_person(\Drupal\node\NodeInterface $person) {
   $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
 
   $result = $nodeStorage->getQuery()
     ->condition('type', 'group')
     ->condition('field_teilnehmer', $person->id(), 'CONTAINS')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (count($result) > 0) {
+    return $nodeStorage->load(reset($result));
+  }
+
+  return false;
+}
+
+
+
+function _startklar_get_helfer_by_person(\Drupal\node\NodeInterface $person) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  $result = $nodeStorage->getQuery()
+    ->condition('type', 'helfer')
+    ->condition('field_person', $person->id())
     ->accessCheck(FALSE)
     ->execute();
 
