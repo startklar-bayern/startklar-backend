@@ -52,14 +52,20 @@ function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
 
       if ($person) {
         $group = _startklar_get_group_by_person($person);
+        $helfer = _startklar_get_helfer_by_person($node);
       }
     }
 
-    if (!$group) {
+    if (!$group && !$helfer) {
       \Drupal::logger('startklar')
-        ->error('Cannot load group for anreise ' . $node->id() . ' to generate access records');
+        ->error('Cannot load group or helfer for anreise ' . $node->id() . ' to generate access records');
     } else {
-      _startklar_add_grants_by_group($group, $node, $grants);
+      if ($group) {
+        _startklar_add_grants_by_group($group, $node, $grants);
+      }
+      if ($helfer) {
+        _startklar_add_grants_for_helfer($node, $grants);
+      }
     }
   }
 
