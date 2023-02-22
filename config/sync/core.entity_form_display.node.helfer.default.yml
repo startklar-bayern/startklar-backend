@@ -17,14 +17,14 @@ mode: default
 content:
   field_fuehrungszeugnis_angefragt:
     type: boolean_checkbox
-    weight: 6
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_fuehrungszeugnis_ok:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
