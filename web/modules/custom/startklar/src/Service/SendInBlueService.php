@@ -35,6 +35,9 @@ class SendInBlueService {
 
   protected int $TEILNEHMER_LIST_ID;
   protected int $HELFER_LIST_ID;
+  protected int $HELFER_INCOMPLETE_LIST_ID;
+  protected int $GROUPS_LIST_ID;
+  protected int $GROUPS_INCOMPLETE_LIST_ID;
 
   protected bool $isDebugMode;
 
@@ -51,6 +54,9 @@ class SendInBlueService {
     $this->HELFERANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_HELFERANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
     $this->HELFER_LIST_ID = intval(getenv('SEND_IN_BLUE_HELFER_LIST_ID'));
+    $this->HELFER_INCOMPLETE_LIST_ID = intval(getenv('HELFER_INCOMPLETE_LIST_ID'));
+    $this->GROUPS_LIST_ID = intval(getenv('GROUPS_LIST_ID'));
+    $this->GROUPS_INCOMPLETE_LIST_ID = intval(getenv('GROUPS_INCOMPLETE_LIST_ID'));
     $this->isDebugMode = getenv('SEND_IN_BLUE_DEBUG') == "enabled";
 
     $this->logger = \Drupal::logger('startklar_sendinblue');
@@ -165,6 +171,33 @@ class SendInBlueService {
     $this->removeMailsFromList($removedMails, $this->HELFER_LIST_ID);
 
     $this->importMailsToList($mails, $this->HELFER_LIST_ID);
+  }
+
+  public function syncHelferIncomplete(array $mails): void {
+    $existingMails = $this->getMailsInList($this->HELFER_INCOMPLETE_LIST_ID);
+
+    $removedMails = array_values(array_diff($existingMails, $mails));
+    $this->removeMailsFromList($removedMails, $this->HELFER_INCOMPLETE_LIST_ID);
+
+    $this->importMailsToList($mails, $this->HELFER_INCOMPLETE_LIST_ID);
+  }
+
+  public function syncGroupsComplete(array $mails): void {
+    $existingMails = $this->getMailsInList($this->GROUPS_LIST_ID);
+
+    $removedMails = array_values(array_diff($existingMails, $mails));
+    $this->removeMailsFromList($removedMails, $this->GROUPS_LIST_ID);
+
+    $this->importMailsToList($mails, $this->GROUPS_LIST_ID);
+  }
+
+  public function syncGroupsIncomplete(array $mails): void {
+    $existingMails = $this->getMailsInList($this->GROUPS_INCOMPLETE_LIST_ID);
+
+    $removedMails = array_values(array_diff($existingMails, $mails));
+    $this->removeMailsFromList($removedMails, $this->GROUPS_INCOMPLETE_LIST_ID);
+
+    $this->importMailsToList($mails, $this->GROUPS_INCOMPLETE_LIST_ID);
   }
 
   /**
