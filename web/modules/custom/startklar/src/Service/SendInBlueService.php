@@ -190,12 +190,9 @@ class SendInBlueService {
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->GROUPS_LIST_ID);
 
-    $body = [];
+    $body = ['EMAIL;GRUPPEN_HELFER_ID'];
     foreach ($data as $mail => $id) {
-      $body[] = [
-        'EMAIL' => $mail,
-        'GRUPPEN_HELFER_ID' => $id,
-      ];
+      $body[] = $mail. ';' . $id;
     }
 
     $this->importPeopleToList($body, $this->GROUPS_LIST_ID);
@@ -209,12 +206,9 @@ class SendInBlueService {
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->GROUPS_INCOMPLETE_LIST_ID);
 
-    $body = [];
+    $body = ['EMAIL;GRUPPEN_HELFER_ID'];
     foreach ($data as $mail => $id) {
-      $body[] = [
-        'EMAIL' => $mail,
-        'GRUPPEN_HELFER_ID' => $id,
-      ];
+      $body[] = $mail. ';' . $id;
     }
 
     $this->importPeopleToList($body, $this->GROUPS_INCOMPLETE_LIST_ID);
