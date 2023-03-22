@@ -54,9 +54,9 @@ class SendInBlueService {
     $this->HELFERANMELDUNG_TEMPLATE_ID = intval(getenv('SEND_IN_BLUE_HELFERANMELDUNG_TEMPLATE_ID'));
     $this->TEILNEHMER_LIST_ID = intval(getenv('SEND_IN_BLUE_TEILNEHMER_LIST_ID'));
     $this->HELFER_LIST_ID = intval(getenv('SEND_IN_BLUE_HELFER_LIST_ID'));
-    $this->HELFER_INCOMPLETE_LIST_ID = intval(getenv('HELFER_INCOMPLETE_LIST_ID'));
-    $this->GROUPS_LIST_ID = intval(getenv('GROUPS_LIST_ID'));
-    $this->GROUPS_INCOMPLETE_LIST_ID = intval(getenv('GROUPS_INCOMPLETE_LIST_ID'));
+    $this->HELFER_INCOMPLETE_LIST_ID = intval(getenv('SEND_IN_BLUE_HELFER_INCOMPLETE_LIST_ID'));
+    $this->GROUPS_LIST_ID = intval(getenv('SEND_IN_BLUE_GROUPS_LIST_ID'));
+    $this->GROUPS_INCOMPLETE_LIST_ID = intval(getenv('SEND_IN_BLUE_GROUPS_INCOMPLETE_LIST_ID'));
     $this->isDebugMode = getenv('SEND_IN_BLUE_DEBUG') == "enabled";
 
     $this->logger = \Drupal::logger('startklar_sendinblue');
