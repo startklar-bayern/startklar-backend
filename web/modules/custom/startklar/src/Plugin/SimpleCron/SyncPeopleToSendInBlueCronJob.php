@@ -43,18 +43,18 @@ class SyncPeopleToSendInBlueCronJob extends SimpleCronPluginBase {
     $groupsIncompleteEmails = [];
     foreach ($groups as $group) {
       if ($group->isPublished()) {
-        $groupsCompleteEmails[] = $group->get('field_mail')->value;
+        $groupsCompleteEmails[$group->get('field_mail')->value] = $group->label();
       } else {
-        $groupsIncompleteEmails[] = $group->get('field_mail')->value;
+        $groupsIncompleteEmails[$group->get('field_mail')->value] = $group->label();
       }
     }
     $groupsCompleteEmails = array_unique($groupsCompleteEmails);
     $groupsIncompleteEmails = array_unique($groupsIncompleteEmails);
 
     // Remove incomplete emails that have another group entity with the same email that is completed
-    $groupsIncompleteEmails = array_filter($groupsIncompleteEmails, function ($helf) use ($groupsCompleteEmails) {
-      return !in_array($helf, $groupsCompleteEmails);
-    });
+    $groupsIncompleteEmails = array_filter($groupsIncompleteEmails, function ($group) use ($groupsCompleteEmails) {
+      return !in_array($group, array_keys($groupsCompleteEmails));
+    }, ARRAY_FILTER_USE_KEY);
 
     try {
       $sendInBlue->syncGroupsComplete($groupsCompleteEmails);

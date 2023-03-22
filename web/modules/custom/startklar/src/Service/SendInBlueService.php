@@ -161,7 +161,7 @@ class SendInBlueService {
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->TEILNEHMER_LIST_ID);
 
-    $this->importMailsToList($mails, $this->TEILNEHMER_LIST_ID);
+    $this->importPeopleToList($this->convertToBody($mails), $this->TEILNEHMER_LIST_ID);
   }
 
   public function syncHelfer(array $mails): void {
@@ -170,7 +170,7 @@ class SendInBlueService {
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->HELFER_LIST_ID);
 
-    $this->importMailsToList($mails, $this->HELFER_LIST_ID);
+    $this->importPeopleToList($this->convertToBody($mails), $this->HELFER_LIST_ID);
   }
 
   public function syncHelferIncomplete(array $mails): void {
@@ -179,25 +179,45 @@ class SendInBlueService {
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->HELFER_INCOMPLETE_LIST_ID);
 
-    $this->importMailsToList($mails, $this->HELFER_INCOMPLETE_LIST_ID);
+    $this->importPeopleToList($this->convertToBody($mails), $this->HELFER_INCOMPLETE_LIST_ID);
   }
 
-  public function syncGroupsComplete(array $mails): void {
+  public function syncGroupsComplete(array $data): void {
+    $mails = array_keys($data);
+
     $existingMails = $this->getMailsInList($this->GROUPS_LIST_ID);
 
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->GROUPS_LIST_ID);
 
-    $this->importMailsToList($mails, $this->GROUPS_LIST_ID);
+    $body = [];
+    foreach ($data as $mail => $id) {
+      $body[] = [
+        'EMAIL' => $mail,
+        'GRUPPEN_HELFER_ID' => $id,
+      ];
+    }
+
+    $this->importPeopleToList($body, $this->GROUPS_LIST_ID);
   }
 
-  public function syncGroupsIncomplete(array $mails): void {
+  public function syncGroupsIncomplete(array $data): void {
+    $mails = array_keys($data);
+
     $existingMails = $this->getMailsInList($this->GROUPS_INCOMPLETE_LIST_ID);
 
     $removedMails = array_values(array_diff($existingMails, $mails));
     $this->removeMailsFromList($removedMails, $this->GROUPS_INCOMPLETE_LIST_ID);
 
-    $this->importMailsToList($mails, $this->GROUPS_INCOMPLETE_LIST_ID);
+    $body = [];
+    foreach ($data as $mail => $id) {
+      $body[] = [
+        'EMAIL' => $mail,
+        'GRUPPEN_HELFER_ID' => $id,
+      ];
+    }
+
+    $this->importPeopleToList($body, $this->GROUPS_INCOMPLETE_LIST_ID);
   }
 
   /**
@@ -226,16 +246,18 @@ class SendInBlueService {
     return array_unique($mails);
   }
 
+  protected function convertToBody(array $mails) {
+    $body = ['EMAIL'];
+    return array_merge($body, $mails);
+  }
+
   /**
    * @throws \SendinBlue\Client\ApiException
    */
-  protected function importMailsToList(array $mails, int $listId): void {
-    if (count($mails) == 0) {
+  protected function importPeopleToList(array $body, int $listId): void {
+    if (count($body) == 0) {
       return;
     }
-
-    $body = ['EMAIL'];
-    $body = array_merge($body, $mails);
 
     $apiClient = $this->getApiClient();
 
