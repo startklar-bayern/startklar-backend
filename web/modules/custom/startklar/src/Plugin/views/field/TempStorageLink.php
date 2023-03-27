@@ -32,7 +32,7 @@ class TempStorageLink extends LinkBase {
 
     if (count($result) > 0) {
       /** @var \Drupal\node\NodeInterface $tempStorageNode */
-      $tempStorageNode = array_values($result)[0];
+      $tempStorageNode = $nodeStorage->load(array_values($result)[0]);
       return $tempStorageNode->toUrl('edit',);
     } else {
       return $node->toUrl();
