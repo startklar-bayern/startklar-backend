@@ -1230,7 +1230,17 @@ display:
           empty: false
           content: '<a class="button" target="_blank" href="/admin/startklar/helfer/export">Daten herunterladen</a>'
           tokenize: false
-      footer: {  }
+      footer:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '@start - @end von @total wird angezeigt'
       display_extenders: {  }
     cache_metadata:
       max-age: -1

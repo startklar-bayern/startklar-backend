@@ -286,6 +286,69 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_teilnehmer:
+          id: field_teilnehmer
+          table: node__field_teilnehmer
+          field: field_teilnehmer
+          relationship: none
+          group_type: count_distinct
+          admin_label: ''
+          plugin_id: field
+          label: Teilnehmer
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         status:
           id: status
           table: node_field_data
@@ -828,6 +891,7 @@ display:
             title: title
             field_dv: field_dv
             field_name: field_name
+            field_teilnehmer: field_teilnehmer
             status: status
             view_node: view_node
             edit_node: edit_node
@@ -857,6 +921,13 @@ display:
               empty_column: false
               responsive: ''
             field_name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_teilnehmer:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -915,6 +986,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
+      group_by: true
       header:
         area_text_custom:
           id: area_text_custom
@@ -927,7 +999,17 @@ display:
           empty: false
           content: '<a class="button" target="_blank" href="/admin/startklar/gruppen/export">Daten herunterladen</a>'
           tokenize: false
-      footer: {  }
+      footer:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '@start - @end von @total wird angezeigt'
       display_extenders: {  }
     cache_metadata:
       max-age: -1
