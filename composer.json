@@ -30,6 +30,7 @@
         "drupal/field_permissions": "^1.2",
         "drupal/hook_event_dispatcher": "^3.2",
         "drupal/maillog": "^1.0@beta",
+        "drupal/masquerade": "^2.0@RC",
         "drupal/openapi_ui_swagger": "^1.0@RC",
         "drupal/pathauto": "^1.9",
         "drupal/simple_cron": "^1.0",
