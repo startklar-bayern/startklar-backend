@@ -45,9 +45,12 @@ function startklar_node_access_records(\Drupal\node\NodeInterface $node) {
   }
 
   if ($node->bundle() == 'anreise') {
+    /** @var \Drupal\node\NodeInterface $group */
     $group = _startklar_get_group_by_anreise($node);
+    $helfer = FALSE;
 
     if (!$group) {
+      /** @var \Drupal\node\NodeInterface $person */
       $person = _startklar_get_person_by_anreise($node);
 
       if ($person) {
