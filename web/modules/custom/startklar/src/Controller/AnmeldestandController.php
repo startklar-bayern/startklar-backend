@@ -48,12 +48,14 @@ class AnmeldestandController extends ControllerBase {
     $groups = $nodeStorage->getQuery()
       ->condition('type', 'group')
       ->condition('status', NodeInterface::PUBLISHED)
+      ->accessCheck(FALSE)
       ->execute();
 
     $groupUnpublishedCount = $nodeStorage->getQuery()
       ->condition('type', 'group')
       ->condition('status', NodeInterface::NOT_PUBLISHED)
       ->count()
+      ->accessCheck(FALSE)
       ->execute();
 
     $groupCount = count($groups);
@@ -73,6 +75,7 @@ class AnmeldestandController extends ControllerBase {
       ->condition('type', 'helfer')
       ->condition('status', NodeInterface::PUBLISHED)
       ->count()
+      ->accessCheck(FALSE)
       ->execute();
 
     $output .= '<strong>Helfer*innen: </strong> ' . $helferCount . '<br><br>';
