@@ -105,11 +105,15 @@ class AnreiseService {
     }
 
     if (!$entity->field_ankunft->isEmpty()) {
-      $anreise->ankunft = $entity->field_ankunft->value;
+      $date = new DrupalDateTime($entity->field_ankunft->value, DateTimeItemInterface::STORAGE_TIMEZONE);
+      $date->setTimezone(new \DateTimeZone("Europe/Berlin"));
+      $anreise->ankunft = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
     }
 
     if (!$entity->field_abfahrt->isEmpty()) {
-      $anreise->abfahrt = $entity->field_abfahrt->value;
+      $date = new DrupalDateTime($entity->field_abfahrt->value, DateTimeItemInterface::STORAGE_TIMEZONE);
+      $date->setTimezone(new \DateTimeZone("Europe/Berlin"));
+      $anreise->abfahrt = $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
     }
 
     return $anreise;
