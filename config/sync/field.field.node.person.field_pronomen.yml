@@ -1,0 +1,19 @@
+uuid: f19cfb96-2da3-45dd-b3ec-53ac1f15f8ea
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pronomen
+    - node.type.person
+id: node.person.field_pronomen
+field_name: field_pronomen
+entity_type: node
+bundle: person
+label: Pronomen
+description: "<ul>\r\n<li>er/ihm</li>\r\n<li>sie/ihr</li>\r\n<li>...</li>\r\n</ul>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

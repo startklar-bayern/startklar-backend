@@ -9,13 +9,16 @@ dependencies:
     - field.field.node.person.field_essen
     - field.field.node.person.field_essen_anmerkungen
     - field.field.node.person.field_geburtsdatum
+    - field.field.node.person.field_geburtsname
     - field.field.node.person.field_geschlecht
     - field.field.node.person.field_geschwisterkind
+    - field.field.node.person.field_land
     - field.field.node.person.field_mail
     - field.field.node.person.field_mail_eltern
     - field.field.node.person.field_nachname
     - field.field.node.person.field_ort
     - field.field.node.person.field_plz
+    - field.field.node.person.field_pronomen
     - field.field.node.person.field_strasse
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
@@ -48,12 +51,15 @@ third_party_settings:
       content:
         - links
         - field_vorname
+        - field_geburtsname
         - field_nachname
         - field_geburtsdatum
         - field_geschlecht
+        - field_pronomen
         - field_strasse
         - field_plz
         - field_ort
+        - field_land
         - field_telefon
         - field_mail
         - field_telefon_eltern
@@ -76,7 +82,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 19
+    weight: 22
     region: content
   field_anreise:
     type: entity_reference_entity_view
@@ -85,7 +91,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 18
+    weight: 21
     region: content
   field_aufsichtsperson:
     type: entity_reference_label
@@ -93,21 +99,21 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 13
+    weight: 16
     region: content
   field_essen:
     type: list_default
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 15
+    weight: 18
     region: content
   field_essen_anmerkungen:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 16
+    weight: 19
     region: content
   field_geburtsdatum:
     type: datetime_default
@@ -116,38 +122,9 @@ content:
       timezone_override: ''
       format_type: medium
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_geschlecht:
-    type: list_default
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
     weight: 4
     region: content
-  field_geschwisterkind:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 14
-    region: content
-  field_mail:
-    type: email_mailto
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_mail_eltern:
-    type: email_mailto
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_nachname:
+  field_geburtsname:
     type: string
     label: inline
     settings:
@@ -155,15 +132,68 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_geschlecht:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_geschwisterkind:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 17
+    region: content
+  field_land:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_mail:
+    type: email_mailto
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_mail_eltern:
+    type: email_mailto
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_nachname:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_ort:
     type: string
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
+    weight: 9
     region: content
   field_plz:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_pronomen:
     type: string
     label: inline
     settings:
@@ -177,7 +207,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 5
+    weight: 7
     region: content
   field_telefon:
     type: string
@@ -185,7 +215,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 11
     region: content
   field_telefon_eltern:
     type: string
@@ -193,7 +223,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 13
     region: content
   field_termin_schutzkonzept:
     type: entity_reference_label
@@ -201,7 +231,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 17
+    weight: 20
     region: content
   field_tshirt_groesse:
     type: entity_reference_label
@@ -209,7 +239,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 12
+    weight: 15
     region: content
   field_vorname:
     type: string

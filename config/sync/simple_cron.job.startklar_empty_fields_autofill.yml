@@ -1,0 +1,14 @@
+uuid: 15e4efd5-8d92-4aad-a7ff-1ceded95683c
+langcode: de
+status: true
+dependencies:
+  module:
+    - startklar
+id: startklar_empty_fields_autofill
+crontab: '0 */3 * * *'
+plugin: startklar_empty_fields_autofill
+type: default
+configuration: {  }
+provider: startklar
+single: false
+weight: 0

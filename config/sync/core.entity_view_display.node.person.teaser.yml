@@ -10,13 +10,16 @@ dependencies:
     - field.field.node.person.field_essen
     - field.field.node.person.field_essen_anmerkungen
     - field.field.node.person.field_geburtsdatum
+    - field.field.node.person.field_geburtsname
     - field.field.node.person.field_geschlecht
     - field.field.node.person.field_geschwisterkind
+    - field.field.node.person.field_land
     - field.field.node.person.field_mail
     - field.field.node.person.field_mail_eltern
     - field.field.node.person.field_nachname
     - field.field.node.person.field_ort
     - field.field.node.person.field_plz
+    - field.field.node.person.field_pronomen
     - field.field.node.person.field_strasse
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
@@ -43,13 +46,16 @@ hidden:
   field_essen: true
   field_essen_anmerkungen: true
   field_geburtsdatum: true
+  field_geburtsname: true
   field_geschlecht: true
   field_geschwisterkind: true
+  field_land: true
   field_mail: true
   field_mail_eltern: true
   field_nachname: true
   field_ort: true
   field_plz: true
+  field_pronomen: true
   field_strasse: true
   field_telefon: true
   field_telefon_eltern: true

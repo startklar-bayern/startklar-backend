@@ -9,12 +9,15 @@ dependencies:
     - field.storage.node.field_essen
     - field.storage.node.field_essen_anmerkungen
     - field.storage.node.field_geburtsdatum
+    - field.storage.node.field_geburtsname
     - field.storage.node.field_geschlecht
     - field.storage.node.field_jobs
+    - field.storage.node.field_land
     - field.storage.node.field_mail
     - field.storage.node.field_nachname
     - field.storage.node.field_ort
     - field.storage.node.field_plz
+    - field.storage.node.field_pronomen
     - field.storage.node.field_strasse
     - field.storage.node.field_telefon
     - field.storage.node.field_termin_schutzkonzept
@@ -47,7 +50,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: test
+      title: 'Helfer Export'
       fields:
         nid:
           id: nid
@@ -187,6 +190,69 @@ display:
           admin_label: ''
           plugin_id: field
           label: Vorname
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_geburtsname:
+          id: field_geburtsname
+          table: node__field_geburtsname
+          field: field_geburtsname
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Geburtsname
           exclude: false
           alter:
             alter_text: false
@@ -429,6 +495,69 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_pronomen:
+          id: field_pronomen
+          table: node__field_pronomen
+          field: field_pronomen
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Pronomen
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_geburtsdatum:
           id: field_geburtsdatum
           table: node__field_geburtsdatum
@@ -628,6 +757,69 @@ display:
           admin_label: ''
           plugin_id: field
           label: Ort
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_land:
+          id: field_land
+          table: node__field_land
+          field: field_land
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: Land
           exclude: false
           alter:
             alter_text: false
@@ -1819,12 +2011,15 @@ display:
         - 'config:field.storage.node.field_essen'
         - 'config:field.storage.node.field_essen_anmerkungen'
         - 'config:field.storage.node.field_geburtsdatum'
+        - 'config:field.storage.node.field_geburtsname'
         - 'config:field.storage.node.field_geschlecht'
         - 'config:field.storage.node.field_jobs'
+        - 'config:field.storage.node.field_land'
         - 'config:field.storage.node.field_mail'
         - 'config:field.storage.node.field_nachname'
         - 'config:field.storage.node.field_ort'
         - 'config:field.storage.node.field_plz'
+        - 'config:field.storage.node.field_pronomen'
         - 'config:field.storage.node.field_strasse'
         - 'config:field.storage.node.field_telefon'
         - 'config:field.storage.node.field_termin_schutzkonzept'
@@ -1876,12 +2071,15 @@ display:
         - 'config:field.storage.node.field_essen'
         - 'config:field.storage.node.field_essen_anmerkungen'
         - 'config:field.storage.node.field_geburtsdatum'
+        - 'config:field.storage.node.field_geburtsname'
         - 'config:field.storage.node.field_geschlecht'
         - 'config:field.storage.node.field_jobs'
+        - 'config:field.storage.node.field_land'
         - 'config:field.storage.node.field_mail'
         - 'config:field.storage.node.field_nachname'
         - 'config:field.storage.node.field_ort'
         - 'config:field.storage.node.field_plz'
+        - 'config:field.storage.node.field_pronomen'
         - 'config:field.storage.node.field_strasse'
         - 'config:field.storage.node.field_telefon'
         - 'config:field.storage.node.field_termin_schutzkonzept'

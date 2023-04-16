@@ -9,13 +9,16 @@ dependencies:
     - field.field.node.person.field_essen
     - field.field.node.person.field_essen_anmerkungen
     - field.field.node.person.field_geburtsdatum
+    - field.field.node.person.field_geburtsname
     - field.field.node.person.field_geschlecht
     - field.field.node.person.field_geschwisterkind
+    - field.field.node.person.field_land
     - field.field.node.person.field_mail
     - field.field.node.person.field_mail_eltern
     - field.field.node.person.field_nachname
     - field.field.node.person.field_ort
     - field.field.node.person.field_plz
+    - field.field.node.person.field_pronomen
     - field.field.node.person.field_strasse
     - field.field.node.person.field_telefon
     - field.field.node.person.field_telefon_eltern
@@ -33,13 +36,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   field_anmerkungen:
     type: string_textarea
-    weight: 141
+    weight: 29
     region: content
     settings:
       rows: 5
@@ -47,7 +50,7 @@ content:
     third_party_settings: {  }
   field_anreise:
     type: entity_reference_autocomplete
-    weight: 139
+    weight: 27
     region: content
     settings:
       match_operator: CONTAINS
@@ -57,7 +60,7 @@ content:
     third_party_settings: {  }
   field_aufsichtsperson:
     type: entity_reference_autocomplete
-    weight: 133
+    weight: 22
     region: content
     settings:
       match_operator: CONTAINS
@@ -67,13 +70,13 @@ content:
     third_party_settings: {  }
   field_essen:
     type: options_select
-    weight: 134
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
   field_essen_anmerkungen:
     type: string_textarea
-    weight: 135
+    weight: 24
     region: content
     settings:
       rows: 5
@@ -81,19 +84,27 @@ content:
     third_party_settings: {  }
   field_geburtsdatum:
     type: datetime_default
-    weight: 124
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_geburtsname:
+    type: string_textfield
+    weight: 9
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_geschlecht:
     type: options_select
-    weight: 125
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   field_geschwisterkind:
     type: entity_reference_autocomplete
-    weight: 136
+    weight: 25
     region: content
     settings:
       match_operator: CONTAINS
@@ -101,9 +112,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_land:
+    type: string_textfield
+    weight: 17
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_mail:
     type: email_default
-    weight: 130
+    weight: 19
     region: content
     settings:
       placeholder: ''
@@ -111,7 +130,7 @@ content:
     third_party_settings: {  }
   field_mail_eltern:
     type: email_default
-    weight: 132
+    weight: 21
     region: content
     settings:
       placeholder: ''
@@ -119,7 +138,7 @@ content:
     third_party_settings: {  }
   field_nachname:
     type: string_textfield
-    weight: 123
+    weight: 10
     region: content
     settings:
       size: 60
@@ -127,7 +146,7 @@ content:
     third_party_settings: {  }
   field_ort:
     type: string_textfield
-    weight: 128
+    weight: 16
     region: content
     settings:
       size: 60
@@ -135,7 +154,15 @@ content:
     third_party_settings: {  }
   field_plz:
     type: string_textfield
-    weight: 127
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pronomen:
+    type: string_textfield
+    weight: 13
     region: content
     settings:
       size: 60
@@ -143,7 +170,7 @@ content:
     third_party_settings: {  }
   field_strasse:
     type: string_textfield
-    weight: 126
+    weight: 14
     region: content
     settings:
       size: 60
@@ -151,7 +178,7 @@ content:
     third_party_settings: {  }
   field_telefon:
     type: string_textfield
-    weight: 129
+    weight: 18
     region: content
     settings:
       size: 60
@@ -159,7 +186,7 @@ content:
     third_party_settings: {  }
   field_telefon_eltern:
     type: string_textfield
-    weight: 131
+    weight: 20
     region: content
     settings:
       size: 60
@@ -167,7 +194,7 @@ content:
     third_party_settings: {  }
   field_termin_schutzkonzept:
     type: entity_reference_autocomplete
-    weight: 138
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS
@@ -177,7 +204,7 @@ content:
     third_party_settings: {  }
   field_tshirt_groesse:
     type: entity_reference_autocomplete
-    weight: 140
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
@@ -187,7 +214,7 @@ content:
     third_party_settings: {  }
   field_vorname:
     type: string_textfield
-    weight: 122
+    weight: 8
     region: content
     settings:
       size: 60
@@ -195,41 +222,41 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 15
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 16
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -237,7 +264,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
