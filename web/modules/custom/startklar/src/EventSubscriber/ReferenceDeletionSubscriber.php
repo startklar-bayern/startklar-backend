@@ -45,7 +45,9 @@ class ReferenceDeletionSubscriber implements EventSubscriberInterface {
     if ($entity instanceof NodeInterface) {
       // Delete anreise nodes when a person or group is deleted.
       if ($entity->hasField('field_anreise') && !$entity->field_anreise->isEmpty()) {
-        $entity->field_anreise->entity->delete();
+        if ($entity->field_anreise->entity) {
+          $entity->field_anreise->entity->delete();
+        }
       }
 
       // Delete person nodes when a group is deleted
@@ -59,7 +61,9 @@ class ReferenceDeletionSubscriber implements EventSubscriberInterface {
 
       // Delete person nodes when a helfer anmeldung is deleted
       if ($entity->hasField('field_person') && !$entity->field_person->isEmpty()) {
-          $fieldItem->entity->delete();
+        if ($entity->field_person->entity) {
+          $entity->field_person->entity->delete();
+        }
       }
     }
   }
