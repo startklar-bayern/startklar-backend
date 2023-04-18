@@ -1,40 +1,96 @@
-uuid: 03c7354c-9087-4d67-97cc-856597b5bf63
+uuid: 135a1e12-d3e9-4c87-b7f5-d3f3b5403cb8
 langcode: de
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
-    - file
+    - node
+    - scheduler
     - user
 _core:
-  default_config_hash: DaGeEDJMcbbQtgV96AuPeZ-0irMc_Oa6Zzh2U3Kmul8
-id: files
-label: Dateien
-module: file
-description: 'Dateien suchen und verwalten.'
-tag: default
-base_table: file_managed
-base_field: fid
+  default_config_hash: uZN6cIt2dD4FwsmAOJePjdGDOLwx9TjvixvVXEetc9k
+id: scheduler_scheduled_content
+label: 'Geplanter Inhalt'
+module: views
+description: 'Zeitgesteuerte Inhalte finden und verwalten.'
+tag: ''
+base_table: node_field_revision
+base_field: vid
 display:
   default:
     id: default
-    display_title: Standard
+    display_title: Master
     display_plugin: default
     position: 0
     display_options:
-      title: Dateien
+      title: 'Vom Zeitplaner gesteuerte Inhalte'
       fields:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
+        node_bulk_form:
+          id: node_bulk_form
+          table: node
+          field: node_bulk_form
+          relationship: nid
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          plugin_id: node_bulk_form
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          action_title: Action
+          include_exclude: exclude
+          selected_actions: {  }
+        title:
+          id: title
+          table: node_field_revision
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: fid
+          entity_type: node
+          entity_field: title
           plugin_id: field
-          label: Fid
-          exclude: true
+          label: Title
+          exclude: false
           alter:
             alter_text: false
             make_link: false
@@ -56,17 +112,31 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-        filename:
-          id: filename
-          table: file_managed
-          field: filename
-          relationship: none
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: nid
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: filename
+          entity_type: node
+          entity_field: type
           plugin_id: field
-          label: Name
+          label: Inhaltstyp
           exclude: false
           alter:
             alter_text: false
@@ -86,8 +156,73 @@ display:
             target: ''
             nl2br: false
             max_length: 0
-            word_boundary: false
-            ellipsis: false
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        name:
+          id: name
+          table: users_field_data
+          field: name
+          relationship: revision_uid
+          group_type: group
+          admin_label: ''
+          entity_type: user
+          entity_field: name
+          plugin_id: field
+          label: Author
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
@@ -108,7 +243,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: file_link
+          type: user_name
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -119,118 +256,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        filemime:
-          id: filemime
-          table: file_managed
-          field: filemime
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: file
-          entity_field: filemime
-          plugin_id: field
-          label: MIME-Typ
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          type: file_filemime
-        filesize:
-          id: filesize
-          table: file_managed
-          field: filesize
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: file
-          entity_field: filesize
-          plugin_id: field
-          label: Größe
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          type: file_size
         status:
           id: status
-          table: file_managed
+          table: node_field_revision
           field: status
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
+          entity_type: node
           entity_field: status
           plugin_id: field
           label: Status
@@ -274,22 +307,33 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: value
           type: boolean
           settings:
             format: custom
-            format_custom_false: Temporär
-            format_custom_true: Dauerhaft
-        created:
-          id: created
-          table: file_managed
-          field: created
+            format_custom_false: Unpublished
+            format_custom_true: Published
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        publish_on:
+          id: publish_on
+          table: node_field_revision
+          field: publish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: created
+          entity_type: node
+          entity_field: publish_on
           plugin_id: field
-          label: Upload-Datum
+          label: 'Veröffentlichen am/um'
           exclude: false
           alter:
             alter_text: false
@@ -330,22 +374,33 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: short
             custom_date_format: ''
             timezone: ''
-        changed:
-          id: changed
-          table: file_managed
-          field: changed
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        unpublish_on:
+          id: unpublish_on
+          table: node_field_revision
+          field: unpublish_on
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: changed
+          entity_type: node
+          entity_field: unpublish_on
           plugin_id: field
-          label: Änderungsdatum
+          label: 'Depublizieren am/um'
           exclude: false
           alter:
             alter_text: false
@@ -386,26 +441,38 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: short
             custom_date_format: ''
             timezone: ''
-        count:
-          id: count
-          table: file_usage
-          field: count
-          relationship: fid
-          group_type: sum
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        operations:
+          id: operations
+          table: node_revision
+          field: operations
+          relationship: none
+          group_type: group
           admin_label: ''
-          plugin_id: numeric
-          label: 'Verwendet in'
+          entity_type: node
+          plugin_id: entity_operations
+          label: Operations
           exclude: false
           alter:
             alter_text: false
             text: ''
-            make_link: true
-            path: 'admin/content/files/usage/{{ fid }}'
+            make_link: false
+            path: ''
             absolute: false
             external: false
             replace_spaces: false
@@ -440,46 +507,31 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: true
-          format_plural_string: !!binary MSBwbGFjZQNAY291bnQgcGxhY2Vz
-          prefix: ''
-          suffix: ''
+          destination: true
       pager:
-        type: mini
+        type: full
         options:
           offset: 0
           items_per_page: 50
-          total_pages: 0
+          total_pages: null
           id: 0
           tags:
-            next: 'Nächste Seite ›'
-            previous: '‹ Vorherige Seite'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
+            next: 'next ›'
+            previous: '‹ previous'
+            first: '« first'
+            last: 'last »'
       exposed_form:
         type: basic
         options:
           submit_button: Filter
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
-        options:
-          perm: 'access files overview'
+        type: scheduler
       cache:
         type: tag
         options: {  }
@@ -488,41 +540,44 @@ display:
           id: area_text_custom
           table: views
           field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
           plugin_id: text_custom
           empty: true
-          content: 'Keine Dateien verfügbar'
+          content: 'Kein zeitgesteuerter Inhalt.'
+          tokenize: false
       sorts: {  }
       arguments: {  }
       filters:
-        filename:
-          id: filename
-          table: file_managed
-          field: filename
+        latest_revision:
+          id: latest_revision
+          table: node_revision
+          field: latest_revision
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: filename
-          plugin_id: string
-          operator: word
+          entity_type: node
+          plugin_id: latest_revision
+          operator: '='
           value: ''
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: filemime_op
-            label: Dateiname
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: filename_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: filename
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
-              authenticated: authenticated
               anonymous: '0'
+              authenticated: '0'
               administrator: '0'
           is_grouped: false
           group_info:
@@ -536,36 +591,37 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        filemime:
-          id: filemime
-          table: file_managed
-          field: filemime
+        title:
+          id: title
+          table: node_field_revision
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: filemime
+          entity_type: node
+          entity_field: title
           plugin_id: string
-          operator: word
+          operator: contains
           value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: filemime_op
-            label: MIME-Typ
+            operator_id: title_op
+            label: Title
             description: ''
             use_operator: false
-            operator: filemime_op
+            operator: title_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: filemime
+            identifier: title
             required: false
             remember: false
             multiple: false
             remember_roles:
-              authenticated: authenticated
               anonymous: '0'
+              authenticated: '0'
               administrator: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -578,35 +634,35 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        status:
-          id: status
-          table: file_managed
-          field: status
-          relationship: none
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: nid
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: status
-          plugin_id: file_status
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
           operator: in
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: status_op
-            label: Status
+            operator_id: type_op
+            label: 'Content type'
             description: ''
             use_operator: false
-            operator: status_op
+            operator: type_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: status
+            identifier: type
             required: false
             remember: false
             multiple: false
             remember_roles:
-              authenticated: authenticated
               anonymous: '0'
+              authenticated: '0'
               administrator: '0'
             reduce: false
           is_grouped: false
@@ -621,6 +677,202 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        status:
+          id: status
+          table: node_field_revision
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Status
+            description: ''
+            use_operator: false
+            operator: status_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: status
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              anonymous: '0'
+              authenticated: '0'
+              administrator: '0'
+          is_grouped: true
+          group_info:
+            label: 'Published status'
+            description: ''
+            identifier: status
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Published
+                operator: '='
+                value: '1'
+              2:
+                title: Unpublished
+                operator: '='
+                value: '0'
+        langcode:
+          id: langcode
+          table: node_field_revision
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: langcode_op
+            label: Language
+            description: ''
+            use_operator: false
+            operator: langcode_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: langcode
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              anonymous: '0'
+              authenticated: '0'
+              administrator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        publish_on:
+          id: publish_on
+          table: node_field_revision
+          field: publish_on
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: publish_on
+          plugin_id: date
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              anonymous: '0'
+              authenticated: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        unpublish_on:
+          id: unpublish_on
+          table: node_field_revision
+          field: unpublish_on
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: unpublish_on
+          plugin_id: date
+          operator: 'not empty'
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              anonymous: '0'
+              authenticated: '0'
+              administrator: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+          2: OR
       style:
         type: table
         options:
@@ -628,74 +880,70 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            fid: fid
-            filename: filename
-            filemime: filemime
-            filesize: filesize
+            node_bulk_form: node_bulk_form
+            title: title
+            type: type
+            name: name
             status: status
-            created: created
-            changed: changed
-            count: count
-          default: changed
+            publish_on: publish_on
+            unpublish_on: unpublish_on
+            operations: operations
+          default: '-1'
           info:
-            fid:
-              sortable: false
-              default_sort_order: asc
+            node_bulk_form:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            filename:
+            title:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            filemime:
+            type:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-medium
-            filesize:
+              responsive: ''
+            name:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-low
+              responsive: ''
             status:
-              sortable: false
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-low
-            created:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
               responsive: ''
-            changed:
+            publish_on:
               sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            count:
-              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
-              responsive: priority-medium
+              responsive: ''
+            unpublish_on:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
           override: true
-          sticky: false
+          sticky: true
           summary: ''
           empty_table: true
           caption: ''
@@ -711,315 +959,112 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
+        nid:
+          id: nid
+          table: node_field_revision
+          field: nid
           relationship: none
           group_type: group
-          admin_label: 'File usage'
-          required: true
-      group_by: true
-      show_admin_links: true
+          admin_label: 'node id'
+          entity_type: node
+          entity_field: nid
+          plugin_id: standard
+          required: false
+        revision_uid:
+          id: revision_uid
+          table: node_revision
+          field: revision_uid
+          relationship: none
+          group_type: group
+          admin_label: 'revision user id'
+          entity_type: node
+          entity_field: revision_uid
+          plugin_id: standard
+          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user.permissions
+        - user
+        - 'user.node_grants:view'
       tags: {  }
-  page_1:
-    id: page_1
-    display_title: Dateiübersicht
+  overview:
+    id: overview
+    display_title: Inhaltsübersicht
     display_plugin: page
     position: 1
     display_options:
-      defaults:
-        pager: true
-        relationships: false
-      relationships:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
-          relationship: none
-          group_type: group
-          admin_label: 'File usage'
-          required: false
-      display_description: ''
+      display_description: 'Übersicht über alle zeitgesteuerten Inhalte, als Reiter auf der Seite Inhalt verwalten.'
+      display_comment: 'Eine Revisions-nid-Beziehung ist erforderlich, weil der Inhaltstyp nur auf der Stufe „Inhalt“, aber nicht auf der Stufe „Inhaltsrevision“ gespeichert wird.'
       display_extenders: {  }
-      path: admin/content/files
+      path: admin/content/scheduled
       menu:
-        type: tab
-        title: Dateien
-        description: ''
-        weight: 0
+        type: normal
+        title: Zeitgesteuert
+        description: 'Inhalt für die Veröffentlichung/Depublizierung geplant'
+        weight: -10
+        expanded: false
         menu_name: admin
-        context: ''
+        parent: system.admin_content
+        context: '0'
+      tab_options:
+        type: normal
+        title: Content
+        description: 'Zeitgesteuerte Inhalte finden und verwalten'
+        weight: -10
+        menu_name: admin
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user.permissions
+        - user
+        - 'user.node_grants:view'
       tags: {  }
-  page_2:
-    id: page_2
-    display_title: Dateinutzung
+  user_page:
+    id: user_page
+    display_title: Benutzerprofil-Reiter
     display_plugin: page
     position: 2
     display_options:
-      title: Dateinutzung
-      fields:
-        entity_label:
-          id: entity_label
-          table: file_usage
-          field: entity_label
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: entity_label
-          label: Entität
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          link_to_entity: true
-        type:
-          id: type
-          table: file_usage
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          label: Entitätstyp
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-        module:
-          id: module
-          table: file_usage
-          field: module
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: standard
-          label: 'Registrierendes Modul'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-        count:
-          id: count
-          table: file_usage
-          field: count
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: numeric
-          label: 'Anzahl der Verwendung'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
-      pager:
-        type: mini
-        options:
-          offset: 0
-          items_per_page: 10
-          total_pages: 0
-          id: 0
-          tags:
-            next: 'Nächste Seite ›'
-            previous: '‹ Vorherige Seite'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-      empty: {  }
+          plugin_id: text_custom
+          empty: true
+          content: 'No scheduled content for user {{ arguments.uid }}'
+          tokenize: true
       arguments:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
+        uid:
+          id: uid
+          table: node_field_revision
+          field: uid
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: file
-          entity_field: fid
-          plugin_id: file_fid
-          default_action: 'not found'
+          entity_type: node
+          entity_field: uid
+          plugin_id: numeric
+          default_action: empty
           exception:
             value: all
             title_enable: false
             title: All
-          title_enable: true
-          title: 'Dateiverwendungsinformationen für {{ arguments.fid }}'
+          title_enable: false
+          title: ''
           default_argument_type: fixed
           default_argument_options:
             argument: ''
@@ -1033,97 +1078,48 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
+            type: 'entity:user'
             fail: 'not found'
-          validate_options: {  }
+          validate_options:
+            access: false
+            operation: view
+            multiple: 0
+            restrict_roles: false
+            roles: {  }
           break_phrase: false
           not: false
-      filters: {  }
-      filter_groups:
-        operator: AND
-        groups: {  }
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          columns:
-            entity_label: entity_label
-            type: type
-            module: module
-            count: count
-          default: entity_label
-          info:
-            entity_label:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-medium
-            module:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: priority-low
-            count:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          override: true
-          sticky: false
-          summary: ''
-          empty_table: true
-          caption: ''
-          description: ''
-      row:
-        type: fields
-        options: {  }
       defaults:
         empty: false
-        title: false
-        pager: false
-        group_by: false
-        style: false
-        row: false
-        relationships: false
-        fields: false
+        access: true
         arguments: false
-        filters: false
-        filter_groups: false
-      relationships:
-        fid:
-          id: fid
-          table: file_managed
-          field: fid
-          relationship: none
-          group_type: group
-          admin_label: 'File usage'
-          required: true
-      group_by: false
-      display_description: ''
+        filters: true
+        filter_groups: true
+      display_description: 'Reiter für zeitgesteuerte Inhalte im Benutzerprofil. Zeigt nur die zeitgesteuerten Inhalte dieses Benutzers an.'
       display_extenders: {  }
-      path: admin/content/files/usage/%
+      path: user/%user/scheduled
+      menu:
+        type: tab
+        title: Zeitgesteuert
+        description: ''
+        weight: -10
+        menu_name: admin
+        parent: system.admin_content
+        context: '0'
+      tab_options:
+        type: normal
+        title: Content
+        description: 'Zeitgesteuerte Inhalte finden und verwalten'
+        weight: -10
+        menu_name: admin
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
+        - 'languages:language_content'
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user.permissions
+        - user
+        - 'user.node_grants:view'
       tags: {  }

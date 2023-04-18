@@ -49,6 +49,7 @@ module:
   path: 0
   path_alias: 0
   rest: 0
+  scheduler: 0
   serialization: 0
   shortcut: 0
   simple_cron: 0

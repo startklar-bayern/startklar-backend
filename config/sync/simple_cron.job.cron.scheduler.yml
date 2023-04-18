@@ -1,0 +1,14 @@
+uuid: 409c83ec-fd4c-4666-9d6d-5d090c4d2fa3
+langcode: de
+status: true
+dependencies:
+  module:
+    - scheduler
+id: cron.scheduler
+crontab: '*/15 * * * *'
+plugin: cron
+type: scheduler
+configuration: {  }
+provider: scheduler
+single: false
+weight: 0
