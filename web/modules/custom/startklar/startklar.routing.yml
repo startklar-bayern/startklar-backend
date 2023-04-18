@@ -35,7 +35,7 @@ startklar.faq.list:
     _title: 'FAQs'
     _controller: '\Drupal\startklar\Controller\FaqController::index'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.faq.ask:
@@ -47,7 +47,7 @@ startklar.faq.ask:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.sharepic.list:
@@ -57,7 +57,7 @@ startklar.sharepic.list:
     _title: 'Sharepics'
     _controller: '\Drupal\startklar\Controller\SharepicController::index'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.page.list:
@@ -77,7 +77,7 @@ startklar.newsarticle.list:
     _title: 'News'
     _controller: '\Drupal\startklar\Controller\NewsController::index'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.newsletter.subscribe:
@@ -89,7 +89,7 @@ startklar.newsletter.subscribe:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.newsletter.info:
@@ -99,7 +99,7 @@ startklar.newsletter.info:
     _title: 'Newsletter Info'
     _controller: '\Drupal\startklar\Controller\NewsletterController::info'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.ag.list:
@@ -109,7 +109,7 @@ startklar.ag.list:
     _title: 'Arbeitsgruppen'
     _controller: '\Drupal\startklar\Controller\AgController::index'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.workshop.list:
@@ -119,7 +119,7 @@ startklar.workshop.list:
     _title: 'Workshops'
     _controller: '\Drupal\startklar\Controller\WorkshopController::index'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.termineSchutzkonzept.index:
@@ -131,7 +131,7 @@ startklar.anmeldung.termineSchutzkonzept.index:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.dvs.index:
@@ -143,7 +143,7 @@ startklar.anmeldung.dvs.index:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.tshirt_groessen.index:
@@ -155,7 +155,7 @@ startklar.anmeldung.tshirt_groessen.index:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.helfer_jobs.index:
@@ -167,7 +167,7 @@ startklar.anmeldung.helfer_jobs.index:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.group.create:
@@ -179,7 +179,7 @@ startklar.anmeldung.group.create:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.group.update:
@@ -189,11 +189,12 @@ startklar.anmeldung.group.update:
     _title: 'Update Anmeldung'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::update'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.group.get:
   path: '/api/anmeldung/group/{id}'
@@ -202,11 +203,12 @@ startklar.anmeldung.group.get:
     _title: 'Get Anmeldung'
     _controller: '\Drupal\startklar\Controller\AnmeldungController::get'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.helfer.create:
   path: '/api/anmeldung/helfer'
@@ -217,7 +219,7 @@ startklar.anmeldung.helfer.create:
   options:
     no_cache: 'TRUE'
   requirements:
-    _access: 'TRUE'
+    _access: 'FALSE'
     _format: 'json'
 
 startklar.anmeldung.helfer.update:
@@ -227,11 +229,12 @@ startklar.anmeldung.helfer.update:
     _title: 'Update Anmeldung'
     _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::update'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.helfer.get:
   path: '/api/anmeldung/helfer/{id}'
@@ -240,11 +243,12 @@ startklar.anmeldung.helfer.get:
     _title: 'Get Helfer Anmeldung'
     _controller: '\Drupal\startklar\Controller\HelferAnmeldungController::get'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.temp_storage.exists:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -253,11 +257,12 @@ startklar.anmeldung.temp_storage.exists:
     _title: 'Anmeldung TempStorage exists'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::exists'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.temp_storage.set:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -267,11 +272,12 @@ startklar.anmeldung.temp_storage.set:
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::setValue'
     _format: 'json'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.temp_storage.get:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -280,11 +286,12 @@ startklar.anmeldung.temp_storage.get:
     _title: 'Anmeldung TempStorage get'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::getValue'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.anmeldung.temp_storage.delete:
   path: '/api/anmeldung/tempStorage/{id}'
@@ -293,11 +300,12 @@ startklar.anmeldung.temp_storage.delete:
     _title: 'Anmeldung TempStorage delete'
     _controller: '\Drupal\startklar\Controller\AnmeldungTempStorageController::deleteValue'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
     _format: 'json'
+    _access: 'FALSE'
 
 startklar.files.upload:
   path: '/api/files/{id}'
@@ -306,10 +314,11 @@ startklar.files.upload:
     _title: 'Upload file'
     _controller: '\Drupal\startklar\Controller\FileController::upload'
   options:
-    _auth: [ 'anmeldung_jwt' ]
+#    _auth: [ 'anmeldung_jwt' ]
     no_cache: 'TRUE'
   requirements:
-    _anmeldung_access_check: 'TRUE'
+#    _anmeldung_access_check: 'TRUE'
+    _access: 'FALSE'
 
 startklar.sendinblue.import_callback:
   path: '/startklar/sendinblue/import-callback'
